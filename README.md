@@ -1,16 +1,28 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+För Godkänt (G)
+ 
+- [ ] Applikationen är byggd med Vite + React
+- [ ] Applikationen har minst 5 components
+- [ ] Props används för att skicka data mellan components
+- [ ] `useState` används för lokal state
+- [ ] Applikationen hämtar data från minst ett externt API med `fetch`
+- [ ] Loading state visas medan data hämtas
+- [ ] Error state hanteras om API-anropet misslyckas
+- [ ] React Router används med minst 3 routes
+- [ ] Zustand används för minst en global state (t.ex. varukorg, favoriter, tema)
+- [ ] Minst ett formulär med controlled components finns
+- [ ] Koden är formaterad och konsekvent
+- [ ] Git används med meningsfulla commits från alla gruppmedlemmar
+- [ ] Repot har en README med projektbeskrivning och instruktioner för att köra projektet
+ 
+För Väl Godkänt (VG)
+ 
+Alla krav för G plus:
+ 
+- [ ] Applikationen har en genomtänkt och konsekvent mappstruktur
+- [ ] Components är uppdelade med tydligt ansvar (ingen "god component" som gör allt)
+- [ ] Zustand används för minst två separata stores eller ett store med flera slices
+- [ ] URL-parametrar används med React Router (t.ex. `/products/:id`)
+- [ ] Nested routes eller layouts används
+- [ ] Applikationen hanterar edge cases (tom lista, ogiltigt ID i URL, etc.)
+- [ ] Koden visar på god kvalitet: inga onödiga re-renders, DRY-princip, tydliga namngivningar
