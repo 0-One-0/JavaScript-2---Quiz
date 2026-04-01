@@ -8,7 +8,7 @@ function NavBar() {
         <Links />
       </div>
       <div className="logo-continer">
-        <img className="logo-img" src="src\assets\logo.png" alt="logo" />
+        <img className="logo-img" src="src\assets\logo2.png" alt="logo" />
       </div>
       <div className="avatar-continer">
         <div className="avatar-circle"></div>

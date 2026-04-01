@@ -21,7 +21,7 @@ function Links() {
 
       <ul className="link-list-big">
         <li>
-          <a href="#">DashBoard</a>
+          <a href="#">Dashboard</a>
         </li>
         <li>
           <a href="#">Quiz</a>
@@ -66,9 +66,9 @@ function PopUpMenu({ show , setShow}) {
           fill="white"
         />
       </svg>
-      <ul className="link-list-big">
+      <ul className="link-list-small">
         <li>
-          <a href="#">DashBoard</a>
+          <a href="#">Dashboard</a>
         </li>
         <li>
           <a href="#">Quiz</a>

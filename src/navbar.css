@@ -1,70 +1,91 @@
-.navbar-continer{
-    display: flex;
-    align-items: center;
-    padding: 0.5rem;
-    box-sizing: border-box;
+
+.navbar-continer {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  position: relative;
 }
 .navbar-continer > div {
-    width: 33%;
+  width: 33%;
 }
 
-
-
-.link-list-big{
-    display: flex;
-    list-style: none;
-    gap: 1rem;
-    display: none;
-    
+.link-list-big {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  display: none;
 }
-.link-list-big > li > a{
-    color: white;
-    text-decoration: none;
+.link-list-big > li > a {
+  color: white;
+  text-decoration: none;
 }
-.link-list-small > li > a{
-    color: white;
-    text-decoration: none;
+.link-list-small > li > a {
+  color: white;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+.link-list-small > li {
+  background: linear-gradient(
+    90deg,
+    rgba(175, 72, 126, 1) 0%,
+    rgba(181, 90, 180, 1) 50%,
+    rgba(186, 107, 234, 1) 100%
+  );
+  padding: 0.5rem;
+  box-sizing: border-box;
+  width: 10rem;
+  border-radius: 7px;
 }
 .link-list-small {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    gap: 1rem;
-    
+    align-self: start;
+  align-items: start;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 1rem;
+  box-sizing: border-box;
+  padding-left: 0;
 }
-.logo-continer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.logo-continer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.logo-img{
-    display: flex;
-    width: 5rem;
+.logo-img {
+  display: flex;
+  width: 5rem;
 }
-.avatar-circle{
-    background-color: white;
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
+.avatar-circle {
+  background-color: white;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
 }
 .avatar-continer {
-    display: flex;
-    flex-direction: column;
-    align-items: end;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 }
-.show{
-    display: flex;
+.show {
+  display: flex;
 }
-.hide{
-    display: none;
+.hide {
+  display: none;
 }
-.popup-menu{
-    width: 100%;
-    top: 0;
-    height: 10rem;
-    background-color: rgb(56 61 110) ;
-    position: absolute;
-    padding: 1rem;
-    
+.popup-menu {
+    gap: 1rem;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: fit-content;
+  box-sizing: border-box;
+  background-color: rgb(56 61 110);
+  position: absolute;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: start;
 }
