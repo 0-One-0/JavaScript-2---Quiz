@@ -1,7 +1,12 @@
+import { useState } from "react";
+
 function Links() {
+  const [show, setShow] = useState(false);
+
   return (
     <>
       <svg
+        onClick={() => setShow(!show)}
         className="Ham-Menu"
         width="22"
         height="16"
@@ -14,7 +19,29 @@ function Links() {
         <rect y="6" width="22" height="4" rx="2" fill="#D9D9D9" />
       </svg>
 
-      <svg className="Close-svg"
+      <ul className="link-list-big">
+        <li>
+          <a href="#">DashBoard</a>
+        </li>
+        <li>
+          <a href="#">Quiz</a>
+        </li>
+        <li>
+          <a href="#">How to play</a>
+        </li>
+      </ul>
+
+      <PopUpMenu show={show} setShow={setShow}/>
+    </>
+  );
+}
+
+function PopUpMenu({ show , setShow}) {
+  return (
+    <div className={`popup-menu ${show ? "show" : "hide"}`}>
+      <svg
+        onClick={() => setShow(!show)}
+        className="close-svg"
         width="9"
         height="12"
         viewBox="0 0 9 12"
@@ -39,8 +66,7 @@ function Links() {
           fill="white"
         />
       </svg>
-
-      <ul className="link-list">
+      <ul className="link-list-big">
         <li>
           <a href="#">DashBoard</a>
         </li>
@@ -51,7 +77,7 @@ function Links() {
           <a href="#">How to play</a>
         </li>
       </ul>
-    </>
+    </div>
   );
 }
 
