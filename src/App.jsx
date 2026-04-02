@@ -6,6 +6,7 @@ function App() {
   return (
     <>
       <NavBar/>
+      <div id= "test-div">hej</div>
     </>
   );
 }

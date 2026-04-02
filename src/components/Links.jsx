@@ -63,19 +63,13 @@ function Links() {
           transformOrigin: "50% 50%",
           ease: "circ.inOut",
         });
-        gsap.fromTo(
-          ".popup-menu",
-          {
-            opacity: 1,
-          },
-          {
-            duration: 0.8,
-            x: -400,
-            display: "none",
-            ease: "power2.inOut",
-            opacity: 0.2,
-          },
-        );
+        gsap.to(".popup-menu", {
+          duration: 0.8,
+          x: -800,
+          display: "none",
+          ease: "power2.inOut",
+          opacity: 0.2,
+        });
       }
     },
     { dependencies: [show] },
@@ -83,10 +77,13 @@ function Links() {
 
   return (
     <>
-      
-      <svg 
-      id="hamburger"
-      onClick={() => setShow(!show)}viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        id="hamburger"
+        onClick={() => setShow(!show)}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g
           id="SVGRepo_tracerCarrier"
@@ -98,7 +95,7 @@ function Links() {
           <g clip-path="url(#clip0_429_11066)">
             {" "}
             <path
-            className="Ham-Menu"
+              className="Ham-Menu"
               d="M3 6.00092H21M3 12.0009H21M3 18.0009H21"
               stroke="#fffafa"
               stroke-width="2.5"
@@ -155,7 +152,9 @@ function Links() {
           <a href="#">Dashboard</a>
         </li>
         <li>
-          <a href="#">Quiz</a>
+          <a id="quiz-link" href="#">
+            Quiz
+          </a>
         </li>
         <li>
           <a href="#">How to play</a>
