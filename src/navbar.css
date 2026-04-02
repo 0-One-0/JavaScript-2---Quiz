@@ -1,6 +1,7 @@
 #test-div {
-  margin-top: 50rem;
-  margin-bottom: 60rem;
+  padding-top: 50rem;
+  padding-bottom: 60rem;
+  
 }
 
 /* Navbar continer */
@@ -14,6 +15,7 @@
   position: fixed;
   width: 100%;
   top: 0;
+  padding-bottom: 1rem;
 }
 .navbar-continer > div {
   width: 33%;
@@ -88,8 +90,9 @@
 }
 .links-continer {
   display: flex;
-
-  min-height: 37px;
+  justify-content: start;
+  align-items: start;
+  min-height: 24px;
   box-sizing: border-box;
 }
 
@@ -113,7 +116,7 @@
 .links-continer > svg {
   position: absolute;
   z-index: 1;
-  top: 1;
+  top: 0.5;
   width: 2rem;
   height: 1rem;
   padding-top: 0.5rem;
@@ -203,7 +206,7 @@ dashboard-logo {
     display: flex;
   }
 
-  .popup-menu{
+  .popup-menu {
     visibility: hidden;
   }
 }
