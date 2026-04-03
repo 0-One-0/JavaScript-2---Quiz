@@ -2,6 +2,7 @@ import { useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(useGSAP, MorphSVGPlugin);
 
