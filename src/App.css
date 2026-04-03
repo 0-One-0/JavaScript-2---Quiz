@@ -1,0 +1,8 @@
+/* test for the logo */
+body{
+    background-color: rgb(56 61 110) ;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+}
