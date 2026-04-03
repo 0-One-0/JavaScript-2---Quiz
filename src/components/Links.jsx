@@ -151,19 +151,17 @@ function Links() {
       <ul className="link-list-big">
         <Link to="/">
           <li>
-            <a href="#">Dashboard</a>
+            Dashboard
           </li>
         </Link>
         <Link to="/">
           <li>
-            <a id="quiz-link" href="#">
-              Quiz
-            </a>
+            Quiz
           </li>
         </Link>
         <Link to="/">
           <li>
-            <a href="#">How to play</a>
+            How to play
           </li>
         </Link>
       </ul>
