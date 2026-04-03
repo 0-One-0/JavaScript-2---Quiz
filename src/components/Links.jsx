@@ -149,17 +149,23 @@ function Links() {
         </g>
       </svg>
       <ul className="link-list-big">
-        <li>
-          <a href="#">Dashboard</a>
-        </li>
-        <li>
-          <a id="quiz-link" href="#">
-            Quiz
-          </a>
-        </li>
-        <li>
-          <a href="#">How to play</a>
-        </li>
+        <Link to="/">
+          <li>
+            <a href="#">Dashboard</a>
+          </li>
+        </Link>
+        <Link to="/">
+          <li>
+            <a id="quiz-link" href="#">
+              Quiz
+            </a>
+          </li>
+        </Link>
+        <Link to="/">
+          <li>
+            <a href="#">How to play</a>
+          </li>
+        </Link>
       </ul>
       <PopUpMenu show={show} setShow={setShow} />
     </>
@@ -170,39 +176,45 @@ function PopUpMenu() {
   return (
     <div className="popup-menu">
       <ul className="link-list-small">
-        <li>
-          <a href="#">
-            {" "}
-            <img
-              className="menu-logos"
-              id="dashboard-logo"
-              src="src\assets\dashboard-logo.png"
-              alt="Dashboard"
-            />
-            Dashboard
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            {" "}
-            <img
-              className="menu-logos"
-              src="src\assets\Quiz-logo.png"
-              alt="Quiz"
-            />
-            Quiz
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <img
-              className="menu-logos"
-              src="src\assets\howto-logo.png"
-              alt="How to"
-            />
-            How to play
-          </a>
-        </li>
+        <Link to="/">
+          <li>
+            <a href="#">
+              {" "}
+              <img
+                className="menu-logos"
+                id="dashboard-logo"
+                src="src\assets\dashboard-logo.png"
+                alt="Dashboard"
+              />
+              Dashboard
+            </a>
+          </li>
+        </Link>
+        <Link to="/">
+          <li>
+            <a href="#">
+              {" "}
+              <img
+                className="menu-logos"
+                src="src\assets\Quiz-logo.png"
+                alt="Quiz"
+              />
+              Quiz
+            </a>
+          </li>
+        </Link>
+        <Link to="/">
+          <li>
+            <a href="#">
+              <img
+                className="menu-logos"
+                src="src\assets\howto-logo.png"
+                alt="How to"
+              />
+              How to play
+            </a>
+          </li>
+        </Link>
       </ul>
     </div>
   );
