@@ -31,6 +31,42 @@ const quizArray = [
     correct_answer: "Peace",
     incorrect_answers: ["Physics", "Economics", "Physiology/Medicine"],
   },
+  {
+    type: "multiple",
+    difficulty: "medium",
+    category: "General Knowledge",
+    question:
+      "Linus Pauling, one of the only winners of multiple Nobel Prizes, earned his Nobel Prizes in Chemistry and what?",
+    correct_answer: "Peace",
+    incorrect_answers: ["Physics", "Economics", "Physiology/Medicine"],
+  },
+  {
+    type: "multiple",
+    difficulty: "medium",
+    category: "General Knowledge",
+    question:
+      "Linus Pauling, one of the only winners of multiple Nobel Prizes, earned his Nobel Prizes in Chemistry and what?",
+    correct_answer: "Peace",
+    incorrect_answers: ["Physics", "Economics", "Physiology/Medicine"],
+  },
+  {
+    type: "multiple",
+    difficulty: "medium",
+    category: "General Knowledge",
+    question:
+      "Linus Pauling, one of the only winners of multiple Nobel Prizes, earned his Nobel Prizes in Chemistry and what?",
+    correct_answer: "Peace",
+    incorrect_answers: ["Physics", "Economics", "Physiology/Medicine"],
+  },
+  {
+    type: "multiple",
+    difficulty: "medium",
+    category: "General Knowledge",
+    question:
+      "Linus Pauling, one of the only winners of multiple Nobel Prizes, earned his Nobel Prizes in Chemistry and what?",
+    correct_answer: "Peace",
+    incorrect_answers: ["Physics", "Economics", "Physiology/Medicine"],
+  },
 ];
 
 function QuizCard() {
@@ -38,7 +74,9 @@ function QuizCard() {
 
   const [question, setQuestion] = useState(quizArray[index]);
   const [random, setRandom] = useState(() => Math.random());
-
+  const [progress, setProgrss] = useState(
+    ((index + 1) / quizArray.length) * 100 + "%",
+  );
   let content = null;
   if (random < 0.25) {
     content = (
@@ -89,23 +127,62 @@ function QuizCard() {
   useEffect(() => {
     setQuestion(quizArray[index]);
   }, [index]);
+  useEffect(() => {
+    setProgrss(((index + 1) / quizArray.length) * 100 + "%");
+  }, [index]);
+  useGSAP(() => {
+    gsap.to(".progressbar-indicator", {
+      width: progress,
+      duration: 0.6,
+      ease: "power1.inOut",
+    });
+    gsap.fromTo(
+      ".question",
+      {
+        opacity: 0,
+      },
+      { opacity: 1,
+        duration: 0.8,
+        ease: "power1.inOut"
+       }
+    );
+  }, [progress]);
 
   return (
     <div className="quiz-continer">
       <div className="quiz info">
-        <span className="category-title"></span>
-        <span className="progress">
+        <div className="topper">
+          {" "}
+          <div className="back"></div>{" "}
+          <span className="category-title">{question.category}</span>{" "}
+          <div className="timer-continer"></div>
+        </div>
+        <ProgressBar />
+        <span className="progress-index">
           {" "}
           Question {index + 1}/{quizArray.length}
         </span>
       </div>
       <div className="question-continer">
-        <h1>
-          {question.question}
-        </h1>
+        <h1 className="question">{question.question}</h1>
       </div>
       <div className="answer-continer">{content}</div>
-      <button onClick={nextQuest}>Next</button>
+      <div className="sub-continer">
+        <button className="submit-btn" onClick={nextQuest}>
+          Submit
+        </button>
+        <button className="skip-btn" onClick={nextQuest}>
+          Skip this question
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function ProgressBar() {
+  return (
+    <div className="progressbar-continer">
+      <div className="progressbar-indicator"></div>
     </div>
   );
 }

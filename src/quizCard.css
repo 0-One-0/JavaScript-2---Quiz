@@ -1,17 +1,20 @@
 .quiz-continer {
   box-sizing: border-box;
-  border: 1px solid black; /* for testing*/
-  margin-top: 4rem;
+
+  margin-top: 7rem;
+  margin-bottom: 50rem;
   padding: 1rem;
   font-family: Montserrat;
   display: flex;
   flex-direction: column;
   color: white;
+  gap: 3rem;
 }
 
 .ans-continer {
   box-sizing: border-box;
   display: flex;
+  align-items: center;
   flex-direction: column;
   list-style: none;
   margin-left: 0;
@@ -22,26 +25,88 @@
 .ans-continer > li {
   box-sizing: border-box;
   border-radius: 16px;
-  width: 15rem;
+  width: 20rem;
   border: none;
   background-color: rgb(77 83 144);
-  padding: 0.7rem;
+  padding: 0.8rem;
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.25);
 }
 
 .question-continer {
   box-sizing: border-box;
-  
+
   min-width: 300px;
   width: 100%;
+  min-height: 121px;
+  padding: 0;
 }
 
 .question-continer > h1 {
-    font-size: 20px;
-    word-spacing: 3px;
-    letter-spacing: 1px;
-    text-align: center;
+  font-size: 20px;
+  word-spacing: 3px;
+  letter-spacing: 1px;
+  text-align: center;
+  margin: 0;
 }
-.progress {
+.category-title {
+}
+.progress-index {
   color: rgb(128 133 182);
+  font-size: 13px;
+}
+.sub-continer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.submit-btn {
+  align-self: center;
+  display: flex;
+  border-radius: 16px;
+  justify-content: center;
+  font-size: 16px;
+  box-sizing: border-box;
+  width: 20rem;
+  color: white;
+  border: none;
+  font-family: Montserrat;
+  background-color: rgb(63 159 254);
+  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.25);
+  padding: 0.8rem;
+}
+.skip-btn {
+  align-self: center;
+  display: flex;
+  background: none;
+  justify-content: center;
+  font-size: 16px;
+  box-sizing: border-box;
+  width: 20rem;
+  color: rgb(128 133 182);
+  border: none;
+  font-family: Montserrat;
+
+  padding: 0.8rem;
+}
+.progressbar-continer {
+  height: 8px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: rgba(122, 129, 188, 0.648);
+}
+.progressbar-indicator {
+  box-sizing: border-box;
+  height: 8px;
+  width: 0%;
+  border-radius: 4px;
+  
+  background: linear-gradient(
+    90deg,
+    rgb(175, 72, 126) 0%,
+    rgb(181, 90, 180) 50%,
+    rgb(186, 107, 234) 100%
+  ); 
 }
