@@ -1,14 +1,13 @@
 #test-div {
   padding-top: 50rem;
   padding-bottom: 60rem;
-  
 }
 
 /* Navbar continer */
 
 .navbar-continer {
   display: flex;
-  background-color: rgb(56 61 110);
+  background-color: var(--bg-color);
   align-items: center;
   padding-top: 1rem;
   box-sizing: border-box;
@@ -67,14 +66,15 @@
   margin: 0;
   display: none;
 }
-.link-list-big > li {
+.link-list-big a {
   display: flex;
   width: fit-content;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
 }
 
-.link-list-big > li > a {
+.link-list-big li {
   display: flex;
   color: white;
   width: 7rem;
@@ -84,7 +84,6 @@
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
   text-align: center;
-  text-decoration: none;
   align-items: center;
   justify-content: center;
 }

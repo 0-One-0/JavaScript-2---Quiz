@@ -16,12 +16,12 @@
 .login-logo {
   display: block;
   margin: 0 auto 1.25rem auto;
-  width: 25rem;
+  width: 22rem;
 }
 
 /* CARD SECTION */
 .login-container {
-  width: 23.75rem;
+  width: 21rem;
   margin: 3.75rem auto;
   padding: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -36,6 +36,7 @@
   margin: 0;
   text-align: center;
   font-size: 2rem;
+  font-weight: normal;
 }
 
 .login-subtitle {
@@ -83,8 +84,8 @@
 }
 
 .login-form label {
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: normal;
 }
 
 .login-form input {
@@ -125,15 +126,47 @@
 }
 
 .login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   margin-top: 0.625rem;
   padding: 0.875rem;
   border: none;
   border-radius: 0.75rem;
   background: linear-gradient(90deg, var(--btn-start), var(--btn-end));
   color: white;
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.2rem;
+  font-weight: normal;
   cursor: pointer;
+}
+
+.login-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.sign-up {
+  text-align: center;
+  margin-top: -0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.sign-up p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: pointer;
+}
+.sign-up a {
+  font-size: 1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sign-up a:hover {
+  color: var(--text-muted);
 }
 
 /* FOOTER SECTION */

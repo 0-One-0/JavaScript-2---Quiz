@@ -1,15 +1,23 @@
 import "./App.css";
 import "./navbar.css";
-import NavBar from "./components/NavBar";
-import Login from "./components/Login";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/home.jsx";
+import Layout from "./Layout.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
 
 function App() {
   return (
-    <>
-      <Login />
-      {/*<NavBar />
-      <div id="test-div">hej</div>*/}
-    </>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
