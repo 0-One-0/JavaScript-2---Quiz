@@ -150,19 +150,13 @@ function Links() {
       </svg>
       <ul className="link-list-big">
         <Link to="/">
-          <li>
-            Dashboard
-          </li>
+          <li>Dashboard</li>
+        </Link>
+        <Link to="/Quiz">
+          <li>Quiz</li>
         </Link>
         <Link to="/">
-          <li>
-            Quiz
-          </li>
-        </Link>
-        <Link to="/">
-          <li>
-            How to play
-          </li>
+          <li>How to play</li>
         </Link>
       </ul>
       <PopUpMenu show={show} setShow={setShow} />
@@ -176,7 +170,7 @@ function PopUpMenu() {
       <ul className="link-list-small">
         <Link to="/">
           <li>
-            <a href="#">
+            
               {" "}
               <img
                 className="menu-logos"
@@ -185,32 +179,28 @@ function PopUpMenu() {
                 alt="Dashboard"
               />
               Dashboard
-            </a>
+            
+          </li>
+        </Link>
+        <Link to="/Quiz">
+          <li>
+            {" "}
+            <img
+              className="menu-logos"
+              src="src\assets\Quiz-logo.png"
+              alt="Quiz"
+            />
+            Quiz
           </li>
         </Link>
         <Link to="/">
           <li>
-            <a href="#">
-              {" "}
-              <img
-                className="menu-logos"
-                src="src\assets\Quiz-logo.png"
-                alt="Quiz"
-              />
-              Quiz
-            </a>
-          </li>
-        </Link>
-        <Link to="/">
-          <li>
-            <a href="#">
-              <img
-                className="menu-logos"
-                src="src\assets\howto-logo.png"
-                alt="How to"
-              />
-              How to play
-            </a>
+            <img
+              className="menu-logos"
+              src="src\assets\howto-logo.png"
+              alt="How to"
+            />
+            How to play
           </li>
         </Link>
       </ul>

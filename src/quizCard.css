@@ -1,0 +1,47 @@
+.quiz-continer {
+  box-sizing: border-box;
+  border: 1px solid black; /* for testing*/
+  margin-top: 4rem;
+  padding: 1rem;
+  font-family: Montserrat;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.ans-continer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+  gap: 24px;
+}
+
+.ans-continer > li {
+  box-sizing: border-box;
+  border-radius: 16px;
+  width: 15rem;
+  border: none;
+  background-color: rgb(77 83 144);
+  padding: 0.7rem;
+  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.25);
+}
+
+.question-continer {
+  box-sizing: border-box;
+  
+  min-width: 300px;
+  width: 100%;
+}
+
+.question-continer > h1 {
+    font-size: 20px;
+    word-spacing: 3px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+.progress {
+  color: rgb(128 133 182);
+}
