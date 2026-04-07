@@ -1,3 +1,4 @@
+/* PAGE LAYOUT */
 .login-page {
   min-height: 100vh;
   display: flex;
@@ -11,20 +12,22 @@
   align-items: center;
 }
 
+/* LOGO SECTION */
 .login-logo {
   display: block;
-  margin: 0 auto 20px auto;
-  width: 400px;
+  margin: 0 auto 1.25rem auto;
+  width: 25rem;
 }
 
+/* CARD SECTION */
 .login-container {
-  width: 380px;
-  margin: 60px auto;
-  padding: 32px;
+  width: 23.75rem;
+  margin: 3.75rem auto;
+  padding: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0 40px 0 40px;
+  border-radius: 0 2.5rem 0 2.5rem;
   background: var(--card-color);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.12);
   color: var(--text-color);
   font-family: var(--font-main);
 }
@@ -32,23 +35,23 @@
 .login-title {
   margin: 0;
   text-align: center;
-  font-size: 32px;
+  font-size: 2rem;
 }
 
 .login-subtitle {
   text-align: center;
   color: var(--text-muted);
-  margin-top: 8px;
-  margin-bottom: 24px;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .google-btn {
   width: 100%;
-  padding: 14px;
-  border-radius: 12px;
+  padding: 0.875rem;
+  border-radius: 0.75rem;
   border: 1px solid var(--input-border);
   background: white;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 600;
   cursor: pointer;
 }
@@ -56,8 +59,8 @@
 .divider {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 24px 0;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
 }
 
 .divider span {
@@ -68,7 +71,7 @@
 
 .divider p {
   margin: 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--text-muted);
   font-weight: 600;
 }
@@ -76,20 +79,20 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
 .login-form label {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 
 .login-form input {
-  padding: 14px;
+  padding: 0.875rem;
   border: 1px solid var(--input-border);
-  border-radius: 10px;
-  font-size: 14px;
-  margin-bottom: 8px;
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
   background: transparent;
   color: var(--text-color);
   font-family: var(--font-main);
@@ -104,21 +107,39 @@
   border-color: var(--text-muted);
 }
 
+.forgot-password {
+  text-align: right;
+  margin-top: -0.25rem;
+  margin-bottom: 1rem;
+}
+
+.forgot-password a {
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.forgot-password a:hover {
+  color: white;
+}
+
 .login-btn {
-  margin-top: 10px;
-  padding: 14px;
+  margin-top: 0.625rem;
+  padding: 0.875rem;
   border: none;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   background: linear-gradient(90deg, var(--btn-start), var(--btn-end));
   color: white;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
 }
 
+/* FOOTER SECTION */
 .login-footer {
   text-align: center;
-  padding: 20px 0;
-  font-size: 12px;
+  padding: 1.25rem 0;
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
