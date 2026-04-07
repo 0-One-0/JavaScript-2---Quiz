@@ -22,7 +22,7 @@
   gap: 24px;
 }
 
-.ans-continer > li {
+.options {
   box-sizing: border-box;
   border-radius: 16px;
   width: 20rem;
@@ -49,6 +49,7 @@
   margin: 0;
 }
 .category-title {
+  font-weight: bold;
 }
 .progress-index {
   color: rgb(128 133 182);
@@ -102,11 +103,23 @@
   height: 8px;
   width: 0%;
   border-radius: 4px;
-  
+
   background: linear-gradient(
     90deg,
     rgb(175, 72, 126) 0%,
     rgb(181, 90, 180) 50%,
     rgb(186, 107, 234) 100%
-  ); 
+  );
+}
+.correct {
+  background-color: green;
+}
+.wrong {
+  background-color: red;
+}
+.hide {
+  display: none;
+}
+.show {
+  display: flex;
 }

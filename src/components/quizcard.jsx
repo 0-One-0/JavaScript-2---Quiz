@@ -71,57 +71,66 @@ const quizArray = [
 
 function QuizCard() {
   const [index, setIndex] = useState(0);
-
   const [question, setQuestion] = useState(quizArray[index]);
   const [random, setRandom] = useState(() => Math.random());
   const [progress, setProgrss] = useState(
     ((index + 1) / quizArray.length) * 100 + "%",
   );
-  let content = null;
-  if (random < 0.25) {
-    content = (
-      <ul className="ans-continer">
-        <li>{question.correct_answer}</li>
-        <li>{question.incorrect_answers[0]}</li>
-        <li>{question.incorrect_answers[1]}</li>
-        <li>{question.incorrect_answers[2]}</li>
-      </ul>
-    );
-  } else if (random < 0.5) {
-    content = (
-      <ul className="ans-continer">
-        <li>{question.incorrect_answers[0]}</li>
-        <li>{question.correct_answer}</li>
-        <li>{question.incorrect_answers[1]}</li>
-        <li>{question.incorrect_answers[2]}</li>
-      </ul>
-    );
-  } else if (random < 0.75) {
-    content = (
-      <ul className="ans-continer">
-        <li>{question.incorrect_answers[0]}</li>
-        <li>{question.incorrect_answers[1]}</li>
-        <li>{question.correct_answer}</li>
-        <li>{question.incorrect_answers[2]}</li>
-      </ul>
-    );
-  } else {
-    content = (
-      <ul className="ans-continer">
-        <li>{question.incorrect_answers[0]}</li>
-        <li>{question.incorrect_answers[1]}</li>
-        <li>{question.incorrect_answers[2]}</li>
-        <li>{question.correct_answer}</li>
-      </ul>
-    );
-  }
+  const [answerd, setAnswerd] = useState(false);
+  const [score, setScore] = useState(0);
 
-  const nextQuest = () => {
+  const checkAns = (e, answer) => {
+    if (answerd === false) {
+      if (question.correct_answer === answer) {
+        e.target.classList.add("correct");
+        setAnswerd(true);
+        setScore((prev) => prev + 1);
+      } else {
+        e.target.classList.add("wrong");
+        setAnswerd(true);
+        const answers = document.querySelectorAll(".options");
+        answers.forEach((li) => {
+          if (li.textContent === question.correct_answer) {
+            li.classList.add("correct");
+          }
+        });
+      }
+    }
+  };
+
+  let content = RandomAlign(random, question, checkAns);
+
+  const nextQuestion = () => {
+    if (answerd === true) {
+      if (index === quizArray.length - 1) {
+        window.alert("You got " + score + " right ");
+        return 0;
+      }
+      const answers = document.querySelectorAll(".options");
+      answers.forEach((li) => {
+        li.classList.remove("correct");
+        li.classList.remove("wrong");
+      });
+
+      setIndex((prev) => prev + 1);
+      setRandom(Math.random());
+      setAnswerd(false);
+    }
+  };
+  const skipQuestion = () => {
+    if (answerd === true) {
+      const answers = document.querySelectorAll(".options");
+      answers.forEach((li) => {
+        li.classList.remove("correct");
+        li.classList.remove("wrong");
+      });
+    }
     if (index === quizArray.length - 1) {
       return 0;
     }
     setIndex((prev) => prev + 1);
     setRandom(Math.random());
+    setAnswerd(false);
   };
 
   useEffect(() => {
@@ -141,10 +150,24 @@ function QuizCard() {
       {
         opacity: 0,
       },
-      { opacity: 1,
+      { opacity: 1, duration: 0.8, ease: "power1.inOut" },
+    );
+    gsap.fromTo(
+      ".options",
+      {
+        opacity: 0,
+        y: -20,
+
+        transformOrigin: "50% 50%",
+      },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.2,
+
         duration: 0.8,
-        ease: "power1.inOut"
-       }
+        ease: "power1.inOut",
+      },
     );
   }, [progress]);
 
@@ -168,10 +191,13 @@ function QuizCard() {
       </div>
       <div className="answer-continer">{content}</div>
       <div className="sub-continer">
-        <button className="submit-btn" onClick={nextQuest}>
+        <button className="submit-btn" onClick={nextQuestion}>
           Submit
         </button>
-        <button className="skip-btn" onClick={nextQuest}>
+        <button
+          className={`skip-btn ${answerd ? "hide" : "show"}`}
+          onClick={skipQuestion}
+        >
           Skip this question
         </button>
       </div>
@@ -185,6 +211,161 @@ function ProgressBar() {
       <div className="progressbar-indicator"></div>
     </div>
   );
+}
+
+function RandomAlign(random, question, checkAns) {
+  let content;
+  if (random < 0.25) {
+    content = (
+      <ul className="ans-continer">
+        <li
+          onClick={(e) => {
+            checkAns(e, question.correct_answer);
+          }}
+          className="options"
+        >
+          {question.correct_answer}
+        </li>
+        <li
+          onClick={(e) => {
+            checkAns(e, "");
+          }}
+          className="options"
+        >
+          {question.incorrect_answers[0]}
+        </li>
+        <li
+          onClick={(e) => {
+            checkAns(e, "");
+          }}
+          className="options"
+        >
+          {question.incorrect_answers[1]}
+        </li>
+        <li
+          onClick={(e) => {
+            checkAns(e, "");
+          }}
+          className="options"
+        >
+          {question.incorrect_answers[2]}
+        </li>
+      </ul>
+    );
+  } else if (random < 0.5) {
+    content = (
+      <ul className="ans-continer">
+        <li
+          onClick={(e) => {
+            checkAns(e, "");
+          }}
+          className="options"
+        >
+          {question.incorrect_answers[0]}
+        </li>
+        <li
+          onClick={(e) => {
+            checkAns(e, question.correct_answer);
+          }}
+          className="options"
+        >
+          {question.correct_answer}
+        </li>
+        <li
+          onClick={(e) => {
+            checkAns(e, "");
+          }}
+          className="options"
+        >
+          {question.incorrect_answers[1]}
+        </li>
+        <li
+          onClick={(e) => {
+            checkAns(e, "");
+          }}
+          className="options"
+        >
+          {question.incorrect_answers[2]}
+        </li>
+      </ul>
+    );
+  } else if (random < 0.75) {
+    content = (
+      <ul className="ans-continer">
+        <li
+          onClick={(e) => {
+            checkAns(e, "");
+          }}
+          className="options"
+        >
+          {question.incorrect_answers[0]}
+        </li>
+        <li
+          onClick={(e) => {
+            checkAns(e, "");
+          }}
+          className="options"
+        >
+          {question.incorrect_answers[1]}
+        </li>
+        <li
+          onClick={(e) => {
+            checkAns(e, question.correct_answer);
+          }}
+          className="options"
+        >
+          {question.correct_answer}
+        </li>
+        <li
+          onClick={(e) => {
+            checkAns(e, "");
+          }}
+          className="options"
+        >
+          {question.incorrect_answers[2]}
+        </li>
+      </ul>
+    );
+  } else {
+    content = (
+      <ul className="ans-continer">
+        <li
+          onClick={(e) => {
+            checkAns(e, "");
+          }}
+          className="options"
+        >
+          {question.incorrect_answers[0]}
+        </li>
+        <li
+          onClick={(e) => {
+            checkAns(e, "");
+          }}
+          className="options"
+        >
+          {question.incorrect_answers[1]}
+        </li>
+        <li
+          onClick={(e) => {
+            checkAns(e, "");
+          }}
+          className="options"
+        >
+          {question.incorrect_answers[2]}
+        </li>
+        <li
+          onClick={(e) => {
+            checkAns(e, question.correct_answer);
+          }}
+          className="options"
+        >
+          {question.correct_answer}
+        </li>
+      </ul>
+    );
+  }
+
+  return content;
 }
 
 export default QuizCard;
