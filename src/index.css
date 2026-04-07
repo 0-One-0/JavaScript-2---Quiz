@@ -2,16 +2,12 @@
 
 :root {
   --font-main: "Montserrat", sans-serif;
-
   --bg-color: #383d6e;
   --card-color: #4c518f;
-
   --text-color: #ffffff;
   --text-muted: #c8cae6;
-
   --input-border: rgba(255, 255, 255, 0.2);
   --input-placeholder: #a7abd3;
-
   --btn-start: #cf4f8f;
   --btn-end: #c45be8;
 }
