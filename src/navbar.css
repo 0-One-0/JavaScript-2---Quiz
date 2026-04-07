@@ -67,14 +67,15 @@
   margin: 0;
   display: none;
 }
-.link-list-big > li {
+.link-list-big a {
   display: flex;
   width: fit-content;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
 }
 
-.link-list-big > li > a {
+.link-list-big li {
   display: flex;
   color: white;
   width: 7rem;
@@ -84,7 +85,6 @@
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
   text-align: center;
-  text-decoration: none;
   align-items: center;
   justify-content: center;
 }
