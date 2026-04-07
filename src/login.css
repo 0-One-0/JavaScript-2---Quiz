@@ -1,0 +1,124 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-logo {
+  display: block;
+  margin: 0 auto 20px auto;
+  width: 400px;
+}
+
+.login-container {
+  width: 380px;
+  margin: 60px auto;
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0 40px 0 40px;
+  background: var(--card-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  color: var(--text-color);
+  font-family: var(--font-main);
+}
+
+.login-title {
+  margin: 0;
+  text-align: center;
+  font-size: 32px;
+}
+
+.login-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.google-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--input-border);
+  background: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.divider span {
+  flex: 1;
+  height: 1px;
+  background: var(--input-border);
+}
+
+.divider p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-form label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.login-form input {
+  padding: 14px;
+  border: 1px solid var(--input-border);
+  border-radius: 10px;
+  font-size: 14px;
+  margin-bottom: 8px;
+  background: transparent;
+  color: var(--text-color);
+  font-family: var(--font-main);
+}
+
+.login-form input::placeholder {
+  color: var(--input-placeholder);
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: var(--text-muted);
+}
+
+.login-btn {
+  margin-top: 10px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--btn-start), var(--btn-end));
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.login-footer {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}

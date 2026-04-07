@@ -1,12 +1,14 @@
 import "./App.css";
 import "./navbar.css";
-import NavBar from "./components/navbar";
+import NavBar from "./components/NavBar";
+import Login from "./components/Login";
 
 function App() {
   return (
     <>
-      <NavBar/>
-      <div id= "test-div">hej</div>
+      <Login />
+      {/*<NavBar />
+      <div id="test-div">hej</div>*/}
     </>
   );
 }
