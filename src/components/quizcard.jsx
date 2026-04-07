@@ -34,8 +34,8 @@ const quizArray = [
 
 
 function QuizCard() {
-  let [index, setIndex] = useState(0);
-  let [question, setQuestion] = useState(quizArray[index]);
+  const [index, setIndex] = useState(0);
+  const [question, setQuestion] = useState(quizArray[index]);
 
   return (
     <div className="quiz-continer">
