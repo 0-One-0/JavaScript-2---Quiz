@@ -1,21 +1,47 @@
 import { useState } from "react";
 import loginIcon from "../assets/login-icon.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "../lib/supabase";
 import LoginLayout from "./AuthLayout";
 
 // Component
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
+
+    setErrorMessage("");
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      setErrorMessage(error.message);
+      return;
+    }
+
+    navigate("/");
   }
 
-  function handleGoogleLogin() {
-    console.log("Logga in med Google");
+  async function handleGoogleLogin() {
+    setErrorMessage("");
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: window.location.origin,
+      },
+    });
+
+    if (error) {
+      setErrorMessage(error.message);
+    }
   }
 
   return (
@@ -24,19 +50,9 @@ function Login() {
         <h2 className="login-title">Log in</h2>
         <p className="login-subtitle">Continue with your account</p>
 
-        <button
-          className="google-btn"
-          type="button"
-          onClick={handleGoogleLogin}
-        >
-          Continue with Google
-        </button>
-
-        <div className="divider">
-          <span></span>
-          <p>OR</p>
-          <span></span>
-        </div>
+        {errorMessage && (
+          <p style={{ color: "red", marginBottom: "10px" }}>{errorMessage}</p>
+        )}
 
         <form className="login-form" onSubmit={handleLogin}>
           <label>Email</label>
@@ -45,6 +61,7 @@ function Login() {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
 
           <label>Password</label>
@@ -53,6 +70,7 @@ function Login() {
             placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
 
           <div className="forgot-password">

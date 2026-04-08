@@ -1,42 +1,78 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { supabase } from "../lib/supabase";
 import AuthLayout from "./AuthLayout";
 
 //Component
 function ForgotPassword() {
   const [email, setEmail] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  function handleResetPassword(e) {
+  async function handleResetPassword(e) {
     e.preventDefault();
-    console.log("Reset password for:", email);
+
+    setErrorMessage("");
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: "http://localhost:5173/#/update-password",
+    });
+
+    if (error) {
+      setErrorMessage(error.message);
+      return;
+    }
+
+    setIsSuccess(true);
   }
 
   return (
     <AuthLayout>
       <div className="login-container">
-        <h2 className="login-title">Forgot Password</h2>
-        <p className="login-subtitle">
-          Enter your email to reset your password
-        </p>
+        {!isSuccess ?
+          <>
+            <h2 className="login-title">Forgot Password</h2>
+            <p className="login-subtitle">
+              Enter your email to reset your password
+            </p>
 
-        <form className="login-form" onSubmit={handleResetPassword}>
-          <label>Email</label>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            <form className="login-form" onSubmit={handleResetPassword}>
+              <label>Email</label>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
 
-          <button className="login-btn" type="submit">
-            Send reset link
-          </button>
+              {errorMessage && (
+                <p style={{ color: "red", marginTop: "10px" }}>
+                  {errorMessage}
+                </p>
+              )}
 
-          <div className="sign-up">
-            <p>Remember your password?</p>
-            <Link to="/login">Log in</Link>
-          </div>
-        </form>
+              <button className="login-btn" type="submit">
+                Send reset link
+              </button>
+
+              <div className="sign-up">
+                <p>Remember your password?</p>
+                <Link to="/login">Log in</Link>
+              </div>
+            </form>
+          </>
+        : <>
+            <h2 className="login-title">Check your email</h2>
+            <p className="login-subtitle">
+              We’ve sent you a password reset link. Please check your email.
+            </p>
+
+            <div className="sign-up" style={{ marginTop: "20px" }}>
+              <Link to="/login">Back to login</Link>
+            </div>
+          </>
+        }
       </div>
     </AuthLayout>
   );
