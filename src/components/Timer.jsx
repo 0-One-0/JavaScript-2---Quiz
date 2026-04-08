@@ -6,24 +6,24 @@ const CountdownTimer = ({
   setSeconds,
   stopProgress,
 }) => {
-  // 60 sekunder som startvärde
+  // Start the timer at 60 sec from the usestate given
 
   useEffect(() => {
-    // Stoppa när vi når noll
+    // Stops the timer at zero and updates the stopProgress to we know that its on 0 with all the colors.
     if (seconds <= 0) {
       setStopProgress(true);
       return;
     }
 
+    //Sets the interval for updates. now it one every sec.
     const timer = setInterval(() => {
-      if (stopProgress === false) {
-        setSeconds((prev) => prev - 1);
-      }
+      setSeconds((prev) => prev - 1);
     }, 1000);
-
+    //Clean up when its done
     return () => clearInterval(timer);
   }, [seconds, setStopProgress, setSeconds, stopProgress]);
 
+  //converts to right minute and second depending on how much time we give-
   const displayMinutes = Math.floor(seconds / 60);
   const displaySeconds = seconds % 60;
 
@@ -47,6 +47,5 @@ const CountdownTimer = ({
     </div>
   );
 };
-
 
 export default CountdownTimer;

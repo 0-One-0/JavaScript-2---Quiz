@@ -1,5 +1,5 @@
-function RandomAlign({random, question, checkAns}) {
-  
+//Return a random order of the questions so that anwser has a different spot most of the time.
+function RandomAlign({ random, question, checkAns }) {
   if (random < 0.25) {
     return (
       <ul className="ans-continer">
@@ -149,8 +149,6 @@ function RandomAlign({random, question, checkAns}) {
       </ul>
     );
   }
-
- 
 }
 
 export default RandomAlign;

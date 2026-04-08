@@ -1,7 +1,6 @@
 #test-div {
   padding-top: 50rem;
   padding-bottom: 60rem;
-  
 }
 
 /* Navbar continer */
@@ -14,6 +13,7 @@
   box-sizing: border-box;
   position: fixed;
   width: 100%;
+  z-index: 1;
   top: 0;
   padding-bottom: 1rem;
 }

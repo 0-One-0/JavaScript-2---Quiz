@@ -1,8 +1,6 @@
 import Links from "./Links";
 
-
 function NavBar() {
-    
   return (
     <nav className="navbar-continer">
       <div className="links-continer">

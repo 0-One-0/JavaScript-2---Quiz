@@ -170,16 +170,14 @@ function PopUpMenu() {
       <ul className="link-list-small">
         <Link to="/">
           <li>
-            
-              {" "}
-              <img
-                className="menu-logos"
-                id="dashboard-logo"
-                src="src\assets\dashboard-logo.png"
-                alt="Dashboard"
-              />
-              Dashboard
-            
+            {" "}
+            <img
+              className="menu-logos"
+              id="dashboard-logo"
+              src="src\assets\dashboard-logo.png"
+              alt="Dashboard"
+            />
+            Dashboard
           </li>
         </Link>
         <Link to="/Quiz">

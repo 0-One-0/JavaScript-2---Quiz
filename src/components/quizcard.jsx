@@ -89,14 +89,22 @@ function QuizCard() {
   const checkAns = (e, answer) => {
     if (answerd === false) {
       if (question.correct_answer === answer) {
+        //Changes the color
         e.target.classList.add("correct");
+
+        //Update relevent states
         setAnswerd(true);
         setStopProgress(true);
         setScore((prev) => prev + 1);
       } else {
+        //Changes the color
         e.target.classList.add("wrong");
+
+        //Update relevent states
         setAnswerd(true);
         setStopProgress(true);
+
+        //Shows the right answer
         const answers = document.querySelectorAll(".options");
         answers.forEach((li) => {
           if (li.textContent === question.correct_answer) {
@@ -107,20 +115,25 @@ function QuizCard() {
     }
   };
 
-  
-
+  //function for the submit button, this only works if the user has made a guess.
   const nextQuestion = () => {
+    //Makes sure the user made a guess before the btn does anything
     if (answerd === true) {
+      //Makes sure there are answers left
       if (index === quizArray.length - 1) {
+        //Shows user the score
         window.alert("You got " + score + " right ");
         return 0;
       }
+
+      //Takes away the colors for the anwsers.
       const answers = document.querySelectorAll(".options");
       answers.forEach((li) => {
         li.classList.remove("correct");
         li.classList.remove("wrong");
       });
 
+      //Update relevent useStates
       setIndex((prev) => prev + 1);
       setRandom(Math.random());
       setAnswerd(false);
@@ -128,7 +141,10 @@ function QuizCard() {
       setSeconds(60);
     }
   };
+
+  //function to skip the question
   const skipQuestion = () => {
+    //if the user anwred we just skip
     if (answerd === true) {
       const answers = document.querySelectorAll(".options");
       answers.forEach((li) => {
@@ -136,9 +152,12 @@ function QuizCard() {
         li.classList.remove("wrong");
       });
     }
+    //makes sure that there is more questions so it doesnt crash
     if (index === quizArray.length - 1) {
       return 0;
     }
+
+    //Update the states to be ready for the next question
     setIndex((prev) => prev + 1);
     setRandom(Math.random());
     setAnswerd(false);
@@ -146,9 +165,13 @@ function QuizCard() {
     setSeconds(60);
   };
 
+  //When the timer goes out we show the user the right answer.
   useEffect(() => {
+    //Checks if we are meant to stop with the state
     if (stopProgress === true) {
       setAnswerd(true);
+
+      //Finds the  right answer and change color to green
       const answers = document.querySelectorAll(".options");
       answers.forEach((li) => {
         if (li.textContent === question.correct_answer) {
@@ -156,16 +179,18 @@ function QuizCard() {
         }
       });
     }
-  }, [stopProgress, question]);
+  }, [stopProgress, question]); //We user stopProgress and question to make sure we look at this as an option when they change
 
+  //Updates question when the index goes up.
   useEffect(() => {
     setQuestion(quizArray[index]);
   }, [index]);
-
+  //Updates the progessbar state when index changes.
   useEffect(() => {
     setProgrss(((index + 1) / quizArray.length) * 100 + "%");
   }, [index]);
 
+  //Gsap animations, it users progress as a dependense to to change the progressbar, animate question and alot of other stuff.
   useGSAP(() => {
     gsap.to(".progressbar-indicator", {
       width: progress,
@@ -198,51 +223,58 @@ function QuizCard() {
     );
   }, [progress]);
 
+  //This returns the whole quizcard.
   return (
-    <div className="quiz-continer">
-      <div className="quiz info">
-        <div className="topper">
-          <div className="back">
+    <section className="quizcard-section">
+      <div className="quiz-continer">
+        <div className="quiz info">
+          <div className="topper">
+            <div className="back">
+              {" "}
+              <button className="back-btn">{"<"}</button>{" "}
+            </div>
+            <span className="category-title">{question.category}</span>{" "}
+            <div className="timer-continer">
+              <CountdownTimer
+                setStopProgress={setStopProgress}
+                seconds={seconds}
+                setSeconds={setSeconds}
+                stopProgress={stopProgress}
+              />
+            </div>
+          </div>
+          <ProgressBar />
+          <span className="progress-index">
             {" "}
-            <button className="back-btn">{"<"}</button>{" "}
-          </div>
-          <span className="category-title">{question.category}</span>{" "}
-          <div className="timer-continer">
-            <CountdownTimer
-              setStopProgress={setStopProgress}
-              seconds={seconds}
-              setSeconds={setSeconds}
-              stopProgress={stopProgress}
-            />
-          </div>
+            Question {index + 1}/{quizArray.length}
+          </span>
         </div>
-        <ProgressBar />
-        <span className="progress-index">
-          {" "}
-          Question {index + 1}/{quizArray.length}
-        </span>
+        <div className="question-continer">
+          <h1 className="question">{question.question}</h1>
+        </div>
+        <div className="answer-continer">
+          <RandomAlign
+            random={random}
+            question={question}
+            checkAns={checkAns}
+          />
+        </div>
+        <div className="sub-continer">
+          <button className="submit-btn" onClick={nextQuestion}>
+            Submit
+          </button>
+          <button
+            className={`skip-btn ${answerd ? "hide" : "show"}`}
+            onClick={skipQuestion}
+          >
+            Skip this question
+          </button>
+        </div>
       </div>
-      <div className="question-continer">
-        <h1 className="question">{question.question}</h1>
-      </div>
-      <div className="answer-continer">
-        <RandomAlign random={random} question={question} checkAns={checkAns}/>
-      </div>
-      <div className="sub-continer">
-        <button className="submit-btn" onClick={nextQuestion}>
-          Submit
-        </button>
-        <button
-          className={`skip-btn ${answerd ? "hide" : "show"}`}
-          onClick={skipQuestion}
-        >
-          Skip this question
-        </button>
-      </div>
-    </div>
+    </section>
   );
 }
-
+//Component for the Progressbar.
 function ProgressBar() {
   return (
     <div className="progressbar-continer">
@@ -250,8 +282,5 @@ function ProgressBar() {
     </div>
   );
 }
-
-
-
 
 export default QuizCard;

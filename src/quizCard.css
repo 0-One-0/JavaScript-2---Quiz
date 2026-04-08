@@ -1,3 +1,10 @@
+.quizcard-section {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .quiz-continer {
   box-sizing: border-box;
 
@@ -9,6 +16,7 @@
   flex-direction: column;
   color: white;
   gap: 3rem;
+  max-width: 414px;
 }
 
 .ans-continer {
@@ -19,13 +27,14 @@
   list-style: none;
   margin-left: 0;
   padding-left: 0;
+
   gap: 24px;
 }
 
 .options {
   box-sizing: border-box;
   border-radius: 16px;
-  z-index: -1;
+
   width: 20rem;
   border: none;
   background-color: rgb(77 83 144);
