@@ -25,6 +25,7 @@
 .options {
   box-sizing: border-box;
   border-radius: 16px;
+  z-index: -1;
   width: 20rem;
   border: none;
   background-color: rgb(77 83 144);
@@ -91,6 +92,16 @@
 
   padding: 0.8rem;
 }
+.back-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Montserrat;
+  padding: 0;
+  margin: 0;
+}
 .progressbar-continer {
   height: 8px;
   border-radius: 4px;
@@ -112,10 +123,39 @@
   );
 }
 .correct {
-  background-color: green;
+  background: linear-gradient(
+    90deg,
+    rgb(46, 125, 50) 0%,
+    rgb(102, 187, 106) 50%,
+    rgb(178, 255, 89) 100%
+  );
 }
 .wrong {
-  background-color: red;
+  background: linear-gradient(
+    90deg,
+    rgb(175, 72, 126) 0%,
+    rgb(181, 90, 180) 50%,
+    rgb(186, 107, 234) 100%
+  );
+}
+.topper {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr;
+  box-sizing: border-box;
+  width: 100%;
+  padding-bottom: 1rem;
+}
+.timer {
+  box-sizing: border-box;
+  background-color: rgb(77 83 144);
+  width: 70px;
+  justify-content: center;
+  padding: 0.3rem;
+  border-radius: 8px;
+  display: flex;
+  gap: 0.3rem;
+  text-align: center;
 }
 .hide {
   display: none;
