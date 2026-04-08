@@ -7,6 +7,7 @@ import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import UpdatePassword from "./pages/UpdatePassword.jsx";
+import Quiz from "./pages/Quiz.jsx";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
 
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/Quiz" element={<Quiz />} />
         </Route>
       </Routes>
     </Router>

@@ -152,7 +152,7 @@ function Links() {
         <Link to="/">
           <li>Dashboard</li>
         </Link>
-        <Link to="/">
+        <Link to="/Quiz">
           <li>Quiz</li>
         </Link>
         <Link to="/">
@@ -170,41 +170,35 @@ function PopUpMenu() {
       <ul className="link-list-small">
         <Link to="/">
           <li>
-            <a href="#">
-              {" "}
-              <img
-                className="menu-logos"
-                id="dashboard-logo"
-                src="src\assets\dashboard-logo.png"
-                alt="Dashboard"
-              />
-              Dashboard
-            </a>
+            {" "}
+            <img
+              className="menu-logos"
+              id="dashboard-logo"
+              src="src\assets\dashboard-logo.png"
+              alt="Dashboard"
+            />
+            Dashboard
+          </li>
+        </Link>
+        <Link to="/Quiz">
+          <li>
+            {" "}
+            <img
+              className="menu-logos"
+              src="src\assets\Quiz-logo.png"
+              alt="Quiz"
+            />
+            Quiz
           </li>
         </Link>
         <Link to="/">
           <li>
-            <a href="#">
-              {" "}
-              <img
-                className="menu-logos"
-                src="src\assets\Quiz-logo.png"
-                alt="Quiz"
-              />
-              Quiz
-            </a>
-          </li>
-        </Link>
-        <Link to="/">
-          <li>
-            <a href="#">
-              <img
-                className="menu-logos"
-                src="src\assets\howto-logo.png"
-                alt="How to"
-              />
-              How to play
-            </a>
+            <img
+              className="menu-logos"
+              src="src\assets\howto-logo.png"
+              alt="How to"
+            />
+            How to play
           </li>
         </Link>
       </ul>
