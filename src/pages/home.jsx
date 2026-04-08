@@ -1,7 +1,5 @@
 function Home() {
-  return (
-    <span>Hej</span>
-  )
+  return <span>Hej</span>;
 }
 
 export default Home;

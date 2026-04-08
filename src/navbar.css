@@ -7,7 +7,7 @@
 
 .navbar-continer {
   display: flex;
-  background-color: rgb(56 61 110);
+  background-color: var(--bg-color);
   align-items: center;
   padding-top: 1rem;
   box-sizing: border-box;

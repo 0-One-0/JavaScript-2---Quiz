@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
+
+:root {
+  --font-main: "Montserrat", sans-serif;
+
+  --bg-color: #383d6e;
+  --card-color: #4c518f;
+  --text-color: #ffffff;
+  --text-muted: #c8cae6;
+  --input-border: rgba(255, 255, 255, 0.2);
+  --input-placeholder: #a7abd3;
+  --btn-start: #af487e;
+  --btn-end: #ba6bea;
+  --hover-color: #474e8d;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background: var(--bg-color);
+  color: var(--text-color);
+}

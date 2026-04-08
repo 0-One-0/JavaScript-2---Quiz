@@ -17,7 +17,9 @@ const CountdownTimer = ({
 
     //Sets the interval for updates. now it one every sec.
     const timer = setInterval(() => {
-      setSeconds((prev) => prev - 1);
+      if (stopProgress === false) {
+        setSeconds((prev) => prev - 1);
+      }
     }, 1000);
     //Clean up when its done
     return () => clearInterval(timer);
