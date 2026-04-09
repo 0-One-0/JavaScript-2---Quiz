@@ -5,8 +5,9 @@ import "../quizCard.css";
 import CountdownTimer from "./Timer";
 import RandomAlign from "./Answers";
 import { fetchQuizQuestions } from "../lib/TriviaApi";
+import { SplitText } from "gsap/all";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, SplitText);
 
 //Temp array for tesing and demo, api will be implemented. the object structure is same as api
 
@@ -33,7 +34,7 @@ function QuizCard() {
     setError(null);
 
     try {
-      const data = await fetchQuizQuestions(3, 15);
+      const data = await fetchQuizQuestions(8, 15);
       setQuizArray(data);
     } catch (err) {
       setError(err.message);
@@ -49,7 +50,7 @@ function QuizCard() {
       loadQuestions();
     }, 2000);
 
-    return () => clearTimeout(timer); //takes away timer when we are done 
+    return () => clearTimeout(timer); //takes away timer when we are done
   }, []);
 
   //Checks if answer is correct or wrong, we then save score and change styles to show user. We altso lock so you can only guess ones
@@ -158,7 +159,11 @@ function QuizCard() {
   }, [index, quizArray]);
 
   //Gsap animations, it users progress as a dependense to to change the progressbar, animate question and alot of other stuff.
+
   useGSAP(() => {
+    let split = SplitText.create(".loading", {
+      type: "chars",
+    });
     if (!loading && question) {
       gsap.to(".progressbar-indicator", {
         width: progress,
@@ -189,23 +194,35 @@ function QuizCard() {
           ease: "power1.inOut",
         },
       );
+    } else {
+      gsap.from(split.chars, {
+        y: 3,
+        delay: 0.1,
+        yoyo: true,
+        opacity: 0,
+        repeat: -1,
+        repeatDelay: 0.2,
+        stagger: 0.1,
+        ease: "power3.inOut",
+        duration: 0.2,
+      });
     }
   }, [progress, loading, question]);
 
   //Check if the content has been loaded from the api before we show other stuff.
-  if (loading || !question && !error ) {
+  if (loading || (!question && !error)) {
     return (
       //Shows loading... when we want the user to wait
       <section className="quizcard-section">
-        <div className="loading">Loading...</div>
+        <h1 className="loading">Loading Quiz....</h1>
       </section>
     );
   }
-  if (error ) {
+  if (error) {
     return (
       //Shows error if it happens with the api.
       <section className="quizcard-section">
-        <div className="error">Error: {error}</div>
+        <h2 className="error">Error: {error}</h2>
       </section>
     );
   }
