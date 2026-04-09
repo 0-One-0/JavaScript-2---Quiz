@@ -149,15 +149,17 @@ function Links() {
         </g>
       </svg>
       <ul className="link-list-big">
-        <Link to="/">
-          <li>Dashboard</li>
-        </Link>
-        <Link to="/Quiz">
-          <li>Quiz</li>
-        </Link>
-        <Link to="/">
-          <li>How to play</li>
-        </Link>
+        <li>
+          <Link to="/">Dashboard </Link>
+        </li>
+
+        <li>
+          <Link to="/Quiz">Quiz</Link>
+        </li>
+
+        <li>
+          <Link to="/">How to play</Link>
+        </li>
       </ul>
       <PopUpMenu show={show} setShow={setShow} />
     </>
@@ -168,9 +170,8 @@ function PopUpMenu() {
   return (
     <div className="popup-menu">
       <ul className="link-list-small">
-        <Link to="/">
-          <li>
-            {" "}
+        <li>
+          <Link to="/">
             <img
               className="menu-logos"
               id="dashboard-logo"
@@ -178,10 +179,11 @@ function PopUpMenu() {
               alt="Dashboard"
             />
             Dashboard
-          </li>
-        </Link>
-        <Link to="/Quiz">
-          <li>
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/Quiz">
             {" "}
             <img
               className="menu-logos"
@@ -189,18 +191,19 @@ function PopUpMenu() {
               alt="Quiz"
             />
             Quiz
-          </li>
-        </Link>
-        <Link to="/">
-          <li>
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/">
             <img
               className="menu-logos"
               src="src\assets\howto-logo.png"
               alt="How to"
             />
             How to play
-          </li>
-        </Link>
+          </Link>
+        </li>
       </ul>
     </div>
   );
