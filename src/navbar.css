@@ -75,6 +75,14 @@
   text-decoration: none;
   color: white;
 }
+.loading {
+  margin-top: 25rem;
+  font-family: "Montserrat", sans-serif;
+}
+.error{
+   margin-top: 25rem;
+  font-family: "Montserrat", sans-serif;
+}
 
 .link-list-big li {
   display: flex;

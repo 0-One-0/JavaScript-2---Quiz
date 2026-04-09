@@ -85,23 +85,23 @@ function Links() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g
           id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></g>
         <g id="SVGRepo_iconCarrier">
           {" "}
-          <g clip-path="url(#clip0_429_11066)">
+          <g clipPath="url(#clip0_429_11066)">
             {" "}
             <path
               className="Ham-Menu"
               d="M3 6.00092H21M3 12.0009H21M3 18.0009H21"
               stroke="#fffafa"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></path>{" "}
           </g>{" "}
           <defs>
@@ -125,11 +125,11 @@ function Links() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g
           id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></g>
         <g id="SVGRepo_iconCarrier">
           {" "}
@@ -141,9 +141,9 @@ function Links() {
               id="Vector"
               d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16"
               stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></path>{" "}
           </g>{" "}
         </g>
