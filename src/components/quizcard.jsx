@@ -29,26 +29,32 @@ function QuizCard() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  //Handles the load, err and quiz states and 
+  // fetches the questions and
+  // answers by doing a calling the function
   const loadQuestions = async () => {
-    setLoading(true);
-    setError(null);
+    setLoading(true); //Lets react know that we need some time and want to show the user that we are loading.
+    setError(null); //Make sure we clear the previus error so that it doesnt lock the user in the error message.
 
+    //We try to call the async function
     try {
-      const data = await fetchQuizQuestions(8, 15);
+      const data = await fetchQuizQuestions(10, 12);
       setQuizArray(data);
     } catch (err) {
+      //We return the error if it happens 
       setError(err.message);
     } finally {
+      //We allways change the loading state to show the result or error.
       setLoading(false);
     }
   };
 
   //this happens the first mount and only then so when we refresh page this happens
   useEffect(() => {
-    //Sets timer so we know that we har loading the questions
+    //Sets timer so we know that we har loading the questions, prevents a fetch error. Double fetch because in strikt mode.
     const timer = setTimeout(() => {
       loadQuestions();
-    }, 2000);
+    }, 2000);//Set timmer for 2 sec.
 
     return () => clearTimeout(timer); //takes away timer when we are done
   }, []);
@@ -159,7 +165,7 @@ function QuizCard() {
   }, [index, quizArray]);
 
   //Gsap animations, it users progress as a dependense to to change the progressbar, animate question and alot of other stuff.
-
+  //Gsap animations for the loading screen.
   useGSAP(() => {
     let split = SplitText.create(".loading", {
       type: "chars",
@@ -267,6 +273,7 @@ function QuizCard() {
             Submit
           </button>
           <button
+          //Checks if the user made a guess, if the user did they cant skip.
             className={`skip-btn ${answerd ? "hide" : "show"}`}
             onClick={skipQuestion}
           >
@@ -280,6 +287,7 @@ function QuizCard() {
 //Component for the Progressbar.
 function ProgressBar() {
   return (
+    //use the div as a continer so we can change the width of inner div with % of the continer. 
     <div className="progressbar-continer">
       <div className="progressbar-indicator"></div>
     </div>
