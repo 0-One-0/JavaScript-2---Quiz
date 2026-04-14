@@ -27,7 +27,7 @@ function Signup() {
       password,
       options: {
         data: {
-          username: username,
+          display_name: username,
         },
       },
     });
