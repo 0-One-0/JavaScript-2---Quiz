@@ -11,7 +11,7 @@ gsap.registerPlugin(useGSAP, SplitText);
 
 //Temp array for tesing and demo, api will be implemented. the object structure is same as api
 
-function QuizCard() {
+function QuizCard({ questionAmount, category, selectedDifficulty}) {
   //All the useState are made here.
   const [quizArray, setQuizArray] = useState([]);
   const [index, setIndex] = useState(0); //this is for the index that we are on like what question.
@@ -38,7 +38,7 @@ function QuizCard() {
 
     //We try to call the async function
     try {
-      const data = await fetchQuizQuestions(10, 12);
+      const data = await fetchQuizQuestions(questionAmount, category, selectedDifficulty);
       setQuizArray(data);
     } catch (err) {
       //We return the error if it happens 
