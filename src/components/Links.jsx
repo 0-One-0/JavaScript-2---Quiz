@@ -85,23 +85,23 @@ function Links() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g
           id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></g>
         <g id="SVGRepo_iconCarrier">
           {" "}
-          <g clip-path="url(#clip0_429_11066)">
+          <g clipPath="url(#clip0_429_11066)">
             {" "}
             <path
               className="Ham-Menu"
               d="M3 6.00092H21M3 12.0009H21M3 18.0009H21"
               stroke="#fffafa"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></path>{" "}
           </g>{" "}
           <defs>
@@ -125,11 +125,11 @@ function Links() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g
           id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></g>
         <g id="SVGRepo_iconCarrier">
           {" "}
@@ -141,23 +141,25 @@ function Links() {
               id="Vector"
               d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16"
               stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></path>{" "}
           </g>{" "}
         </g>
       </svg>
       <ul className="link-list-big">
-        <Link to="/">
-          <li>Dashboard</li>
-        </Link>
-        <Link to="/Quiz">
-          <li>Quiz</li>
-        </Link>
-        <Link to="/">
-          <li>How to play</li>
-        </Link>
+        <li>
+          <Link to="/">Dashboard </Link>
+        </li>
+
+        <li>
+          <Link to="/Quiz">Quiz</Link>
+        </li>
+
+        <li>
+          <Link to="/">How to play</Link>
+        </li>
       </ul>
       <PopUpMenu show={show} setShow={setShow} />
     </>
@@ -168,9 +170,8 @@ function PopUpMenu() {
   return (
     <div className="popup-menu">
       <ul className="link-list-small">
-        <Link to="/">
-          <li>
-            {" "}
+        <li>
+          <Link to="/">
             <img
               className="menu-logos"
               id="dashboard-logo"
@@ -178,10 +179,11 @@ function PopUpMenu() {
               alt="Dashboard"
             />
             Dashboard
-          </li>
-        </Link>
-        <Link to="/Quiz">
-          <li>
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/Quiz">
             {" "}
             <img
               className="menu-logos"
@@ -189,18 +191,19 @@ function PopUpMenu() {
               alt="Quiz"
             />
             Quiz
-          </li>
-        </Link>
-        <Link to="/">
-          <li>
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/">
             <img
               className="menu-logos"
               src="src\assets\howto-logo.png"
               alt="How to"
             />
             How to play
-          </li>
-        </Link>
+          </Link>
+        </li>
       </ul>
     </div>
   );

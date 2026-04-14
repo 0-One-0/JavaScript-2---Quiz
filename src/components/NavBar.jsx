@@ -1,4 +1,5 @@
 import Links from "./Links";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
@@ -7,7 +8,8 @@ function NavBar() {
         <Links />
       </div>
       <div className="logo-continer">
-        <img className="logo-img" src="src\assets\logo2.png" alt="logo" />
+        <Link to="/"><img className="logo-img" src="src\assets\logo2.png" alt="logo" /></Link>
+        
       </div>
       <div className="avatar-continer">
         <div className="avatar-circle"></div>
