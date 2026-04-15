@@ -63,7 +63,7 @@ function QuizCard({ questionAmount, category, selectedDifficulty, setScore }) {
     }, 2000); //Set timmer for 2 sec.
 
     return () => clearTimeout(timer); //takes away timer when we are done
-  }, []);
+  },[]);
 
   //Checks if answer is correct or wrong, we then save score and change styles to show user. We altso lock so you can only guess ones
   const checkAns = (e, answer) => {
@@ -275,12 +275,12 @@ function QuizCard({ questionAmount, category, selectedDifficulty, setScore }) {
           />
         </div>
         <div className="sub-continer">
-          <button className="submit-btn" onClick={nextQuestion}>
+          <button className="main-btn" onClick={nextQuestion}>
             Submit
           </button>
           <button
             //Checks if the user made a guess, if the user did they cant skip.
-            className={`skip-btn ${answerd ? "hide" : "show"}`}
+            className={`second-btn ${answerd ? "hide" : "show"}`}
             onClick={skipQuestion}
           >
             Skip this question

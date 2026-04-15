@@ -60,8 +60,6 @@ function App() {
               element={
                 <QuizResult
                   questionAmount={questionAmount}
-                  category={category}
-                  selectedDifficulty={selectedDifficulty}
                   score={score}
                 />
               }

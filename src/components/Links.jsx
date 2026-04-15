@@ -3,7 +3,9 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { Link } from "react-router-dom";
-
+import howTo from "../assets/howto-logo.png";
+import quizLogo from "../assets/Quiz-logo.png";
+import dashboard from "../assets/dashboard-logo.png";
 gsap.registerPlugin(useGSAP, MorphSVGPlugin);
 
 function Links() {
@@ -175,7 +177,7 @@ function PopUpMenu() {
             <img
               className="menu-logos"
               id="dashboard-logo"
-              src="src\assets\dashboard-logo.png"
+              src={dashboard}
               alt="Dashboard"
             />
             Dashboard
@@ -187,7 +189,7 @@ function PopUpMenu() {
             {" "}
             <img
               className="menu-logos"
-              src="src\assets\Quiz-logo.png"
+              src={quizLogo}
               alt="Quiz"
             />
             Quiz
@@ -198,7 +200,7 @@ function PopUpMenu() {
           <Link to="/">
             <img
               className="menu-logos"
-              src="src\assets\howto-logo.png"
+              src={howTo}
               alt="How to"
             />
             How to play
