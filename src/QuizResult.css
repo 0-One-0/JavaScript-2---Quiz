@@ -1,0 +1,45 @@
+*{
+    font-family: Montserrat;
+}
+.results-container {
+  margin-top: 10rem;
+  box-sizing: border-box;
+  
+  width: 100%;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.results-top{
+    display: grid;
+    width: 375px;
+    
+    padding: 0.5rem;
+    box-sizing: border-box;
+    grid-template-columns: 60% 25%;
+
+}
+.result-title{
+    
+    align-items: center;
+    display: flex;
+    padding: 0rem 1rem;
+    margin-left: auto;
+    margin-right: 0.2rem;
+}
+.Close-results {
+  width: 1rem;
+}
+.close-container{
+    margin-left: auto;
+    background-color: rgba(128, 128, 128, 0.226);
+    width: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2rem;
+    border-radius: 5px;
+    box-sizing: border-box;
+}

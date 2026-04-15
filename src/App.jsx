@@ -12,11 +12,13 @@ import { useState } from "react";
 import SelectQuiz from "./components/quizSelect.jsx";
 import DifficultyPage from "./components/quizDifficulty.jsx";
 import QuizCard from "./components/quizcard.jsx";
+import QuizResult from "./components/QuizResult.jsx";
 
 function App() {
   const [category, setCategory] = useState(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
   const [questionAmount, setQuestionAmount] = useState(0);
+  const [score, setScore] = useState(0); //Keeps check of the correct answers from user.
 
   return (
     <Router>
@@ -29,9 +31,41 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/Quiz" element={<Quiz />}>
-            <Route path="/Quiz/" element={<SelectQuiz setCategory={setCategory}/>} />
-            <Route path="/Quiz/selectDifficulty" element={<DifficultyPage setSelectedDifficulty={setSelectedDifficulty} setQuestionAmount={setQuestionAmount}/>} />
-            <Route path="/Quiz/quizCard" element={<QuizCard questionAmount={questionAmount} category={category} selectedDifficulty={selectedDifficulty}/>} />
+            <Route
+              path="/Quiz/"
+              element={<SelectQuiz setCategory={setCategory} />}
+            />
+            <Route
+              path="/Quiz/selectDifficulty"
+              element={
+                <DifficultyPage
+                  setSelectedDifficulty={setSelectedDifficulty}
+                  setQuestionAmount={setQuestionAmount}
+                />
+              }
+            />
+            <Route
+              path="/Quiz/quizCard"
+              element={
+                <QuizCard
+                  questionAmount={questionAmount}
+                  category={category}
+                  selectedDifficulty={selectedDifficulty}
+                  setScore={setScore}
+                />
+              }
+            />
+            <Route
+              path="/Quiz/quizResult"
+              element={
+                <QuizResult
+                  questionAmount={questionAmount}
+                  category={category}
+                  selectedDifficulty={selectedDifficulty}
+                  score={score}
+                />
+              }
+            />
           </Route>
         </Route>
       </Routes>
