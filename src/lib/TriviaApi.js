@@ -1,7 +1,7 @@
 export async function fetchQuizQuestions(
   amount,
   category,
-  difficulty = "medium",
+  difficulty,
   type = "multiple",
 ) {
   //We use string fortmatting to make sure we can change the urls perams when needed.

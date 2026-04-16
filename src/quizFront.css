@@ -1,0 +1,133 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  min-height: 100vh;
+  background: #3b3f73;
+  color: white;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo { font-size: 24px; }
+.menu { font-size: 20px; }
+
+.search {
+  background: #4b4f87;
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+}
+
+.section-title {
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.horizontal-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.card {
+  min-width: 150px;
+  height: 180px;
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gradient-pink { background: linear-gradient(135deg, #ec4899, #a855f7); }
+.gradient-green { background: linear-gradient(135deg, #2dd4bf, #22c55e); }
+
+.card-icon { font-size: 32px; text-align: center; }
+
+.list { margin: 10px 0; }
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  background: #4b4f87;
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow-btn {
+  background: #ec4899;
+  border: none;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.grid-item {
+  background: #4b4f87;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.random {
+  background: linear-gradient(to right, #a855f7, #ec4899);
+  padding: 16px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.big-icon { font-size: 24px; }
+
+.difficulty {
+  background: #4b4f87;
+  padding: 12px;
+  border-radius: 12px;
+  margin: 10px 0;
+}
+
+.difficulty.active {
+  border: 2px solid #ec4899;
+}
+
+.start-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(to right, #3b82f6, #60a5fa);
+  color: white;
+  font-size: 16px;
+}
