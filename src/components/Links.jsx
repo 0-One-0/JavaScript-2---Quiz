@@ -168,12 +168,13 @@ function Links() {
   );
 }
 
-function PopUpMenu() {
+function PopUpMenu({show, setShow}) {
   return (
     <div className="popup-menu">
       <ul className="link-list-small">
         <li>
-          <Link to="/">
+          <Link to="/"
+          onClick={() => setShow(!show)}>
             <img
               className="menu-logos"
               id="dashboard-logo"
@@ -185,7 +186,8 @@ function PopUpMenu() {
         </li>
 
         <li>
-          <Link to="/Quiz">
+          <Link to="/Quiz"
+           onClick={() => setShow(!show)}>
             {" "}
             <img
               className="menu-logos"
@@ -197,7 +199,8 @@ function PopUpMenu() {
         </li>
 
         <li>
-          <Link to="/">
+          <Link to="/"
+           onClick={() => setShow(!show)}>
             <img
               className="menu-logos"
               src={howTo}
