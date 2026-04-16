@@ -12,11 +12,13 @@ import { useState } from "react";
 import SelectQuiz from "./components/quizSelect.jsx";
 import DifficultyPage from "./components/quizDifficulty.jsx";
 import QuizCard from "./components/quizcard.jsx";
+import QuizCategories from "./components/quizCategories.jsx";
 
 function App() {
   const [category, setCategory] = useState(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
   const [questionAmount, setQuestionAmount] = useState(0);
+  const [catArray, setCatArray] = useState([]);
 
   return (
     <Router>
@@ -29,7 +31,8 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/Quiz" element={<Quiz />}>
-            <Route path="/Quiz/" element={<SelectQuiz setCategory={setCategory}/>} />
+            <Route path="/Quiz/" element={<SelectQuiz setCategory={setCategory} setCatArray={setCatArray}/>} />
+            <Route path="/Quiz/categories" element={<QuizCategories setCategory={setCategory} catArray={catArray}/>} />
             <Route path="/Quiz/selectDifficulty" element={<DifficultyPage setSelectedDifficulty={setSelectedDifficulty} setQuestionAmount={setQuestionAmount}/>} />
             <Route path="/Quiz/quizCard" element={<QuizCard questionAmount={questionAmount} category={category} selectedDifficulty={selectedDifficulty}/>} />
           </Route>
