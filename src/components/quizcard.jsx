@@ -39,7 +39,6 @@ function QuizCard({
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
 
   //Handles the load, err and quiz states and
   // fetches the questions and
@@ -67,15 +66,12 @@ function QuizCard({
 
   //this happens the first mount and only then so when we refresh page this happens
   useEffect(() => {
-    
     //Sets timer so we know that we har loading the questions, prevents a fetch error. Double fetch because in strikt mode.
     const timer = setTimeout(() => {
-      
       if (!replay) {
         loadQuestions();
       } else {
         setLoading(false);
-        
       }
     }, 2000); //Set timmer for 2 sec.
 
@@ -140,6 +136,7 @@ function QuizCard({
   };
 
   const goBack = () => {
+    setScore((prev) => prev - prev);
     navigate("/Quiz/");
   };
 
