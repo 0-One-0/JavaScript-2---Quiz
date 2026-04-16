@@ -12,10 +12,19 @@ gsap.registerPlugin(useGSAP, SplitText);
 
 //Temp array for tesing and demo, api will be implemented. the object structure is same as api
 
-function QuizCard({ questionAmount, category, selectedDifficulty, setScore }) {
+function QuizCard({
+  questionAmount,
+  category,
+  selectedDifficulty,
+  setScore,
+  quizArray,
+  setQuizArray,
+  replay,
+  score,
+}) {
   const navigate = useNavigate();
   //All the useState are made here.
-  const [quizArray, setQuizArray] = useState([]);
+
   const [index, setIndex] = useState(0); //this is for the index that we are on like what question.
   const [question, setQuestion] = useState(quizArray[index]); //the quiz questions
   const [progress, setProgrss] = useState(
@@ -28,8 +37,9 @@ function QuizCard({ questionAmount, category, selectedDifficulty, setScore }) {
   const [stopProgress, setStopProgress] = useState(false); //checks so we stop everything when the timer is done.
   const [seconds, setSeconds] = useState(60); //use to start the timer for every question
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
 
   //Handles the load, err and quiz states and
   // fetches the questions and
@@ -57,13 +67,20 @@ function QuizCard({ questionAmount, category, selectedDifficulty, setScore }) {
 
   //this happens the first mount and only then so when we refresh page this happens
   useEffect(() => {
+    
     //Sets timer so we know that we har loading the questions, prevents a fetch error. Double fetch because in strikt mode.
     const timer = setTimeout(() => {
-      loadQuestions();
+      
+      if (!replay) {
+        loadQuestions();
+      } else {
+        setLoading(false);
+        
+      }
     }, 2000); //Set timmer for 2 sec.
 
     return () => clearTimeout(timer); //takes away timer when we are done
-  },[]);
+  }, []);
 
   //Checks if answer is correct or wrong, we then save score and change styles to show user. We altso lock so you can only guess ones
   const checkAns = (e, answer) => {
@@ -120,6 +137,10 @@ function QuizCard({ questionAmount, category, selectedDifficulty, setScore }) {
       setStopProgress(false);
       setSeconds(60);
     }
+  };
+
+  const goBack = () => {
+    navigate("/Quiz/");
   };
 
   //function to skip the question
@@ -246,7 +267,9 @@ function QuizCard({ questionAmount, category, selectedDifficulty, setScore }) {
           <div className="topper">
             <div className="back">
               {" "}
-              <button className="back-btn">{"<"}</button>{" "}
+              <button onClick={goBack} className="back-btn">
+                {"<"}
+              </button>{" "}
             </div>
             <span className="category-title">{question.category}</span>{" "}
             <div className="timer-continer">

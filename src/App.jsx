@@ -19,6 +19,8 @@ function App() {
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
   const [questionAmount, setQuestionAmount] = useState(0);
   const [score, setScore] = useState(0); //Keeps check of the correct answers from user.
+  const [replay, setReplay] = useState(false);
+  const [quizArray, setQuizArray] = useState([]);
 
   return (
     <Router>
@@ -52,6 +54,11 @@ function App() {
                   category={category}
                   selectedDifficulty={selectedDifficulty}
                   setScore={setScore}
+                  quizArray={quizArray}
+                  setQuizArray={setQuizArray}
+                  replay ={replay}
+                  score = {score}
+
                 />
               }
             />
@@ -61,6 +68,8 @@ function App() {
                 <QuizResult
                   questionAmount={questionAmount}
                   score={score}
+                  setReplay={setReplay}
+                  setScore = {setScore}
                 />
               }
             />
