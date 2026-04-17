@@ -1,0 +1,30 @@
+import { useNavigate } from "react-router-dom";
+
+export default function QuizCategories({ setCategory, catArray }) {
+  const navigate = useNavigate();
+
+  const handleSelect = (category) => {
+    setCategory(category);
+    navigate("/quiz/selectDifficulty");
+  };
+  const handleBack = () => {
+    navigate("/quiz/");
+  }
+
+  return(
+    <div className="quizApp">
+      <button className="back-btn" onClick={() => handleBack()}>{"<"}</button>
+      {/* All Categories */}
+      <div className="section-header">
+        <h2 className="section-title">All Categories</h2>
+      </div>
+
+      <div className="grid">
+        {catArray.map((category) => (
+          <div className="grid-item" key={category.id} onClick={() => handleSelect(category.id)}>{category.icon} {category.name}</div>
+        ))}
+      </div>
+
+    </div>
+  );
+}

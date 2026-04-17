@@ -13,11 +13,13 @@ import SelectQuiz from "./components/quizSelect.jsx";
 import DifficultyPage from "./components/quizDifficulty.jsx";
 import QuizCard from "./components/quizcard.jsx";
 import Profile from "./pages/Profile.jsx";
+import QuizCategories from "./components/quizCategories.jsx";
 
 function App() {
   const [category, setCategory] = useState(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
   const [questionAmount, setQuestionAmount] = useState(0);
+  const [catArray, setCatArray] = useState([]);
 
   return (
     <Router>
@@ -29,14 +31,25 @@ function App() {
 
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/profille" element={<Profile />} />
-          <Route path="/Quiz" element={<Quiz />}>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/quiz" element={<Quiz />}>
             <Route
-              path="/Quiz/"
-              element={<SelectQuiz setCategory={setCategory} />}
+              path="/quiz/"
+              element={
+                <SelectQuiz
+                  setCategory={setCategory}
+                  setCatArray={setCatArray}
+                />
+              }
             />
             <Route
-              path="/Quiz/selectDifficulty"
+              path="/quiz/categories"
+              element={
+                <QuizCategories setCategory={setCategory} catArray={catArray} />
+              }
+            />
+            <Route
+              path="/quiz/selectdifficulty"
               element={
                 <DifficultyPage
                   setSelectedDifficulty={setSelectedDifficulty}
@@ -45,7 +58,7 @@ function App() {
               }
             />
             <Route
-              path="/Quiz/quizCard"
+              path="/quiz/quizCard"
               element={
                 <QuizCard
                   questionAmount={questionAmount}

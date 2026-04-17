@@ -25,7 +25,7 @@ export default function DifficultyPage({ setSelectedDifficulty, setQuestionAmoun
   };
 
   return (
-    <div className="app">
+    <div className="quizApp">
       <h2 className="section-title">Choose your difficulty</h2>
 
       <div className={`difficulty ${localDifficulty === "easy" ? "active" : ""}`} onClick={() => chooseDifficulty("easy")}>

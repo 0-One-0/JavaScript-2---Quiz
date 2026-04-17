@@ -29,21 +29,6 @@ function Login() {
     navigate("/");
   }
 
-  async function handleGoogleLogin() {
-    setErrorMessage("");
-
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: window.location.origin,
-      },
-    });
-
-    if (error) {
-      setErrorMessage(error.message);
-    }
-  }
-
   return (
     <LoginLayout>
       <div className="login-container">
