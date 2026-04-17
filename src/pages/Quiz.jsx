@@ -1,8 +1,7 @@
-import QuizCard from "../components/quizcard";
+import { Outlet } from "react-router-dom";
+import "../quizFront.css";
 
 function Quiz(){
-    return <>
-    <QuizCard/>
-    </>
+    return <Outlet />
 }
 export default Quiz;

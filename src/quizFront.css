@@ -1,0 +1,142 @@
+.quizApp {
+  color: var(--text-color);
+  padding: 16px;
+  margin-top: 4rem;
+
+  & .search {
+    background: var(--card-color);
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+
+  & .search input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--text-color);
+  }
+
+  .results {
+    width: 100%;
+    background-color: var(--card-color);
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.75rem;
+    margin-top: 1rem;
+    max-height: 10rem;
+    overflow-y: scroll;
+  }
+
+  .result { padding: 10px; }
+
+  .result:hover { 
+    background-color: var(--hover-color);
+    cursor: pointer;
+  }
+
+  & .section-title {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  & .horizontal-scroll {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    justify-content: center;
+  }
+
+  & .card {
+    min-width: 150px;
+    height: 180px;
+    border-radius: 16px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  & .gradient-pink { background: linear-gradient(135deg, var(--btn-start), var(--btn-end)); }
+  & .gradient-green { background: linear-gradient(135deg, #2dd4bf, #22c55e); }
+
+  & .card-title { text-align: center; }
+
+  & .card-icon { 
+    font-size: 32px; 
+    text-align: center; 
+  }
+
+  & .list { margin: 10px 0; }
+
+  & .list-item {
+    display: flex;
+    justify-content: space-between;
+    background: var(--card-color);
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+
+  & .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  & .arrow-btn {
+    background: var(--btn-start);
+    border: none;
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+  }
+
+  & .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 10px 0;
+  }
+
+  & .grid-item {
+    background: var(--card-color);
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  & .random {
+    background: linear-gradient(to right, var(--btn-end), var(--btn-start));
+    padding: 16px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & .random-title { align-content: center; }
+
+  & .big-icon { font-size: 2rem; }
+
+  & .difficulty {
+    background: var(--card-color);
+    padding: 12px;
+    border-radius: 12px;
+    margin: 10px 0;
+  }
+
+  & .difficulty.active { border: 2px solid var(--btn-start); }
+
+  & .start-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(to right, #3b82f6, #60a5fa);
+    color: var(--text-color);
+    font-size: 16px;
+  }
+}
+
