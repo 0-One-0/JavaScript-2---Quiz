@@ -1,8 +1,10 @@
-{/*import { useState } from "react";*/}
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SelectQuiz({ setCategory, setCatArray }) {
   const navigate = useNavigate();
+  const [input, setInput] = useState("");
+  const [results, setResults] = useState([]);
 
   const catArr = [
     { id: 9, name: "General Knowledge", icon: "💡" },
@@ -31,13 +33,17 @@ export default function SelectQuiz({ setCategory, setCatArray }) {
     { id: 32, name: "Entertainment: Cartoon & Animations", icon: "🖍️" }
   ]
   
-  /*const [searchCategory, setSearchCategory] = useState(catArr);
-  const handleSearchCategory = e => {
-    const search = e.target.value.toLowerCase();
+  const handleSearch = (value) => {
+    setInput(value);
+    if(value === "") {
+      setResults([]);
+      return;
+    }
+    const search = value.toLowerCase();
     const categoryFilter = catArr.filter(searchCategory => searchCategory.name.toLowerCase().includes(search));
-    setSearchCategory(categoryFilter);
+    setResults(categoryFilter);
   }
-*/
+
   const handleSelect = (category) => {
     setCategory(category);
     navigate("/quiz/selectDifficulty");
@@ -53,7 +59,12 @@ export default function SelectQuiz({ setCategory, setCatArray }) {
 
       {/* Search */}
       <div className="search">
-        <input type="text" onChange={"(e) => handleSearchCategory(e)"} placeholder="Search topics or quizzes" />
+        <input type="text" value={input} onChange={(e) => handleSearch(e.target.value)} placeholder="Search topics or quizzes" />
+      </div>
+      <div className="results">
+        {results.map((results) => (
+          <div className="result" key={results.id} onClick={(e) => {e.stopPropagation(); handleSelect(results.id)}}>{results.icon} {results.name}</div>
+        ))}
       </div>
 
       {/* Daily Challenge */}

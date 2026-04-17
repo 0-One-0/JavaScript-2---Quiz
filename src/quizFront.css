@@ -1,10 +1,10 @@
 .quizApp {
-  color: white;
+  color: var(--text-color);
   padding: 16px;
   margin-top: 4rem;
 
   & .search {
-    background: #4b4f87;
+    background: var(--card-color);
     padding: 10px;
     border-radius: 12px;
     margin-bottom: 20px;
@@ -15,7 +15,25 @@
     border: none;
     outline: none;
     background: transparent;
-    color: white;
+    color: var(--text-color);
+  }
+
+  .results {
+    width: 100%;
+    background-color: var(--card-color);
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.75rem;
+    margin-top: 1rem;
+    max-height: 10rem;
+    overflow-y: scroll;
+  }
+
+  .result { padding: 10px; }
+
+  .result:hover { 
+    background-color: var(--hover-color);
+    cursor: pointer;
   }
 
   & .section-title {
@@ -41,7 +59,7 @@
     justify-content: space-around;
   }
 
-  & .gradient-pink { background: linear-gradient(135deg, #ec4899, #a855f7); }
+  & .gradient-pink { background: linear-gradient(135deg, var(--btn-start), var(--btn-end)); }
   & .gradient-green { background: linear-gradient(135deg, #2dd4bf, #22c55e); }
 
   & .card-title { text-align: center; }
@@ -56,7 +74,7 @@
   & .list-item {
     display: flex;
     justify-content: space-between;
-    background: #4b4f87;
+    background: var(--card-color);
     padding: 10px;
     border-radius: 12px;
     margin-bottom: 8px;
@@ -69,9 +87,9 @@
   }
 
   & .arrow-btn {
-    background: #ec4899;
+    background: var(--btn-start);
     border: none;
-    color: white;
+    color: var(--text-color);
     padding: 0.5rem 1rem;
     border-radius: 20px;
   }
@@ -84,13 +102,13 @@
   }
 
   & .grid-item {
-    background: #4b4f87;
+    background: var(--card-color);
     padding: 10px;
     border-radius: 12px;
   }
 
   & .random {
-    background: linear-gradient(to right, #a855f7, #ec4899);
+    background: linear-gradient(to right, var(--btn-end), var(--btn-start));
     padding: 16px;
     border-radius: 16px;
     display: flex;
@@ -102,13 +120,13 @@
   & .big-icon { font-size: 2rem; }
 
   & .difficulty {
-    background: #4b4f87;
+    background: var(--card-color);
     padding: 12px;
     border-radius: 12px;
     margin: 10px 0;
   }
 
-  & .difficulty.active { border: 2px solid #ec4899; }
+  & .difficulty.active { border: 2px solid var(--btn-start); }
 
   & .start-btn {
     width: 100%;
@@ -117,7 +135,7 @@
     border: none;
     border-radius: 12px;
     background: linear-gradient(to right, #3b82f6, #60a5fa);
-    color: white;
+    color: var(--text-color);
     font-size: 16px;
   }
 }
