@@ -13,6 +13,7 @@ import SelectQuiz from "./components/quizSelect.jsx";
 import DifficultyPage from "./components/quizDifficulty.jsx";
 import QuizCard from "./components/quizcard.jsx";
 import QuizResult from "./components/QuizResult.jsx";
+import QuizCategories from "./components/quizCategories.jsx";
 
 function App() {
   const [category, setCategory] = useState(null);
@@ -21,6 +22,7 @@ function App() {
   const [score, setScore] = useState(0); //Keeps check of the correct answers from user.
   const [replay, setReplay] = useState(false);
   const [quizArray, setQuizArray] = useState([]);
+  const [catArray, setCatArray] = useState([]);
 
   return (
     <Router>
@@ -35,7 +37,7 @@ function App() {
           <Route path="/Quiz" element={<Quiz />}>
             <Route
               path="/Quiz/"
-              element={<SelectQuiz setCategory={setCategory} />}
+              element={<SelectQuiz setCategory={setCategory} setCatArray={setCatArray} />}
             />
             <Route
               path="/Quiz/selectDifficulty"
@@ -62,6 +64,7 @@ function App() {
                 />
               }
             />
+            <Route path="/Quiz/categories" element={<QuizCategories setCategory={setCategory} catArray={catArray}/>} />
             <Route
               path="/Quiz/quizResult"
               element={
