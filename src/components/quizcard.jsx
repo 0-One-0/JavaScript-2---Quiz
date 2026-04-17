@@ -20,7 +20,6 @@ function QuizCard({
   quizArray,
   setQuizArray,
   replay,
-  score,
 }) {
   const navigate = useNavigate();
   //All the useState are made here.
