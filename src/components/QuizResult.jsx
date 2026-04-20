@@ -13,23 +13,23 @@ function QuizResult({ questionAmount, score, setReplay, setScore }) {
     // left cannon aimed right
     confetti({
       particleCount: 150,
-      angle: 60, // 👈 pointing right and down
+      angle: 60, 
       spread: 120,
-      origin: { x: 0, y: 0 }, // 👈 top left corner
-      gravity: 0.8, // 👈 lower gravity = stays in air longer
-      drift: 0.5, // 👈 gentle drift across the screen
-      ticks: 400, // 👈 this is what makes it stay longer
+      origin: { x: 0, y: 0 }, 
+      gravity: 0.8, 
+      drift: 0.5, 
+      ticks: 400, 
       colors: ["#FF6BB5", "#00D4E8", "#FFD700", "#fff"],
     });
 
     // right cannon — angled inward to the left
     confetti({
       particleCount: 150,
-      angle: 120, // 👈 pointing left and down
+      angle: 120, 
       spread: 120,
-      origin: { x: 1, y: 0 }, // 👈 top right corner
+      origin: { x: 1, y: 0 },
       gravity: 0.8,
-      drift: -0.5, // 👈 drift in opposite direction
+      drift: -0.5, 
       ticks: 400,
       colors: ["#FF6BB5", "#00D4E8", "#FFD700", "#fff"],
     });
