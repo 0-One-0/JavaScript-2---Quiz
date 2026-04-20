@@ -4,11 +4,37 @@ import trophy from "../assets/prize-icon.png";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useNavigate } from "react-router-dom";
+import confetti from "canvas-confetti";
 
 gsap.registerPlugin(useGSAP);
 
 function QuizResult({ questionAmount, score, setReplay, setScore }) {
-   const navigate = useNavigate();
+  function fireConfetti() {
+    // left cannon aimed right
+    confetti({
+      particleCount: 150,
+      angle: 60, // 👈 pointing right and down
+      spread: 120,
+      origin: { x: 0, y: 0 }, // 👈 top left corner
+      gravity: 0.8, // 👈 lower gravity = stays in air longer
+      drift: 0.5, // 👈 gentle drift across the screen
+      ticks: 400, // 👈 this is what makes it stay longer
+      colors: ["#FF6BB5", "#00D4E8", "#FFD700", "#fff"],
+    });
+
+    // right cannon — angled inward to the left
+    confetti({
+      particleCount: 150,
+      angle: 120, // 👈 pointing left and down
+      spread: 120,
+      origin: { x: 1, y: 0 }, // 👈 top right corner
+      gravity: 0.8,
+      drift: -0.5, // 👈 drift in opposite direction
+      ticks: 400,
+      colors: ["#FF6BB5", "#00D4E8", "#FFD700", "#fff"],
+    });
+  }
+  const navigate = useNavigate();
   let response = "You’re getting warm 🔥";
   let respnseArray = [
     "Oof… that one hurt 😅 Try again?",
@@ -20,11 +46,11 @@ function QuizResult({ questionAmount, score, setReplay, setScore }) {
   const [showScore, setShowScore] = useState(0);
 
   let procent = (score / questionAmount) * 100;
-  if(isNaN(procent)){
+  if (isNaN(procent)) {
     procent = 0;
   }
 
-  if (procent < 33 ) {
+  if (procent < 33) {
     response = respnseArray[0];
   } else if (procent < 66) {
     response = respnseArray[1];
@@ -43,7 +69,7 @@ function QuizResult({ questionAmount, score, setReplay, setScore }) {
 
     //Clean up when its done
     return () => clearInterval(timer);
-  }, [loaded, showScore]);
+  }, [loaded, showScore, score]);
   const navBack = () => {
     setScore((prev) => prev - prev);
     setReplay(false);
@@ -56,54 +82,59 @@ function QuizResult({ questionAmount, score, setReplay, setScore }) {
   };
 
   useGSAP(() => {
-    gsap.fromTo(
+    const tl = gsap.timeline({
+      onComplete: () => setLoaded(true),
+    });
+
+    tl.fromTo(
       ".results-show-result",
-      {
-        opacity: 0,
-      },
-      {
-        opacity: 1,
-
-        duration: 0.6,
-        ease: "power1.inOut",
-      },
-    );
-
-    gsap.from(".trophy", {
-      opacity: 0.5,
-      delay: 0.5,
-      duration: 1.5,
-      y: -200,
-      ease: "bounce.out",
-    });
-    gsap.from(".results-text", {
-      opacity: 0.5,
-      delay: 1,
-      duration: 0.8,
-      y: 200,
-      ease: "power1.out",
-    });
-
-    gsap.from(".results-amount", {
-      opacity: 0,
-      delay: 1,
-      duration: 0.8,
-      ease: "power1.out",
-      onComplete: () => {
-        setLoaded(true);
-      },
-    });
-  }, []);
-
-  useGSAP(() => {
-    if (loaded) {
-      gsap.to(".results-info-continer", {
-        opacity: 1,
-        duration: 1,
-        ease: "power2.out",
+      { opacity: 0 },
+      { opacity: 1, duration: 0.6, ease: "power1.inOut" },
+    )
+      .from(
+        ".trophy",
+        {
+          opacity: 0.5,
+          y: -200,
+          duration: 0.8,
+          ease: "bounce.out",
+        },
+        "+=0.5",
+      )
+      .from(
+        ".results-text",
+        {
+          opacity: 0.5,
+          y: 200,
+          duration: 0.8,
+          ease: "power1.out",
+        },
+        "-=1",
+      )
+      .from(
+        ".results-amount",
+        {
+          opacity: 0,
+          duration: 0.8,
+          ease: "power1.out",
+        },
+        "<",
+      )
+      .to(
+        ".results-info-continer",
+        {
+          opacity: 1,
+          duration: 1.5,
+          ease: "power2.out",
+        },
+        "+=0.5",
+      )
+      .call(() => {
+        if (score === questionAmount) {
+          fireConfetti();
+        }
       });
-    }
-  }, [loaded]);
+  }, []);
   return (
     <section className="result-section">
       <div className="results-container">
@@ -154,9 +185,7 @@ function QuizResult({ questionAmount, score, setReplay, setScore }) {
           <div className="results-info">
             <div className="info-accuracy">
               <span className="info-titles">ACCURACY</span>
-              <span className="results-show">
-                {procent}%
-              </span>
+              <span className="results-show">{procent}%</span>
             </div>
             <div className="info-correct">
               <span className="info-titles">CORRECT ANSWERS</span>
@@ -169,8 +198,12 @@ function QuizResult({ questionAmount, score, setReplay, setScore }) {
           </div>
         </div>
         <div className="navigation-continer">
-          <button onClick={playAgain} className="main-btn">Play Again</button>
-          <span onClick={navBack} className="second-btn">Back to Home</span>
+          <button onClick={playAgain} className="main-btn">
+            Play Again
+          </button>
+          <span onClick={navBack} className="second-btn">
+            Back to Home
+          </span>
         </div>
       </div>
     </section>

@@ -1,5 +1,5 @@
 * {
-  font-family: Montserrat;
+  font-family: var(--font-main);
 }
 .result-section {
   display: flex;
@@ -48,7 +48,7 @@
   align-items: center;
   gap: 1.5rem;
   margin-bottom: 4rem;
-  background: linear-gradient(to top right, #69e18a, #47d6ff);
+  background: linear-gradient(220deg, rgb(8, 99, 235), rgb(16, 214, 102));
 }
 
 .results-icon {
