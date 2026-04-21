@@ -3,7 +3,9 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { Link } from "react-router-dom";
-
+import howTo from "../assets/howto-logo.png";
+import quizLogo from "../assets/Quiz-logo.png";
+import dashboard from "../assets/dashboard-logo.png";
 gsap.registerPlugin(useGSAP, MorphSVGPlugin);
 
 function Links() {
@@ -166,16 +168,17 @@ function Links() {
   );
 }
 
-function PopUpMenu() {
+function PopUpMenu({show, setShow}) {
   return (
     <div className="popup-menu">
       <ul className="link-list-small">
         <li>
-          <Link to="/">
+          <Link to="/"
+          onClick={() => setShow(!show)}>
             <img
               className="menu-logos"
               id="dashboard-logo"
-              src="src\assets\dashboard-logo.png"
+              src={dashboard}
               alt="Dashboard"
             />
             Dashboard
@@ -183,11 +186,12 @@ function PopUpMenu() {
         </li>
 
         <li>
-          <Link to="/Quiz">
+          <Link to="/Quiz"
+           onClick={() => setShow(!show)}>
             {" "}
             <img
               className="menu-logos"
-              src="src\assets\Quiz-logo.png"
+              src={quizLogo}
               alt="Quiz"
             />
             Quiz
@@ -195,10 +199,11 @@ function PopUpMenu() {
         </li>
 
         <li>
-          <Link to="/">
+          <Link to="/"
+           onClick={() => setShow(!show)}>
             <img
               className="menu-logos"
-              src="src\assets\howto-logo.png"
+              src={howTo}
               alt="How to"
             />
             How to play

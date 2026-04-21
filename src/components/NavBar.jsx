@@ -1,5 +1,6 @@
 import Links from "./Links";
 import { Link } from "react-router-dom";
+import logo from "../assets/logo2.png";
 
 function NavBar() {
   return (
@@ -8,7 +9,7 @@ function NavBar() {
         <Links />
       </div>
       <div className="logo-continer">
-        <Link to="/"><img className="logo-img" src="src\assets\logo2.png" alt="logo" /></Link>
+        <Link to="/"><img className="logo-img" src={logo} alt="logo" /></Link>
         
       </div>
       <div className="avatar-continer">

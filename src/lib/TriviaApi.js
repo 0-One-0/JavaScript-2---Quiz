@@ -4,6 +4,7 @@ export async function fetchQuizQuestions(
   difficulty,
   type = "multiple",
 ) {
+  
   //We use string fortmatting to make sure we can change the urls perams when needed.
   const url = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}&encode=url3986`;
 

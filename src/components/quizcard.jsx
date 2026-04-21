@@ -1,19 +1,29 @@
 import { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import "../quizCard.css";
+import "../quiz-card.css";
 import CountdownTimer from "./Timer";
 import RandomAlign from "./Answers";
-import { fetchQuizQuestions } from "../lib/TriviaApi";
+import { fetchQuizQuestions } from "../lib/triviaApi";
 import { SplitText } from "gsap/all";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
 //Temp array for tesing and demo, api will be implemented. the object structure is same as api
 
-function QuizCard({ questionAmount, category, selectedDifficulty}) {
+function QuizCard({
+  questionAmount,
+  category,
+  selectedDifficulty,
+  setScore,
+  quizArray,
+  setQuizArray,
+  replay,
+}) {
+  const navigate = useNavigate();
   //All the useState are made here.
-  const [quizArray, setQuizArray] = useState([]);
+
   const [index, setIndex] = useState(0); //this is for the index that we are on like what question.
   const [question, setQuestion] = useState(quizArray[index]); //the quiz questions
   const [progress, setProgrss] = useState(
@@ -22,14 +32,14 @@ function QuizCard({ questionAmount, category, selectedDifficulty}) {
   const [random, setRandom] = useState(() => Math.random()); //Random number to make sure that we dont have the right answer on all the questions.
 
   const [answerd, setAnswerd] = useState(false); //Looks the submit so that we dont leave without answering, diffrent for skip.
-  const [score, setScore] = useState(0); //Keeps check of the correct answers from user.
+
   const [stopProgress, setStopProgress] = useState(false); //checks so we stop everything when the timer is done.
   const [seconds, setSeconds] = useState(60); //use to start the timer for every question
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  //Handles the load, err and quiz states and 
+  //Handles the load, err and quiz states and
   // fetches the questions and
   // answers by doing a calling the function
   const loadQuestions = async () => {
@@ -38,10 +48,14 @@ function QuizCard({ questionAmount, category, selectedDifficulty}) {
 
     //We try to call the async function
     try {
-      const data = await fetchQuizQuestions(questionAmount, category, selectedDifficulty);
+      const data = await fetchQuizQuestions(
+        questionAmount,
+        category,
+        selectedDifficulty,
+      );
       setQuizArray(data);
     } catch (err) {
-      //We return the error if it happens 
+      //We return the error if it happens
       setError(err.message);
     } finally {
       //We allways change the loading state to show the result or error.
@@ -53,8 +67,12 @@ function QuizCard({ questionAmount, category, selectedDifficulty}) {
   useEffect(() => {
     //Sets timer so we know that we har loading the questions, prevents a fetch error. Double fetch because in strikt mode.
     const timer = setTimeout(() => {
-      loadQuestions();
-    }, 2000);//Set timmer for 2 sec.
+      if (!replay) {
+        loadQuestions();
+      } else {
+        setLoading(false);
+      }
+    }, 2000); //Set timmer for 2 sec.
 
     return () => clearTimeout(timer); //takes away timer when we are done
   }, []);
@@ -96,7 +114,7 @@ function QuizCard({ questionAmount, category, selectedDifficulty}) {
       //Makes sure there are answers left
       if (index === quizArray.length - 1) {
         //Shows user the score
-        window.alert("You got " + score + " right ");
+        navigate("/Quiz/quizResult");
         return 0;
       }
 
@@ -114,6 +132,11 @@ function QuizCard({ questionAmount, category, selectedDifficulty}) {
       setStopProgress(false);
       setSeconds(60);
     }
+  };
+
+  const goBack = () => {
+    setScore((prev) => prev - prev);
+    navigate("/Quiz/");
   };
 
   //function to skip the question
@@ -240,7 +263,9 @@ function QuizCard({ questionAmount, category, selectedDifficulty}) {
           <div className="topper">
             <div className="back">
               {" "}
-              <button className="back-btn">{"<"}</button>{" "}
+              <button onClick={goBack} className="back-btn">
+                {"<"}
+              </button>{" "}
             </div>
             <span className="category-title">{question.category}</span>{" "}
             <div className="timer-continer">
@@ -269,12 +294,12 @@ function QuizCard({ questionAmount, category, selectedDifficulty}) {
           />
         </div>
         <div className="sub-continer">
-          <button className="submit-btn" onClick={nextQuestion}>
+          <button className="main-btn" onClick={nextQuestion}>
             Submit
           </button>
           <button
-          //Checks if the user made a guess, if the user did they cant skip.
-            className={`skip-btn ${answerd ? "hide" : "show"}`}
+            //Checks if the user made a guess, if the user did they cant skip.
+            className={`second-btn ${answerd ? "hide" : "show"}`}
             onClick={skipQuestion}
           >
             Skip this question
@@ -287,7 +312,7 @@ function QuizCard({ questionAmount, category, selectedDifficulty}) {
 //Component for the Progressbar.
 function ProgressBar() {
   return (
-    //use the div as a continer so we can change the width of inner div with % of the continer. 
+    //use the div as a continer so we can change the width of inner div with % of the continer.
     <div className="progressbar-continer">
       <div className="progressbar-indicator"></div>
     </div>
