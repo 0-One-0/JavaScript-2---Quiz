@@ -7,3 +7,34 @@
   justify-content: center;
   margin-top: 100px;
 }
+
+.dashboard-item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+@media (min-width: 1024px) {
+  .dashboard {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .dashboard-item-small,
+  .dashboard-item-large {
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .dashboard-item-small {
+    flex: 0 0 calc((100% - 48px) / 3);
+  }
+
+  .dashboard-item-large {
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
+}

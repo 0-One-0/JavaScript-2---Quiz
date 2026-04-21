@@ -120,58 +120,68 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
-      <Widget // Kanye Quote Widget
-        widgetTitle="Random Kanye Quote"
-        widgetText={
-          kanyeLoading
-            ? "Loading..."
-            : kanyeError
-            ? kanyeError
-            : kanyeQoute
-        }
-        image={kanyeImg}
-        variant="kanye"
-      />
+      <div className="dashboard-item dashboard-item-small">
+        <Widget // Kanye Quote Widget
+          widgetTitle="Random Kanye Quote"
+          widgetText={
+            kanyeLoading
+              ? "Loading..."
+              : kanyeError
+              ? kanyeError
+              : kanyeQoute
+          }
+          image={kanyeImg}
+          variant="kanye"
+        />
+      </div>
 
-      <Widget // Useless Fact Widget
-        widgetTitle="Today's Useless Fact"
-        widgetText={
-          factLoading
-            ? "Loading..."
-            : factError
-            ? factError
-            : uselessFact
-        }
-        image={lightBulb}
-        variant="uselessFact"
-      />
+      <div className="dashboard-item dashboard-item-small">
+        <Widget // Useless Fact Widget
+          widgetTitle="Today's Useless Fact"
+          widgetText={
+            factLoading
+              ? "Loading..."
+              : factError
+              ? factError
+              : uselessFact
+          }
+          image={lightBulb}
+          variant="uselessFact"
+        />
+      </div>
 
-      <Widget // Harry Potter Spell Widget
-        widgetTitle="Harry Potter Spell"
-        widgetSubTitle={spellTitle}
-        widgetText={spellText}
-        image={hpImg}
-        variant="hpSpell"
-      />
+      <div className="dashboard-item dashboard-item-small">
+        <Widget // Harry Potter Spell Widget
+          widgetTitle="Harry Potter Spell"
+          widgetSubTitle={spellTitle}
+          widgetText={spellText}
+          image={hpImg}
+          variant="hpSpell"
+        />
+      </div>
 
-      <Widget // Attack on Titan Widget
-        widgetTitle="Random titan from Attack on Titan"
-        widgetText={
-          titanLoading
-            ? "Loading..."
-            : titanError
-            ? titanError
-            : titanTitle
-        }
-        image={titanImage}
-        variant="aot"
-      />
+      <div className="dashboard-item dashboard-item-large">
+        <Widget // Attack on Titan Widget
+          widgetTitle="Random titan from Attack on Titan"
+          widgetText={
+            titanLoading
+              ? "Loading..."
+              : titanError
+              ? titanError
+              : titanTitle
+          }
+          image={titanImage}
+          variant="aot"
+        />
+      </div>
       
+      <div className="dashboard-item dashboard-item-large">
         <ScoreboardWidget
           title="Scoreboard"
           players={players}
           currentUserId={5}
-      />
+        />
+      </div>
     </div>
   );
 }
