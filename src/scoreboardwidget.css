@@ -1,0 +1,84 @@
+.scoreboardWidget {
+  width: 100%;
+  max-width: 320px;
+  min-height: 120px;
+  padding: 24px 32px;
+  border-radius: 32px;
+  background: var(--card-color);
+  box-shadow: 0 12px 25px rgba(20, 16, 70, 0.12);
+}
+
+.scoreboardTitle {
+  margin: 0 0 24px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+.scoreboardList {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.scoreboardRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: 20px;
+}
+
+.scoreboardRow--me {
+  background: #e7e3e9;
+}
+
+.scoreboardLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.scoreboardRank {
+  width: 18px;
+  font-size: 1.05rem;
+  color: #7d7d7d;
+}
+
+.scoreboardAvatarWrapper {
+  position: relative;
+  width: 44px;
+  height: 44px;
+}
+
+.scoreboardAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.scoreboardCrown {
+  position: absolute;
+  top: -22px;
+  left: 4px;
+  font-size: 1.3rem;
+}
+
+.scoreboardName {
+  font-size: 1.05rem;
+  color: #6f6f6f;
+}
+
+.scoreboardRow--me .scoreboardName,
+.scoreboardRow--me .scoreboardRank,
+.scoreboardRow--me .scoreboardScore {
+  color: #2b2b2b;
+  font-weight: 600;
+}
+
+.scoreboardScore {
+  font-size: 1rem;
+  color: #7d7d7d;
+}
