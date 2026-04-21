@@ -3,12 +3,14 @@ import Widget from "../components/Widget";
 import { fetchKanyeQuote } from "../lib/kanyeQoute";
 import { fetchUselessFact } from "../lib/uselessFact";
 import { fetchHpSpell } from "../lib/hpSpells";
+import { fetchJoke } from "../lib/joke";
 import { fetchTitan } from "../lib/aot";
 import { fetchCat } from "../lib/cat";
 import "../dashboard.css";
 import kanyeImg from "../assets/kanye.png";
 import lightBulb from "../assets/light-bulb.png";
 import hpImg from "../assets/harry-potter.png";
+import jokeImg from "../assets/laughing-emoji.png";
 
 import ScoreboardWidget from "../components/ScoreboardWidget";
 import avatar1 from "../assets/profile-woman.png";
@@ -39,10 +41,16 @@ function Dashboard() {
   const [spellLoading, setSpellLoading] = useState(true);
   const [spellError, setSpellError] = useState("");
 
+  // State for Joke Widget
+  const [jokeSetup, setJokeSetup] = useState("");
+  const [jokePunchline, setJokePunchline] = useState("");
+  const [jokeLoading, setJokeLoading] = useState(true);
+  const [jokeError, setJokeError] = useState("");
+
   // State for Attack on Titan Widget
   const [titanTitle, setTitanTitle] = useState("");
-  const [titanText, setTitanText] = useState("");
   const [titanImage, setTitanImage] = useState("");
+  const [titanText, setTitanText] = useState("");
   const [titanLoading, setTitanLoading] = useState(true);
   const [titanError, setTitanError] = useState("");
 
@@ -98,6 +106,23 @@ function Dashboard() {
     }
   };
 
+  // Joke Widget
+  const loadJoke = async () => {
+    try {
+      setJokeLoading(true);
+      setJokeError("");
+  
+      const joke = await fetchJoke();
+  
+      setJokeSetup(joke.setup);
+      setJokePunchline(joke.punchline);
+    } catch (err) {
+      setJokeError("Could not load joke.");
+    } finally {
+      setJokeLoading(false);
+    }
+  };
+
   // Attack on Titan Widget
   const loadTitan = async () => {
     try {
@@ -136,6 +161,7 @@ function Dashboard() {
     loadQoute();
     loadFact();
     loadSpell();
+    loadJoke();
     loadTitan();
     loadCat();
   }, []);
@@ -179,6 +205,28 @@ function Dashboard() {
           widgetText={spellText}
           image={hpImg}
           variant="hpSpell"
+        />
+      </div>
+
+      <div className="dashboard-item dashboard-item-small">
+        <Widget
+          widgetTitle="Random Joke"
+          widgetSubTitle={
+            jokeLoading
+              ? "Loading..."
+              : jokeError
+              ? ""
+              : jokeSetup
+          }
+          widgetText={
+            jokeLoading
+              ? "Loading..."
+              : jokeError
+              ? jokeError
+              : jokePunchline
+          }
+          image={jokeImg}
+          variant="joke"
         />
       </div>
 
