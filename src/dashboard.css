@@ -35,6 +35,6 @@
   }
 
   .dashboard-item-large {
-    flex: 0 0 calc((100% - 24px) / 2);
+    flex: 0 0 calc((100% - 48px) / 3);
   }
 }

@@ -4,6 +4,7 @@ import { fetchKanyeQuote } from "../lib/kanyeQoute";
 import { fetchUselessFact } from "../lib/uselessFact";
 import { fetchHpSpell } from "../lib/hpSpells";
 import { fetchTitan } from "../lib/aot";
+import { fetchCat } from "../lib/cat";
 import "../dashboard.css";
 import kanyeImg from "../assets/kanye.png";
 import lightBulb from "../assets/light-bulb.png";
@@ -44,6 +45,11 @@ function Dashboard() {
   const [titanImage, setTitanImage] = useState("");
   const [titanLoading, setTitanLoading] = useState(true);
   const [titanError, setTitanError] = useState("");
+
+  // State for Cat Image Widget
+  const [catImage, setCatImage] = useState("");
+  const [catLoading, setCatLoading] = useState(true);
+  const [catError, setCatError] = useState("");
 
   // Kanye Quote Widget
   const loadQoute = async () => {
@@ -110,12 +116,28 @@ function Dashboard() {
     }
   };
 
+  // Cat Image Widget
+  const loadCat = async () => {
+    try {
+      setCatLoading(true);
+      setCatError("");
+  
+      const cat = await fetchCat();
+      setCatImage(cat.image);
+    } catch (err) {
+      setCatError("Could not load cat 😿");
+    } finally {
+      setCatLoading(false);
+    }
+  };
+
   // Load all widgets on component mount
   useEffect(() => {
     loadQoute();
     loadFact();
     loadSpell();
     loadTitan();
+    loadCat();
   }, []);
 
   return (
@@ -172,6 +194,21 @@ function Dashboard() {
           }
           image={titanImage}
           variant="aot"
+        />
+      </div>
+
+      <div className="dashboard-item dashboard-item-large">
+        <Widget // Random Cat Image Widget
+          widgetTitle="Random Cat"
+          widgetText={
+            catLoading
+              ? "Loading..."
+              : catError
+              ? catError
+              : "Enjoy this random cat"
+          }
+          image={catImage}
+          variant="cat"
         />
       </div>
       

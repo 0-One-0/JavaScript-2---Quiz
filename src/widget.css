@@ -81,6 +81,25 @@
   font-style: normal;
 }
 
+/* Cat Widget Styling */
+.widget-cat .widgetHeading{
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.widget-cat .widgetImg {
+  max-height: 325px;
+  max-width: 400px;
+}
+
+.widget-cat .widgetText {
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 16px;
+}
+
 @media (min-width: 1024px) {
   .widget {
     max-width: none;
