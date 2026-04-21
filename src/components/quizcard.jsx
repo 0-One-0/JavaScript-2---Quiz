@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import "../quizCard.css";
+import "../quiz-card.css";
 import CountdownTimer from "./Timer";
 import RandomAlign from "./Answers";
-import { fetchQuizQuestions } from "../lib/TriviaApi";
+import { fetchQuizQuestions } from "../lib/triviaApi";
 import { SplitText } from "gsap/all";
 import { useNavigate } from "react-router-dom";
 
