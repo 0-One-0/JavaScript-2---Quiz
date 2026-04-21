@@ -32,9 +32,9 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/quiz" element={<Quiz />}>
+          <Route path="/Quiz" element={<Quiz />}>
             <Route
-              path="/quiz/"
+              path="/Quiz/"
               element={
                 <SelectQuiz
                   setCategory={setCategory}
@@ -43,13 +43,13 @@ function App() {
               }
             />
             <Route
-              path="/quiz/categories"
+              path="/Quiz/categories"
               element={
                 <QuizCategories setCategory={setCategory} catArray={catArray} />
               }
             />
             <Route
-              path="/quiz/selectdifficulty"
+              path="/Quiz/selectDifficulty"
               element={
                 <DifficultyPage
                   setSelectedDifficulty={setSelectedDifficulty}
@@ -58,7 +58,7 @@ function App() {
               }
             />
             <Route
-              path="/quiz/quizCard"
+              path="/Quiz/quizCard"
               element={
                 <QuizCard
                   questionAmount={questionAmount}

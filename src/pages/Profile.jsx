@@ -5,7 +5,7 @@ function Profile() {
   //State to store the logged in user
   const [user, setUser] = useState(null);
 
-  //State to store error mesages
+  //State to store error messages
   const [errorMessage, setErrorMessage] = useState("");
 
   //State to track loading status
@@ -38,7 +38,7 @@ function Profile() {
     return <h1>Loading...</h1>;
   }
 
-  //Show error message if something wen  wrong.
+  //Show error message if something went wrong.
   if (errorMessage) {
     return <h1>{errorMessage}</h1>;
   }
