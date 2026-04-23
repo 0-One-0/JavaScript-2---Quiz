@@ -38,7 +38,19 @@ function EditProfile() {
             : <span>{avatarLetter}</span>}
           </div>
 
-          <input type="file" accept="image/*" onChange={handleAvatarChange} />
+          <div className="avatar-upload">
+            <label htmlFor="avatarInput" className="avatar-upload-btn">
+              Change Avatar
+            </label>
+
+            <input
+              id="avatarInput"
+              type="file"
+              accept="image/*"
+              onChange={handleAvatarChange}
+              className="avatar-input-hidden"
+            />
+          </div>
         </div>
 
         <form className="edit-profile-form">
