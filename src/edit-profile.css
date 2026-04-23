@@ -1,0 +1,69 @@
+/* PAGE LAYOUT */
+.edit-profile-page {
+  min-height: 100vh;
+  padding: 4rem 1rem 1rem;
+  background: var(--bg-color);
+}
+
+/* CARD */
+.edit-profile-card {
+  max-width: 26.25rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  background: var(--card-color);
+  border-radius: 2rem;
+}
+
+/* TITLE */
+.edit-profile-title {
+  margin: 0;
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
+
+/* AVATAR IMAGE */
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* FORM */
+.edit-profile-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+}
+
+/* INPUTS */
+.edit-profile-form label {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.edit-profile-form input,
+.edit-profile-form textarea {
+  margin-top: 0.4rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--input-border);
+  background: transparent;
+  color: var(--text-color);
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+}
+
+/* BUTTON */
+.save-profile-btn {
+  margin-top: 1.5rem;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 1rem;
+  background: linear-gradient(90deg, var(--btn-start), var(--btn-end));
+  color: var(--text-color);
+  font-size: 1rem;
+  cursor: pointer;
+}

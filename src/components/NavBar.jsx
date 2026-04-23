@@ -2,6 +2,7 @@ import Links from "./Links";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
+import logo from "../assets/logo2.png";
 
 function NavBar() {
   const [user, setUser] = useState(null);
@@ -48,7 +49,7 @@ function NavBar() {
       </div>
       <div className="logo-continer">
         <Link to="/">
-          <img className="logo-img" src="src\assets\logo2.png" alt="logo" />
+          <img className="logo-img" src={logo} alt="logo" />
         </Link>
       </div>
       <div className="avatar-continer">
@@ -65,10 +66,6 @@ function NavBar() {
                 <Link to="/profile" onClick={() => setIsOpen(false)}>
                   Profil
                 </Link>
-
-                <button type="button" onClick={() => setIsOpen(false)}>
-                  Inställningar
-                </button>
 
                 <button type="button" onClick={handleLogout}>
                   Logga ut
