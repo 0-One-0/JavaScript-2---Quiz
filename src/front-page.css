@@ -57,6 +57,7 @@
   border-radius: 19px;
   box-shadow: -3px 4px 8.8px rgba(0, 0, 0, 0.247);
   max-width: 300px;
+  min-width: 180px;
 }
 .daily-title {
   margin: 0;
@@ -157,7 +158,8 @@
     height: 20rem;
   }
   .think-img {
-    top: 2rem;
+    
+    width: 14rem;
   }
   .quote {
     font-size: 20px;
@@ -169,7 +171,7 @@
     font-size: 20px;
     font-weight: 700;
   }
-  .random-text{
+  .random-text {
     font-size: 15px;
   }
 }
