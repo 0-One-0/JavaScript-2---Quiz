@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import AuthLayout from "./AuthLayout";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap/all";
 
 // Component
 function Signup() {
@@ -39,6 +41,17 @@ function Signup() {
 
     setIsSuccess(true);
   }
+  useGSAP(() =>{
+    gsap.set(".login-container", {
+      opacity: 0,
+    });
+
+    gsap.to(".login-container", {
+      opacity: 1,
+      duration: 1.2,
+      ease: "power3.inOut"
+    })
+  }, [])
 
   return (
     <AuthLayout>
