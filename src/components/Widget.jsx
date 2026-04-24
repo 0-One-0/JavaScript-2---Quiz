@@ -13,14 +13,14 @@ function Widget({ widgetTitle, widgetSubTitle, widgetText, image, variant }) {
 
       {widgetSubTitle && ( // subtitle is optional, only render if provided
         <h3 className="widgetSubTitle">
-          {variant === "hpSpell"
+          {variant === "hpSpell" // For the Harry Potter Spell widget, we add quotation marks around the subtitle (the spell name) for better styling. For other widgets, just show the subtitle as is.
             ? `“${widgetSubTitle}”`
             : widgetSubTitle}
         </h3>
       )}
 
       <p className="widgetText">
-        {variant === "hpSpell"
+        {variant === "hpSpell" // For the Harry Potter Spell widget, we add a dash before the text to make it look like a quote, since the spell description is essentially a quote describing what the spell does. For other widgets, just show the text as is.
           ? `- ${widgetText}`
           : widgetText}
       </p>
