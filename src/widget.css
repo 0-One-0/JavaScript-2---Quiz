@@ -1,0 +1,127 @@
+
+/* Widget Component Styling */
+.widget {
+  width: 100%;
+  max-width: 320px;
+  min-height: 120px;
+  padding: 16px 32px;
+  border-radius: 24px;
+  background: var(--card-color);
+  box-shadow: 0 12px 25px rgba(20, 16, 70, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+.widgetHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.widgetImg {
+  max-height: 50px;
+  max-width: 320px !important; 
+}
+
+.widgetTitle {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.widgetText {
+  padding: 4px 0 4px 24px;
+  margin-bottom: 24px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-color);
+  border-left: 3px solid var(--input-border);
+  font-style: italic;
+}
+
+/* UselessFact Widget Styling */
+.widget-uselessFact .widgetText {
+  border: none;
+  padding: 0;
+} 
+
+/* AOT Widget Styling */
+.widget-aot .widgetHeading{
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.widget-aot .widgetImg {
+  max-height: 325px;
+}
+
+.widget-aot .widgetText {
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 16px;
+}
+
+/* HP Spell Widget Styling */
+.widget-hpSpell .widgetSubTitle {
+  font-weight: 500;
+  font-style: italic;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.widget-hpSpell .widgetText{
+  border: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-style: normal;
+}
+
+/* Joke Widget Styling */
+.widget-joke .widgetSubTitle {
+  font-size: 1rem;
+  font-weight: 500;
+  font-style: italic;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.widget-joke .widgetText{
+  border: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-style: normal;
+}
+
+/* Cat Widget Styling */
+.widget-cat .widgetHeading{
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.widget-cat .widgetImg {
+  max-height: 325px;
+  max-width: 400px;
+}
+
+.widget-cat .widgetText {
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 16px;
+}
+
+@media (min-width: 1024px) {
+  .widget {
+    max-width: none;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+}
