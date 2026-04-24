@@ -8,6 +8,48 @@ import { SplitText } from "gsap/SplitText";
 gsap.registerPlugin(useGSAP, SplitText);
 
 export function Home({ setCategory }) {
+  //values from CSS mediaquery to only do the changes when we want.
+  function mediaCss() {
+    gsap.set(".flex-div", {
+      display: "grid",
+      gridTemplateColumns: "2fr 1fr",
+      gridTemplateRows: "auto auto",
+      gap: "1.5rem",
+      rowGap: "3rem",
+      alignItems: "start",
+      boxSizing: "border-box",
+      width: "760px",
+      marginTop: "4rem",
+    });
+    gsap.set(".random-container", {
+      gridColumn: "1 / -1",
+      alignItems: "center",
+      maxWidth: "100rem",
+      width: "30rem",
+      height: "10rem",
+      justifyContent: "center",
+      justifySelf: "center",
+    });
+    gsap.set(".random-btn", {
+      width: "20rem",
+      height: "5rem",
+      alignItems: "center",
+      fontSize: "20px",
+      fontWeight: 700,
+    });
+    gsap.set(".daily-continer", {
+      flexDirection: "column",
+    });
+  }
+  //Reverts Css on leaving the params
+  function revertMedia() {
+    gsap.set(".flex-div", { clearProps: "all" });
+    gsap.set(".random-container", { clearProps: "all" });
+    gsap.set(".random-btn", { clearProps: "all" });
+    gsap.set(".daily-continer", { clearProps: "all" });
+  }
+
+  //Temp values for veribals real values added later.
   let title1 = "Daily inspiration";
   let content1 = (
     <p className="daily-content">
@@ -21,6 +63,7 @@ export function Home({ setCategory }) {
   useGSAP(() => {
     const tl = gsap.timeline({
       onComplete: () => {
+        //Animate hover on statue
         gsap.to(".think-img", {
           y: -8,
           duration: 4,
@@ -28,7 +71,7 @@ export function Home({ setCategory }) {
           yoyo: true,
           repeat: -1,
         });
-
+        //Animate glow on button
         gsap.to(".random-btn", {
           boxShadow: "0 0 20px 6px rgba(199, 84, 160, 0.6)",
           duration: 2,
@@ -36,14 +79,89 @@ export function Home({ setCategory }) {
           repeat: -1,
           yoyo: true,
         });
+        let mm = gsap.matchMedia();
+
+        mm.add("(min-width: 768px)", () => {
+          const tl2 = gsap.timeline();
+
+          tl2 //make sure we se the elements before we animate
+            .set(".header-div, .daily-div, .random-container", {
+              scale: 1,
+              opacity: 1,
+              y: 0,
+              xPercent: 0,
+            })
+            //Aminate the elements away
+            .to(".header-div, .daily-div, .random-container", {
+              y: 50,
+              xPercent: "random([-50,50])",
+              scale: 0,
+              opacity: 0,
+              ease: "power2.inOut",
+              stagger: {
+                each: 0.04,
+                from: "start",
+              },
+              duration: 0.6,
+            })
+            .call(mediaCss) //Call function that changes properties when we cant see the elemnts
+            //Show elemenets
+            .to(".header-div, .daily-div, .random-container", {
+              scale: 1,
+              opacity: 1,
+              y: 0,
+              xPercent: 0,
+              ease: "power2.inOut",
+              stagger: {
+                each: 0.04,
+                from: "start",
+              },
+              duration: 0.6,
+            });
+          //happens when we go under the 768px
+          return () => {
+            // Kill any progess in the timeline
+            tl2.kill();
+
+            // Revert mediaCss changes
+            revertMedia();
+
+            //Sets the popertys so that we can animate them out.
+            gsap.set(".header-div, .daily-div, .random-container", {
+              scale: 0,
+              opacity: 0,
+              y: 50,
+            });
+
+            // Animate back smoothly and then clear all props from this set.
+            gsap.to(".header-div, .daily-div, .random-container", {
+              scale: 1,
+              opacity: 1,
+              y: 0,
+              xPercent: 0,
+              ease: "power2.inOut",
+              duration: 0.4,
+              clearProps: "scale,opacity,y,xPercent",
+              onComplete: () => {
+                gsap.set(".header-div, .daily-div, .random-container", {
+                  clearProps: "all",
+                });
+              },
+            });
+          };
+        });
       },
     });
+
+    //Split text for aminatons on chars or words
     let split = SplitText.create(".page-title", {
       type: "chars",
     });
     let splitQuote = SplitText.create(".quote", {
       type: "words",
     });
+
+    //Sets values before animation
     gsap.set(".flex-div, .header-div, .daily-div , .random-container", {
       opacity: 0,
     });
@@ -56,6 +174,9 @@ export function Home({ setCategory }) {
       y: 200,
     });
 
+
+    //timeline starts here and animations happens after oneanother
+    //This animation creates a "loading" aniamtion without loading.
     tl.from(split.chars, {
       yPercent: "random([-50,50])",
       rotate: -30,
