@@ -1,17 +1,18 @@
 /* PAGE LAYOUT */
 .edit-profile-page {
   min-height: 100vh;
-  padding: 4rem 1rem 1rem;
+  padding-top: 1rem;
   background: var(--bg-color);
 }
 
 /* CARD */
 .edit-profile-card {
-  max-width: 26.25rem;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   padding: 2rem 1.5rem;
   background: var(--card-color);
-  border-radius: 2rem;
+  border-radius: 0 0 2rem 2rem;
+  box-sizing: border-box; /* 🔥 viktigt */
 }
 
 /* TITLE */
@@ -28,6 +29,23 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 1.5rem;
+}
+
+/* AVATAR UPLOAD */
+.avatar-upload {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* REMOVE BUTTON */
+.remove-avatar-btn {
+  padding: 0.6rem 1rem;
+  border-radius: 0.75rem;
+  background: transparent;
+  border: 1px solid var(--input-border);
+  color: var(--text-muted);
+  cursor: pointer;
 }
 
 .avatar-preview {
@@ -108,4 +126,12 @@
   color: var(--text-color);
   font-size: 1rem;
   cursor: pointer;
+}
+
+/* PROFILE SAVED */
+.success-text {
+  margin-top: 1rem;
+  color: #4caf50;
+  text-align: center;
+  font-size: 0.9rem;
 }

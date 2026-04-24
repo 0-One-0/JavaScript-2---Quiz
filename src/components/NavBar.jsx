@@ -10,7 +10,25 @@ function NavBar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getUser();
+    async function fetchUser() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      setUser(user);
+    }
+
+    fetchUser();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(() => {
+      fetchUser();
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   async function getUser() {
@@ -40,6 +58,8 @@ function NavBar() {
   const displayName =
     user?.user_metadata?.display_name || user?.user_metadata?.username || "";
 
+  const avatarUrl = user?.user_metadata?.avatar_url || "";
+
   const avatarLetter = displayName.charAt(0).toUpperCase();
 
   return (
@@ -56,7 +76,13 @@ function NavBar() {
         {user && (
           <>
             <div className="avatar-circle" onClick={() => setIsOpen(!isOpen)}>
-              {avatarLetter}
+              {avatarUrl ?
+                <img
+                  src={avatarUrl}
+                  alt="Profile avatar"
+                  className="avatar-img"
+                />
+              : avatarLetter}
             </div>
 
             {isOpen && (
