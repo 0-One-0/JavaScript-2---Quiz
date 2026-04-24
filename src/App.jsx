@@ -1,7 +1,7 @@
 import "./App.css";
 import "./navbar.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/home.jsx";
+import FrontPage from "./pages/FrontPage.jsx";
 import Layout from "./Layout.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
@@ -37,7 +37,7 @@ function App() {
         <Route path="/update-password" element={<UpdatePassword />} />
 
         <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<FrontPage setCategory={setCategory} />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/Quiz" element={<Quiz />}>
