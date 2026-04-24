@@ -14,6 +14,7 @@ import DifficultyPage from "./components/quizDifficulty.jsx";
 import QuizCard from "./components/quizcard.jsx";
 import QuizResult from "./components/QuizResult.jsx";
 import QuizCategories from "./components/quizCategories.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 
 function App() {
   const [category, setCategory] = useState(null);
@@ -77,6 +78,8 @@ function App() {
               }
             />
           </Route>
+          <Route path="/Quiz" element={<Quiz />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
     </Router>
