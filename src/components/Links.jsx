@@ -152,7 +152,7 @@ function Links() {
       </svg>
       <ul className="link-list-big">
         <li>
-          <Link to="/">Dashboard </Link>
+          <Link to="/Dashboard">Dashboard </Link>
         </li>
 
         <li>
@@ -173,7 +173,7 @@ function PopUpMenu({show, setShow}) {
     <div className="popup-menu">
       <ul className="link-list-small">
         <li>
-          <Link to="/"
+          <Link to="/Dashboard"
           onClick={() => setShow(!show)}>
             <img
               className="menu-logos"
