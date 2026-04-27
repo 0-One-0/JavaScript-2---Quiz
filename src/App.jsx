@@ -15,8 +15,13 @@ import QuizCard from "./components/quizcard.jsx";
 import QuizResult from "./components/QuizResult.jsx";
 import QuizCategories from "./components/quizCategories.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { SplitText } from "gsap/SplitText";
 
 function App() {
+  gsap.registerPlugin(useGSAP, SplitText);
   const [category, setCategory] = useState(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
   const [questionAmount, setQuestionAmount] = useState(0);
@@ -34,11 +39,16 @@ function App() {
         <Route path="/update-password" element={<UpdatePassword />} />
 
         <Route element={<Layout />}>
-          <Route path="/" element={<FrontPage setCategory={setCategory}/>} />
+          <Route path="/" element={<FrontPage setCategory={setCategory} />} />
           <Route path="/Quiz" element={<Quiz />}>
             <Route
               path="/Quiz/"
-              element={<SelectQuiz setCategory={setCategory} setCatArray={setCatArray} />}
+              element={
+                <SelectQuiz
+                  setCategory={setCategory}
+                  setCatArray={setCatArray}
+                />
+              }
             />
             <Route
               path="/Quiz/selectDifficulty"
@@ -59,13 +69,17 @@ function App() {
                   setScore={setScore}
                   quizArray={quizArray}
                   setQuizArray={setQuizArray}
-                  replay ={replay}
-                  score = {score}
-
+                  replay={replay}
+                  score={score}
                 />
               }
             />
-            <Route path="/Quiz/categories" element={<QuizCategories setCategory={setCategory} catArray={catArray}/>} />
+            <Route
+              path="/Quiz/categories"
+              element={
+                <QuizCategories setCategory={setCategory} catArray={catArray} />
+              }
+            />
             <Route
               path="/Quiz/quizResult"
               element={
@@ -73,7 +87,7 @@ function App() {
                   questionAmount={questionAmount}
                   score={score}
                   setReplay={setReplay}
-                  setScore = {setScore}
+                  setScore={setScore}
                 />
               }
             />
@@ -81,6 +95,7 @@ function App() {
           <Route path="/Quiz" element={<Quiz />} />
           <Route path="/Dashboard" element={<Dashboard />} />
         </Route>
+         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
