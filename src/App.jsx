@@ -17,9 +17,6 @@ import QuizCategories from "./components/quizCategories.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 
 function App() {
-  const [category, setCategory] = useState(null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState(null);
-  const [questionAmount, setQuestionAmount] = useState(0);
   const [score, setScore] = useState(0); //Keeps check of the correct answers from user.
   const [replay, setReplay] = useState(false);
   const [quizArray, setQuizArray] = useState([]);
@@ -34,43 +31,35 @@ function App() {
         <Route path="/update-password" element={<UpdatePassword />} />
 
         <Route element={<Layout />}>
-          <Route path="/" element={<FrontPage setCategory={setCategory}/>} />
+          <Route path="/" element={<FrontPage/>} />
           <Route path="/Quiz" element={<Quiz />}>
             <Route
               path="/Quiz/"
-              element={<SelectQuiz setCategory={setCategory} setCatArray={setCatArray} />}
+              element={<SelectQuiz setCatArray={setCatArray} />}
             />
             <Route
               path="/Quiz/selectDifficulty"
               element={
-                <DifficultyPage
-                  setSelectedDifficulty={setSelectedDifficulty}
-                  setQuestionAmount={setQuestionAmount}
-                />
+                <DifficultyPage />
               }
             />
             <Route
               path="/Quiz/quizCard"
               element={
                 <QuizCard
-                  questionAmount={questionAmount}
-                  category={category}
-                  selectedDifficulty={selectedDifficulty}
                   setScore={setScore}
                   quizArray={quizArray}
                   setQuizArray={setQuizArray}
                   replay ={replay}
                   score = {score}
-
                 />
               }
             />
-            <Route path="/Quiz/categories" element={<QuizCategories setCategory={setCategory} catArray={catArray}/>} />
+            <Route path="/Quiz/categories" element={<QuizCategories catArray={catArray}/>} />
             <Route
               path="/Quiz/quizResult"
               element={
                 <QuizResult
-                  questionAmount={questionAmount}
                   score={score}
                   setReplay={setReplay}
                   setScore = {setScore}

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQuizParams } from "../lib/quizParams";
 
-export default function SelectQuiz({ setCategory, setCatArray }) {
+export default function SelectQuiz({ setCatArray }) {
   const navigate = useNavigate();
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
+  const { setCategory } = useQuizParams();
 
   const catArr = [
     { id: 9, name: "General Knowledge", icon: "💡" },

@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { useQuizParams } from "../lib/quizParams";
 
-export default function QuizCategories({ setCategory, catArray }) {
+export default function QuizCategories({ catArray }) {
   const navigate = useNavigate();
+  const { setCategory } = useQuizParams();
 
   const handleSelect = (category) => {
     setCategory(category);

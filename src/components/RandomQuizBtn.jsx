@@ -1,8 +1,10 @@
 import gsap from "gsap";
 import { useNavigate } from "react-router-dom";
+import { useQuizParams } from "../lib/quizParams";
 
-export default function RandomBtn({ setCategory }) {
+export default function RandomBtn() {
   const navigate = useNavigate();
+  const { setCategory } = useQuizParams();
 
   const handleSelect = (category) => {
     const tl = gsap.timeline({
