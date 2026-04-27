@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuizParams } from "../lib/quizParams";
+import CategoryGridItem from "./CategoryGridItem";
+import RandomBtn from "./RandomQuizBtn";
+import SearchBar from "./SearchBar";
 
 export default function SelectQuiz({ setCatArray }) {
   const navigate = useNavigate();
-  const [input, setInput] = useState("");
-  const [results, setResults] = useState([]);
   const { setCategory } = useQuizParams();
 
   const catArr = [
@@ -34,17 +34,6 @@ export default function SelectQuiz({ setCatArray }) {
     { id: 31, name: "Entertainment: Japanese Anime & Manga", icon: "🎌" },
     { id: 32, name: "Entertainment: Cartoon & Animations", icon: "🖍️" }
   ]
-  
-  const handleSearch = (value) => {
-    setInput(value);
-    if(value === "") {
-      setResults([]);
-      return;
-    }
-    const search = value.toLowerCase();
-    const categoryFilter = catArr.filter(searchCategory => searchCategory.name.toLowerCase().includes(search));
-    setResults(categoryFilter);
-  }
 
   const handleSelect = (category) => {
     setCategory(category);
@@ -60,14 +49,7 @@ export default function SelectQuiz({ setCatArray }) {
     <div className="quizApp">
 
       {/* Search */}
-      <div className="search">
-        <input type="text" value={input} onChange={(e) => handleSearch(e.target.value)} placeholder="Search topics or quizzes" />
-      </div>
-      <div className="results">
-        {results.map((results) => (
-          <div className="result" key={results.id} onClick={(e) => {e.stopPropagation(); handleSelect(results.id)}}>{results.icon} {results.name}</div>
-        ))}
-      </div>
+      <SearchBar searchArr={catArr} handleSelect={handleSelect} placeholderText="Search for a category" />
 
       {/* Daily Challenge */}
       <h2 className="section-title">Daily Challenge</h2>
@@ -113,17 +95,14 @@ export default function SelectQuiz({ setCatArray }) {
       </div>
 
       <div className="grid">
-        <div className="grid-item" onClick={() => handleSelect(catArr[12].id)}>{catArr[12].icon} {catArr[12].name}</div>
-        <div className="grid-item" onClick={() => handleSelect(catArr[13].id)}>{catArr[13].icon} {catArr[13].name}</div>
-        <div className="grid-item" onClick={() => handleSelect(catArr[16].id)}>{catArr[16].icon} {catArr[16].name}</div>
-        <div className="grid-item" onClick={() => handleSelect(catArr[18].id)}>{catArr[18].icon} {catArr[18].name}</div>
+        <CategoryGridItem categoryArray={catArr[12]} handleSelect={handleSelect} />
+        <CategoryGridItem categoryArray={catArr[13]} handleSelect={handleSelect} />
+        <CategoryGridItem categoryArray={catArr[16]} handleSelect={handleSelect} />
+        <CategoryGridItem categoryArray={catArr[18]} handleSelect={handleSelect} />
       </div>
 
       {/* Random Quiz */}
-      <div className="random" onClick={() => handleSelect("0")}>
-        <div className="random-title">Random Quiz</div>
-        <div className="big-icon">🔀</div>
-      </div>
+      <RandomBtn />
     </div>
   );
 }
