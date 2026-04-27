@@ -18,8 +18,13 @@ import QuizCategories from "./components/quizCategories.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import EditProfile from "./pages/EditProfile.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { SplitText } from "gsap/SplitText";
 
 function App() {
+  gsap.registerPlugin(useGSAP, SplitText);
   const [category, setCategory] = useState(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
   const [questionAmount, setQuestionAmount] = useState(0);
@@ -43,18 +48,6 @@ function App() {
           <Route path="/Quiz" element={<Quiz />}>
             <Route
               path="/Quiz/"
-              element={
-                <SelectQuiz
-                  setCategory={setCategory}
-                  setCatArray={setCatArray}
-                />
-              }
-            />
-            <Route
-              path="/Quiz/categories"
-              element={
-                <QuizCategories setCategory={setCategory} catArray={catArray} />
-              }
               element={
                 <SelectQuiz
                   setCategory={setCategory}
@@ -107,6 +100,7 @@ function App() {
           <Route path="/Quiz" element={<Quiz />} />
           <Route path="/Dashboard" element={<Dashboard />} />
         </Route>
+         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
