@@ -9,11 +9,11 @@ import ForgotPassword from "./pages/ForgotPassword.jsx";
 import UpdatePassword from "./pages/UpdatePassword.jsx";
 import Quiz from "./pages/Quiz.jsx";
 import { useState } from "react";
-import SelectQuiz from "./components/quizSelect.jsx";
-import DifficultyPage from "./components/quizDifficulty.jsx";
-import QuizCard from "./components/quizcard.jsx";
+import SelectQuiz from "./components/QuizSelect.jsx";
+import DifficultyPage from "./components/QuizDifficulty.jsx";
+import QuizCard from "./components/Quizcard.jsx";
 import QuizResult from "./components/QuizResult.jsx";
-import QuizCategories from "./components/quizCategories.jsx";
+import QuizCategories from "./components/QuizCategories.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 
 function App() {
