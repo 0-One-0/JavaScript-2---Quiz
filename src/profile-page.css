@@ -1,0 +1,163 @@
+/* PAGE LAYOUT */
+.profile-page {
+  min-height: 100vh;
+  padding-top: 4rem;
+  background: var(--bg-color);
+}
+
+/* PROFILE CARD */
+.profile-card {
+  width: 100%;
+  margin: 0;
+  background: var(--card-color);
+  border-radius: 0 0 3rem 3rem;
+  overflow: hidden;
+}
+
+/* HEADER */
+.profile-header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+  border-bottom-left-radius: 3rem;
+  border-bottom-right-radius: 3rem;
+}
+
+/* AVATAR */
+.profile-avatar {
+  position: absolute;
+  bottom: -2.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  background: var(--card-color);
+  border: 0.18rem solid var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.25rem;
+  font-weight: 600;
+}
+
+.profile-avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* PROFILE INFO */
+.profile-info {
+  padding: 3.75rem 1.25rem 1.5rem;
+  text-align: center;
+}
+
+.profile-name {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
+
+.profile-subtitle {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* STATS */
+.profile-stats {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-value {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.stat-label {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* RIVALS */
+.rivals-section {
+  margin-top: 2rem;
+  padding: 0 1rem 1.5rem;
+  text-align: center;
+}
+
+.rivals-title {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.rivals-list {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.rival {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3.5rem;
+}
+
+.rival-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--hover-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+}
+
+.rival-name {
+  margin-top: 0.3rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* PROFILE ACTIONS */
+.profile-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* EDIT PROFILE BUTTON */
+.edit-profile-btn {
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: linear-gradient(90deg, var(--btn-start), var(--btn-end));
+  color: var(--text-color);
+  font-family: var(--font-main);
+  font-size: 1rem;
+  cursor: pointer;
+}
