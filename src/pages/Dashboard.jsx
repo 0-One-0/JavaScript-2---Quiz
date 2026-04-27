@@ -16,6 +16,7 @@ import jokeImg from "../assets/laughing-emoji.png";
 import ScoreboardWidget from "../components/ScoreboardWidget";
 import avatar1 from "../assets/profile-woman.png";
 import avatar2 from "../assets/profile-man.png";
+import { useGSAP } from "@gsap/react";
 
 // Mock data for Scoreboard Widget - for now
 const players = [
@@ -165,6 +166,10 @@ function Dashboard() {
     loadTitan();
     loadCat();
   }, []);
+
+  useGSAP(() =>{
+
+  },[]);
 
   return (
     <div className="dashboard">
