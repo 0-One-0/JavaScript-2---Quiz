@@ -181,7 +181,6 @@ export function Home({ setCategory }) {
       yPercent: "random([-50,50])",
       rotate: -30,
       opacity: 0,
-      repeat: 2,
       repeatDelay: 1,
       yoyo: true,
       ease: "sine.inOut",

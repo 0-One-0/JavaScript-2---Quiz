@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useQuizParams } from "../lib/quizParams";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 export default function DifficultyPage() {
   const [localDifficulty, setLocalDifficulty] = useState("");
@@ -26,7 +28,16 @@ export default function DifficultyPage() {
     navigate("/quiz/quizCard");
   };
 
-  
+  useGSAP(()=>{
+    const tl = gsap.timeline();
+
+    tl.from(".quizApp", {
+      opacity: 0,
+      autoAlpha: 0,
+      xPercent: "random([-50, 50])",
+      ease: "power3.inOut",
+    })
+  }, [])
 
   return (
     <div className="quizApp">

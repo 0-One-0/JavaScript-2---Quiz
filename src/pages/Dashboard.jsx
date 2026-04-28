@@ -17,6 +17,7 @@ import ScoreboardWidget from "../components/ScoreboardWidget";
 import avatar1 from "../assets/profile-woman.png";
 import avatar2 from "../assets/profile-man.png";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 // Mock data for Scoreboard Widget - for now
 const players = [
@@ -168,7 +169,16 @@ function Dashboard() {
   }, []);
 
   useGSAP(() =>{
-
+    gsap.from(".dashboard-item", {
+      opacity: 0,
+      autoAlpha: 0,
+      xPercent: "random([-50, 50])",
+      stagger: {
+        each: 0.2,
+      },
+      ease: "power3.inOut",
+    })
+    
   },[]);
 
   return (
