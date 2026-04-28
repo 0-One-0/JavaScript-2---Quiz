@@ -26,6 +26,8 @@ export default function DifficultyPage() {
     navigate("/quiz/quizCard");
   };
 
+  
+
   return (
     <div className="quizApp">
       <h2 className="section-title">Choose your difficulty</h2>
