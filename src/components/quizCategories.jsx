@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import { useQuizParams } from "../lib/quizParams";
+import CategoryGridItem from "./CategoryGridItem";
 
-export default function QuizCategories({ setCategory, catArray }) {
+export default function QuizCategories({ catArray }) {
   const navigate = useNavigate();
+  const { setCategory } = useQuizParams();
 
   const handleSelect = (category) => {
     setCategory(category);
@@ -21,7 +24,7 @@ export default function QuizCategories({ setCategory, catArray }) {
 
       <div className="grid">
         {catArray.map((category) => (
-          <div className="grid-item" key={category.id} onClick={() => handleSelect(category.id)}>{category.icon} {category.name}</div>
+          <CategoryGridItem categoryArray={category} handleSelect={handleSelect} />
         ))}
       </div>
 

@@ -1,21 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useQuizParams } from "../lib/quizParams";
 
-export default function DifficultyPage({ setSelectedDifficulty, setQuestionAmount }) {
+export default function DifficultyPage() {
   const [localDifficulty, setLocalDifficulty] = useState("");
   const navigate = useNavigate();
+  const { setAmount, setDifficulty } = useQuizParams();
 
   const chooseDifficulty = (level) => {
-    setSelectedDifficulty(level);
+    setDifficulty(level);
     setLocalDifficulty(level);
     if(level === "easy") {
-      setQuestionAmount(5);
+      setAmount(5);
     }
     if(level === "medium") {
-      setQuestionAmount(10);
+      setAmount(10);
     }
     if(level === "hard") {
-      setQuestionAmount(20);
+      setAmount(20);
     }
   };
 
