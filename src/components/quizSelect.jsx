@@ -50,7 +50,10 @@ export default function SelectQuiz({ setCatArray }) {
   useGSAP(() => {
     const tl = gsap.timeline();
 
-    tl.from(".search, .section-title, .arrow-btn", {
+    tl.set(".quizApp", {
+      overflow: "hidden",
+    })
+    .from(".search, .section-title, .arrow-btn", {
       opacity: 0,
       stagger: {
         each: 0.2,
@@ -64,6 +67,8 @@ export default function SelectQuiz({ setCatArray }) {
         each: 0.2,
       },
       ease: "power3.inOut",
+    }).set(".quizApp", {
+      overflow: "visible",
     });
   }, []);
 

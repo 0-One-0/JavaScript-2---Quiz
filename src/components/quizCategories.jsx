@@ -18,18 +18,25 @@ export default function QuizCategories({ catArray }) {
   useGSAP(() => {
     const tl = gsap.timeline();
 
-    tl.from(".section-title", {
-      opacity: 0,
-      stagger: {
-        each: 0.2,
-      },
-      ease: "power3.inOut",
-    }).from(".grid", {
-      opacity: 0,
-      autoAlpha: 0,
-      xPercent: "random([-50, 50])",
-      ease: "power3.inOut",
-    });
+    tl.set(".quizApp", {
+      overflow: "hidden",
+    })
+      .from(".section-title", {
+        opacity: 0,
+        stagger: {
+          each: 0.2,
+        },
+        ease: "power3.inOut",
+      })
+      .from(".grid", {
+        opacity: 0,
+        autoAlpha: 0,
+        xPercent: "random([-50, 50])",
+        ease: "power3.inOut",
+      })
+      .set(".quizApp", {
+        overflow: "visible",
+      });
   }, []);
 
   return (

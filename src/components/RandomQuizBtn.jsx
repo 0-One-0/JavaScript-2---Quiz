@@ -16,14 +16,14 @@ export default function RandomBtn() {
     tl.to(".header-div, .daily-div, .random-container", {
       scale: 0,
       opacity: 0,
-      
+
       xPercent: "random([-50,50])",
       yPercent: 50,
       ease: "power2.inOut",
       stagger: {
         each: 0.08,
-        amount: 1,
-      }
+        amount: 0.2,
+      },
     });
   };
 

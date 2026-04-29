@@ -65,6 +65,9 @@ function NavBar() {
   return (
     <nav className="navbar-continer">
       <div className="links-continer">
+        <Link to="/">
+          <img className="logo-img-big" src={logo} alt="logo" />
+        </Link>
         <Links />
       </div>
       <div className="logo-continer">

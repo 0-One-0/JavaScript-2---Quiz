@@ -2,6 +2,8 @@ import "../profile-page.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 // Render the main profile page layout
 function ProfilePage() {
@@ -52,18 +54,33 @@ function ProfilePage() {
 
   const avatarUrl = user?.user_metadata?.avatar_url || "";
 
+  useGSAP(() => {
+    const tl = gsap.timeline();
+
+    tl.from(".profile-card, .profile-header", {
+      opacity: 0,
+      y: -900,
+      stagger: {
+        each: 0.04,
+      },
+      ease: "power1.inOut",
+    });
+  }, []);
+
   return (
     <div className="profile-page">
       <div className="profile-card">
         <div className="profile-header">
           <div className="profile-avatar">
-            {avatarUrl ?
+            {avatarUrl ? (
               <img
                 src={avatarUrl}
                 alt="Profile avatar"
                 className="profile-avatar-image"
               />
-            : <span>{avatarLetter}</span>}
+            ) : (
+              <span>{avatarLetter}</span>
+            )}
           </div>
         </div>
 

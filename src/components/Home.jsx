@@ -84,7 +84,7 @@ export function Home({ setCategory }) {
         mm.add("(min-width: 768px)", () => {
           const tl2 = gsap.timeline();
 
-          tl2 //make sure we se the elements before we animate
+          tl2 //make sure we set the elements before we animate
             .set(".header-div, .daily-div, .random-container", {
               scale: 1,
               opacity: 1,
@@ -102,7 +102,7 @@ export function Home({ setCategory }) {
                 each: 0.04,
                 from: "start",
               },
-              duration: 0.6,
+              duration: 0.2,
             })
             .call(mediaCss) //Call function that changes properties when we cant see the elemnts
             //Show elemenets
@@ -116,7 +116,7 @@ export function Home({ setCategory }) {
                 each: 0.04,
                 from: "start",
               },
-              duration: 0.6,
+              duration: 0.2,
             });
           //happens when we go under the 768px
           return () => {
@@ -174,7 +174,6 @@ export function Home({ setCategory }) {
       y: 200,
     });
 
-
     //timeline starts here and animations happens after oneanother
     //This animation creates a "loading" aniamtion without loading.
     tl.from(split.chars, {
@@ -191,11 +190,12 @@ export function Home({ setCategory }) {
     })
       .to(".page-title", {
         y: 0,
-        duration: 1.8,
+        duration: 1.5,
         ease: "bounce.in",
       })
       .to(".flex-div", {
         opacity: 1,
+        duration: 0.02,
       })
       .to(".header-div", {
         scale: 1,
@@ -203,20 +203,20 @@ export function Home({ setCategory }) {
         y: 0,
         xPercent: 0,
         ease: "power2.inOut",
-        duration: 1,
+        duration: 0.5,
       })
       .from(splitQuote.words, {
         opacity: 0,
 
         stagger: {
           each: 0.1,
-          amount: 2,
+          amount: 1.5,
         },
         ease: "power2.out",
       })
       .from(".quote-auth", {
         opacity: 0,
-        direction: 2,
+        direction: 1,
         ease: "power2.out",
       })
       .to(".daily-div, .random-container", {
@@ -225,9 +225,9 @@ export function Home({ setCategory }) {
         y: 0,
         xPercent: 0,
         ease: "power2.inOut",
-        duration: 1,
+        duration: 0.5,
         stagger: {
-          each: 0.4,
+          each: 0.04,
         },
       })
       .to(".page-title", {

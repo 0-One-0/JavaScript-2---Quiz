@@ -63,16 +63,19 @@ function Dashboard() {
   const [catError, setCatError] = useState("");
 
   // Kanye Quote Widget
-  const loadQuote = async () => { // Function to call Kanye Quote
+  const loadQuote = async () => {
+    // Function to call Kanye Quote
     try {
       setKanyeLoading(true); // Set loading to true before starting fetch
       setKanyeError(""); // Clear any previous error messages before starting new fetch
 
       const quote = await fetchKanyeQuote(); // Call the function that fetches the Kanye quote from the API
       setKanyeQuote(quote); // Store the fetched quote in state to display it in the UI
-    } catch (err) { // If an error occurs during fetch, catch it and set an error message in state to display in the UI
+    } catch (err) {
+      // If an error occurs during fetch, catch it and set an error message in state to display in the UI
       setKanyeError("Could not load Kanye quote. Please try again later.");
-    } finally { // Finally block runs after try/catch
+    } finally {
+      // Finally block runs after try/catch
       setKanyeLoading(false); // Set loading to false after fetch is complete
     }
   };
@@ -97,9 +100,9 @@ function Dashboard() {
     try {
       setSpellLoading(true);
       setSpellError("");
-  
+
       const spell = await fetchHpSpell();
-  
+
       setSpellTitle(spell.title);
       setSpellText(spell.text);
     } catch (err) {
@@ -114,9 +117,9 @@ function Dashboard() {
     try {
       setJokeLoading(true);
       setJokeError("");
-  
+
       const joke = await fetchJoke();
-  
+
       setJokeSetup(joke.setup);
       setJokePunchline(joke.punchline);
     } catch (err) {
@@ -131,9 +134,9 @@ function Dashboard() {
     try {
       setTitanLoading(true);
       setTitanError("");
-  
+
       const titan = await fetchTitan();
-  
+
       setTitanTitle(titan.title);
       setTitanImage(titan.image);
     } catch (err) {
@@ -148,7 +151,7 @@ function Dashboard() {
     try {
       setCatLoading(true);
       setCatError("");
-  
+
       const cat = await fetchCat();
       setCatImage(cat.image);
     } catch (err) {
@@ -168,8 +171,17 @@ function Dashboard() {
     loadCat();
   }, []);
 
-  useGSAP(() =>{
-    gsap.from(".dashboard-item", {
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      onComplete: () => {
+         tl.set(".dashboard", {
+      overflow: "visible",
+    })
+      },
+    });
+    tl.set(".dashboard", {
+      overflow: "hidden",
+    }).from(".dashboard-item", {
       opacity: 0,
       autoAlpha: 0,
       xPercent: "random([-50, 50])",
@@ -177,21 +189,17 @@ function Dashboard() {
         each: 0.2,
       },
       ease: "power3.inOut",
-    })
-    
-  },[]);
+    });
+  }, []);
 
   return (
     <div className="dashboard">
       <div className="dashboard-item dashboard-item-small">
         <Widget // Kanye Quote Widget
           widgetTitle="Random Kanye Quote" // Title of the widget
-          widgetText={ // The main content of the widget, which will show the quote or loading/error message
-            kanyeLoading
-              ? "Loading..."
-              : kanyeError
-              ? kanyeError
-              : kanyeQuote
+          widgetText={
+            // The main content of the widget, which will show the quote or loading/error message
+            kanyeLoading ? "Loading..." : kanyeError ? kanyeError : kanyeQuote
           }
           image={kanyeImg} // Image of the widget
           variant="kanye" // Variant prop to allow for specific styling based on the type of widget
@@ -202,11 +210,7 @@ function Dashboard() {
         <Widget // Useless Fact Widget
           widgetTitle="Today's Useless Fact"
           widgetText={
-            factLoading
-              ? "Loading..."
-              : factError
-              ? factError
-              : uselessFact
+            factLoading ? "Loading..." : factError ? factError : uselessFact
           }
           image={lightBulb}
           variant="uselessFact"
@@ -218,11 +222,7 @@ function Dashboard() {
           widgetTitle="Harry Potter Spell"
           widgetSubTitle={spellLoading || spellError ? "" : spellTitle} // Subtitle is optional, only show if spell is loaded successfully
           widgetText={
-            spellLoading
-              ? "Loading..."
-              : spellError
-              ? spellError
-              : spellText
+            spellLoading ? "Loading..." : spellError ? spellError : spellText
           }
           image={hpImg}
           variant="hpSpell"
@@ -233,18 +233,10 @@ function Dashboard() {
         <Widget
           widgetTitle="Random Joke"
           widgetSubTitle={
-            jokeLoading
-              ? "Loading..."
-              : jokeError
-              ? ""
-              : jokeSetup
+            jokeLoading ? "Loading..." : jokeError ? "" : jokeSetup
           }
           widgetText={
-            jokeLoading
-              ? "Loading..."
-              : jokeError
-              ? jokeError
-              : jokePunchline
+            jokeLoading ? "Loading..." : jokeError ? jokeError : jokePunchline
           }
           image={jokeImg}
           variant="joke"
@@ -255,11 +247,7 @@ function Dashboard() {
         <Widget // Attack on Titan Widget
           widgetTitle="Random titan from Attack on Titan"
           widgetText={
-            titanLoading
-              ? "Loading..."
-              : titanError
-              ? titanError
-              : titanTitle
+            titanLoading ? "Loading..." : titanError ? titanError : titanTitle
           }
           image={titanImage}
           variant="aot"
@@ -273,16 +261,16 @@ function Dashboard() {
             catLoading
               ? "Loading..."
               : catError
-              ? catError
-              : "Enjoy this random cat"
+                ? catError
+                : "Enjoy this random cat"
           }
           image={catImage}
           variant="cat"
         />
       </div>
-      
+
       <div className="dashboard-item dashboard-item-large">
-        <ScoreboardWidget  // Scoreboard Widget
+        <ScoreboardWidget // Scoreboard Widget
           title="Scoreboard"
           players={players}
           currentUserId={5}
