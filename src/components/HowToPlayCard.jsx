@@ -1,9 +1,11 @@
 import "../howtoplay-card.css";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
+import { useNavigate } from "react-router-dom";
 
 function HowToPlayCard({ title, text, video, step, totalSteps, onNext }) {
   const cardRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const el = cardRef.current;
@@ -21,6 +23,18 @@ function HowToPlayCard({ title, text, video, step, totalSteps, onNext }) {
     const el = cardRef.current;
 
     const content = el.querySelectorAll(".video-box, h2, p");
+
+    if (step === totalSteps - 1) {
+      gsap.to(content, {
+        opacity: 0,
+        x: -80,
+        duration: 0.3,
+        ease: "power2.in",
+        stagger: 0.05,
+        onComplete: () => navigate("/"),
+      });
+      return;
+    }
 
     gsap.to(content, {
       opacity: 0,
