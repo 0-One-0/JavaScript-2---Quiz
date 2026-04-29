@@ -4,6 +4,7 @@ import video1 from "../assets/videos/video1.mp4";
 import video2 from "../assets/videos/video2.mp4";
 import video3 from "../assets/videos/video3.mp4";
 import video4 from "../assets/videos/video4.mp4";
+import "../HowToPlay.css";
 
 function HowToPlay() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -21,12 +22,12 @@ function HowToPlay() {
     },
     {
       title: "Select Difficulty",
-      text: "Choose your difficulty level.",
+      text: "Choose your difficulty level. The number of questions depends on the difficulty you select.",
       video: video3,
     },
     {
       title: "Start Playing",
-      text: "Answer the questions and try to get the highest score possible.",
+      text: "Answer the questions and try to get the highest score possible. Good luck!",
       video: video4,
     },
   ];
@@ -40,7 +41,7 @@ function HowToPlay() {
   const step = steps[currentStep];
 
   return (
-    <main className="how-page">
+    <main className="howTo-page">
       <HowToPlayCard
         title={step.title}
         text={step.text}

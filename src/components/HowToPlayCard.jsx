@@ -1,11 +1,23 @@
+import "../howtoplay-card.css";
+
+
 function HowToPlayCard({ title, text, video, step, totalSteps, onNext }) {
   return (
-    <div className="how-card">
+    <div className="howTo-card">
       <h3>How to play</h3>
 
-      <video className="how-video" autoPlay muted loop playsInline>
-        <source src={video} type="video/mp4" />
-      </video>
+      <div className="video-box">
+        <video 
+          key={video}
+          className="howTo-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src={video} type="video/mp4" />
+        </video>
+      </div>
 
       <h2>{title}</h2>
       <p>{text}</p>
