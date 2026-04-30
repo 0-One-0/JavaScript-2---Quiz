@@ -12,7 +12,6 @@ import { useState } from "react";
 import SelectQuiz from "./components/quizSelect.jsx";
 import DifficultyPage from "./components/quizDifficulty.jsx";
 import QuizCard from "./components/quizcard.jsx";
-import Profile from "./pages/Profile.jsx";
 import QuizResult from "./components/QuizResult.jsx";
 import QuizCategories from "./components/quizCategories.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
@@ -43,8 +42,8 @@ function App() {
 
         <Route element={<Layout />}>
           <Route path="/" element={<FrontPage setCategory={setCategory} />} />
-          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/profile/:username" element={<ProfilePage />} />
           <Route path="/Quiz" element={<Quiz />}>
             <Route
               path="/Quiz/"
@@ -100,7 +99,7 @@ function App() {
           <Route path="/Quiz" element={<Quiz />} />
           <Route path="/Dashboard" element={<Dashboard />} />
         </Route>
-         <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

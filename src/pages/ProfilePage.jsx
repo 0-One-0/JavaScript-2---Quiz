@@ -2,17 +2,19 @@ import "../profile-page.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
+import { useParams } from "react-router-dom";
 
 // Render the main profile page layout
 function ProfilePage() {
   const navigate = useNavigate();
 
-  // Store logged in user
-  const [user, setUser] = useState(null);
+  // Get user id
+  const { username } = useParams();
 
-  // Generate avatar letter from Supabase username
-  const avatarLetter =
-    user?.user_metadata?.display_name?.charAt(0).toUpperCase() || "?";
+  const [profile, setProfile] = useState(null);
+
+  // Generate avatar letter from Supabase profile database
+  const avatarLetter = profile?.username?.charAt(0).toUpperCase() || "?";
 
   // Placeholder
   const stats = {
@@ -30,27 +32,31 @@ function ProfilePage() {
     { name: "Sinan" },
   ];
 
-  // Fetch logged in user from Supabase
+  // Fetch profile data from profiles table
   useEffect(() => {
-    async function fetchUser() {
-      const { data, error } = await supabase.auth.getUser();
+    async function fetchProfile() {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("username", username)
+        .single();
 
       if (error) {
         console.error(error.message);
         return;
       }
 
-      setUser(data.user);
+      setProfile(data);
     }
 
-    fetchUser();
-  }, []);
+    fetchProfile();
+  }, [username]);
 
   function handleEditProfile() {
     navigate("/edit-profile");
   }
 
-  const avatarUrl = user?.user_metadata?.avatar_url || "";
+  const avatarUrl = profile?.avatar_url || "";
 
   return (
     <div className="profile-page">
@@ -68,21 +74,17 @@ function ProfilePage() {
         </div>
 
         <div className="profile-info">
-          <h1 className="profile-name">
-            {user?.user_metadata?.display_name || "No username"}
-          </h1>
-          <p className="profile-subtitle">
-            {user?.user_metadata?.bio || "No bio yet"}
-          </p>
+          <h1 className="profile-name">{profile?.username || "No username"}</h1>
+          <p className="profile-subtitle">{profile?.bio || "No bio yet"}</p>
 
           <div className="profile-stats">
             <div className="stat">
-              <p className="stat-value">{stats.points}</p>
+              <p className="stat-value">{profile?.points ?? 0}</p>
               <p className="stat-label">Points</p>
             </div>
 
             <div className="stat">
-              <p className="stat-value">{stats.quizzes}</p>
+              <p className="stat-value">{profile?.quizzes ?? 0}</p>
               <p className="stat-label">Quizzes</p>
             </div>
 

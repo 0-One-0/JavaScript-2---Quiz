@@ -24,7 +24,7 @@ function Signup() {
       return;
     }
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -39,9 +39,26 @@ function Signup() {
       return;
     }
 
+    if (data.user) {
+      const { error: profileError } = await supabase.from("profiles").insert({
+        id: data.user.id,
+        username: username,
+        bio: "",
+        avatar_url: "",
+        points: 0,
+        quizzes: 0,
+      });
+
+      if (profileError) {
+        console.error("Profile insert error:", profileError.message);
+        setErrorMessage(profileError.message);
+        return;
+      }
+    }
+
     setIsSuccess(true);
   }
-  useGSAP(() =>{
+  useGSAP(() => {
     gsap.set(".login-container", {
       opacity: 0,
     });
@@ -49,9 +66,9 @@ function Signup() {
     gsap.to(".login-container", {
       opacity: 1,
       duration: 1.2,
-      ease: "power3.inOut"
-    })
-  }, [])
+      ease: "power3.inOut",
+    });
+  }, []);
 
   return (
     <AuthLayout>

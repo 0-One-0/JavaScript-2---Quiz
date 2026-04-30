@@ -1,11 +1,18 @@
 import "../edit-profile.css";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
+import { useNavigate } from "react-router-dom";
 
 // Handle edit profile page
 function EditProfile() {
+  // Store full profile from database
+  const [profile, setProfile] = useState(null);
+
   // Store selected avatar preview
   const [avatarPreview, setAvatarPreview] = useState("");
+
+  // Track if avatar should be removed
+  const [avatarRemoved, setAvatarRemoved] = useState(false);
 
   // Store username input
   const [username, setUsername] = useState("");
@@ -16,10 +23,16 @@ function EditProfile() {
   // Track if profile changes were saved
   const [success, setSuccess] = useState(false);
 
+  // Loading state while saving profile
+  const [loading, setLoading] = useState(false);
+
+  // Initialize navigation
+  const navigate = useNavigate();
+
   // Generate fallback avatar letter from username
   const avatarLetter = username.charAt(0).toUpperCase() || "?";
 
-  // Fetch and load user profille data (username and avatar) from Supabase
+  // Fetch and load user profile data from profiles table
   useEffect(() => {
     async function fetchUser() {
       const {
@@ -28,21 +41,31 @@ function EditProfile() {
 
       if (!user) return;
 
-      setUsername(user.user_metadata?.display_name || "");
-      setAvatarPreview(user.user_metadata?.avatar_url || "");
-      setBio(user.user_metadata?.bio || "");
+      const { data: profileData, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+
+      if (error) {
+        console.log(error.message);
+        return;
+      }
+
+      setProfile(profileData);
+      setUsername(profileData.username || "");
+      setAvatarPreview(profileData.avatar_url || "");
+      setBio(profileData.bio || "");
     }
 
     fetchUser();
   }, []);
 
-  // Show a preview of the selected avatar image
-  async function handleAvatarChange(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+  // Upload avatar to Supabase Storage and show preview
+  async function handleAvatarChange(e) {
+    const file = e.target.files[0];
 
-    const imageUrl = URL.createObjectURL(file);
-    setAvatarPreview(imageUrl);
+    if (!file) return;
 
     const {
       data: { user },
@@ -52,30 +75,26 @@ function EditProfile() {
 
     const fileExt = file.name.split(".").pop();
     const fileName = `${user.id}.${fileExt}`;
+    const filePath = fileName;
 
-    const { error } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from("avatars")
-      .upload(fileName, file, { upsert: true });
+      .upload(filePath, file, {
+        upsert: true,
+      });
 
-    if (error) {
-      console.error(error.message);
+    if (uploadError) {
+      console.log("UPLOAD ERROR:", uploadError);
       return;
     }
 
-    const { data } = supabase.storage.from("avatars").getPublicUrl(fileName);
-    const avatarUrl = data.publicUrl;
+    const { data } = supabase.storage.from("avatars").getPublicUrl(filePath);
 
-    await supabase.auth.updateUser({
-      data: {
-        avatar_url: avatarUrl,
-      },
-    });
-
-    setAvatarPreview(avatarUrl);
-    console.log("Saved avatar:", avatarUrl);
+    setAvatarPreview(data.publicUrl);
+    setAvatarRemoved(false);
   }
 
-  // Remove avatar from Supabase and reset preview
+  // Remove avatar from Supabase Storage and reset preview
   async function handleRemoveAvatar() {
     const {
       data: { user },
@@ -92,40 +111,53 @@ function EditProfile() {
         `${user.id}.webp`,
       ]);
 
-    await supabase.auth.updateUser({
-      data: {
-        avatar_url: "",
-      },
-    });
-
     setAvatarPreview("");
+    setAvatarRemoved(true);
   }
 
-  // Save profile changes
-  async function handleSaveProfile(event) {
-    event.preventDefault();
+  // Save profile changes to profiles table
+  async function handleSaveProfile(e) {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(false);
 
     const {
       data: { user },
     } = await supabase.auth.getUser();
 
-    if (!user) return;
+    if (!user || !profile) {
+      setLoading(false);
+      return;
+    }
 
-    await supabase.auth.updateUser({
-      data: {
-        display_name: username,
-        bio: bio,
-        avatar_url: user.user_metadata?.avatar_url || "",
-      },
-    });
+    const updatedUsername = username.trim() || profile.username;
+    const updatedBio = bio.trim() || profile.bio;
+    const updatedAvatarUrl =
+      avatarRemoved ? "" : avatarPreview || profile.avatar_url;
+
+    const { error } = await supabase
+      .from("profiles")
+      .update({
+        username: updatedUsername,
+        bio: updatedBio,
+        avatar_url: updatedAvatarUrl,
+      })
+      .eq("id", user.id);
+
+    if (error) {
+      console.log(error.message);
+      setLoading(false);
+      return;
+    }
 
     setSuccess(true);
+    setLoading(false);
 
-    // 🔥 update UI direkt
-    setUsername(username);
-
-    console.log("Profile updated");
+    setTimeout(() => {
+      navigate(`/profile/${updatedUsername}`);
+    }, 1000);
   }
+
   return (
     <div className="edit-profile-page">
       <div className="edit-profile-card">
@@ -147,13 +179,15 @@ function EditProfile() {
               Change Avatar
             </label>
 
-            <button
-              type="button"
-              className="remove-avatar-btn"
-              onClick={handleRemoveAvatar}
-            >
-              Remove
-            </button>
+            {avatarPreview && (
+              <button
+                type="button"
+                className="remove-avatar-btn"
+                onClick={handleRemoveAvatar}
+              >
+                Remove
+              </button>
+            )}
 
             <input
               id="avatarInput"
@@ -166,7 +200,7 @@ function EditProfile() {
         </div>
 
         <form className="edit-profile-form" onSubmit={handleSaveProfile}>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Change Username</label>
           <input
             id="username"
             type="text"
@@ -186,8 +220,8 @@ function EditProfile() {
 
           {success && <p className="success-text">Saved!</p>}
 
-          <button type="submit" className="save-profile-btn">
-            Save Changes
+          <button type="submit" className="save-profile-btn" disabled={loading}>
+            {loading ? "Saving..." : "Save changes"}
           </button>
         </form>
       </div>
