@@ -44,6 +44,11 @@ function ProfilePage() {
         data: { user },
       } = await supabase.auth.getUser();
 
+      if (!user) {
+        navigate("/login");
+        return;
+      }
+
       setLoggedInUser(user);
 
       // Get profile data from profiles table by username in URL
@@ -62,7 +67,7 @@ function ProfilePage() {
     }
 
     fetchProfile();
-  }, [username]);
+  }, [username, navigate]);
 
   function handleEditProfile() {
     navigate("/edit-profile");
