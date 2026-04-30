@@ -80,6 +80,11 @@
 .scoreboardName {
   font-size: 1.05rem;
   color: var(--text-color);
+  text-decoration: none;
+}
+
+.scoreboardName:hover {
+  text-decoration: underline;
 }
 
 .scoreboardRow--me .scoreboardName,

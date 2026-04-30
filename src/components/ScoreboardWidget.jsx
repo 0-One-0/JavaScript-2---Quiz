@@ -1,4 +1,5 @@
 import "../ScoreboardWidget.css";
+import { Link } from "react-router-dom";
 
 // Displays a scoreboard with players from the profiles table
 function ScoreboardWidget({ title, players, currentUserId }) {
@@ -42,7 +43,9 @@ function ScoreboardWidget({ title, players, currentUserId }) {
                   }
                 </div>
 
-                <span className="scoreboardName">{player.name}</span>
+                <Link to={`/profile/${player.name}`} className="scoreboardName">
+                  {player.name}
+                </Link>
               </div>
 
               <span className="scoreboardScore">{player.score ?? 0} pts</span>
