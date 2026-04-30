@@ -7,6 +7,7 @@ import RandomAlign from "./Answers";
 import { fetchQuizQuestions } from "../lib/triviaApi";
 import { SplitText } from "gsap/all";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../lib/supabase";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
