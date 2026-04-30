@@ -8,10 +8,14 @@ import { useParams } from "react-router-dom";
 function ProfilePage() {
   const navigate = useNavigate();
 
-  // Get user id
+  // Get username from URL
   const { username } = useParams();
 
+  // Store profile data from profiles table
   const [profile, setProfile] = useState(null);
+
+  // Store currently logged-in Supabase user
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   // Generate avatar letter from Supabase profile database
   const avatarLetter = profile?.username?.charAt(0).toUpperCase() || "?";
@@ -35,6 +39,14 @@ function ProfilePage() {
   // Fetch profile data from profiles table
   useEffect(() => {
     async function fetchProfile() {
+      // Get currently logged-in user
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      setLoggedInUser(user);
+
+      // Get profile data from profiles table by username in URL
       const { data, error } = await supabase
         .from("profiles")
         .select("*")
@@ -57,6 +69,8 @@ function ProfilePage() {
   }
 
   const avatarUrl = profile?.avatar_url || "";
+
+  const isOwnProfile = loggedInUser?.id === profile?.id;
 
   return (
     <div className="profile-page">
@@ -109,11 +123,16 @@ function ProfilePage() {
                 );
               })}
             </div>
-            <div className="profile-actions">
-              <button className="edit-profile-btn" onClick={handleEditProfile}>
-                Edit Profile
-              </button>
-            </div>
+            {isOwnProfile && (
+              <div className="profile-actions">
+                <button
+                  className="edit-profile-btn"
+                  onClick={handleEditProfile}
+                >
+                  Edit Profile
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
