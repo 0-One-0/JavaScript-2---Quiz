@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import { useParams } from "react-router-dom";
+import RivalsList from "../components/RivalsList";
+import FollowersList from "../components/FollowersList";
 
 // Render the main profile page layout
 function ProfilePage() {
@@ -16,25 +18,22 @@ function ProfilePage() {
 
   // Store currently logged-in Supabase user
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const [rivals, setRivals] = useState([]);
+
+  // Track if logged in useralready follows this profile.
+  const [isFollowing, setIsFollowing] = useState(false);
 
   // Generate avatar letter from Supabase profile database
   const avatarLetter = profile?.username?.charAt(0).toUpperCase() || "?";
 
-  // Placeholder
-  const stats = {
-    points: 1200,
-    quizzes: 24,
-    followers: 35,
-  };
+  // Store how many users follow this profile
+  const [followersCount, setFollowersCount] = useState(0);
 
-  // Placeholder
-  const rivals = [
-    { name: "Maan" },
-    { name: "Marko" },
-    { name: "Jonathan" },
-    { name: "Vanessa" },
-    { name: "Sinan" },
-  ];
+  // Toggle followers list visibility
+  const [showFollowers, setShowFollowers] = useState(false);
+
+  // Loading screen for followers
+  const [followersLoading, setFollowersLoading] = useState(false);
 
   // Fetch profile data from profiles table
   useEffect(() => {
@@ -50,6 +49,7 @@ function ProfilePage() {
       }
 
       setLoggedInUser(user);
+      fetchRivals(user.id);
 
       // Get profile data from profiles table by username in URL
       const { data, error } = await supabase
@@ -64,19 +64,131 @@ function ProfilePage() {
       }
 
       setProfile(data);
+      checkIfFollowing(user.id, data.id);
+      fetchFollowersCount(data.id);
     }
 
     fetchProfile();
   }, [username, navigate]);
 
+  async function fetchRivals(userId) {
+    const { data, error } = await supabase
+      .from("followers")
+      .select("following_id")
+      .eq("follower_id", userId);
+
+    if (error) {
+      console.log(error.message);
+      return;
+    }
+
+    const followingIds = data.map((follow) => follow.following_id);
+
+    if (followingIds.length === 0) {
+      setRivals([]);
+      return;
+    }
+
+    const { data: rivalProfiles, error: profilesError } = await supabase
+      .from("profiles")
+      .select("id, username, avatar_url, points")
+      .in("id", followingIds)
+      .order("points", { ascending: false })
+      .limit(10);
+
+    if (profilesError) {
+      console.log(profilesError.message);
+      return;
+    }
+
+    setRivals(rivalProfiles);
+  }
+
+  async function checkIfFollowing(userId, profileId) {
+    const { data, error } = await supabase
+      .from("followers")
+      .select("*")
+      .eq("follower_id", userId)
+      .eq("following_id", profileId)
+      .maybeSingle();
+
+    if (error) {
+      console.log(error.message);
+      return;
+    }
+
+    setIsFollowing(!!data);
+  }
+
+  async function fetchFollowersCount(profileId) {
+    const { count, error } = await supabase
+      .from("followers")
+      .select("*", { count: "exact", head: true })
+      .eq("following_id", profileId);
+
+    if (error) {
+      console.log(error.message);
+      return;
+    }
+
+    setFollowersCount(count || 0);
+  }
+
   function handleEditProfile() {
     navigate("/edit-profile");
+  }
+
+  async function handleFollow() {
+    if (!loggedInUser || !profile) return;
+
+    if (isFollowing) {
+      const { error } = await supabase
+        .from("followers")
+        .delete()
+        .eq("follower_id", loggedInUser.id)
+        .eq("following_id", profile.id);
+
+      if (error) {
+        console.log(error.message);
+        return;
+      }
+
+      setIsFollowing(false);
+      fetchRivals(loggedInUser.id);
+      return;
+    }
+
+    const { error } = await supabase.from("followers").insert({
+      follower_id: loggedInUser.id,
+      following_id: profile.id,
+    });
+
+    if (error) {
+      console.log(error.message);
+      return;
+    }
+
+    setIsFollowing(true);
+    fetchRivals(loggedInUser.id);
   }
 
   const avatarUrl = profile?.avatar_url || "";
 
   const isOwnProfile = loggedInUser?.id === profile?.id;
 
+  function handleToggleFollowers() {
+    if (showFollowers) {
+      setShowFollowers(false);
+      return;
+    }
+
+    setFollowersLoading(true);
+
+    setTimeout(() => {
+      setShowFollowers(true);
+      setFollowersLoading(false);
+    }, 1000);
+  }
   return (
     <div className="profile-page">
       <div className="profile-card">
@@ -107,40 +219,43 @@ function ProfilePage() {
               <p className="stat-label">Quizzes</p>
             </div>
 
-            <div className="stat">
-              <p className="stat-value">{stats.followers}</p>
+            <div className="stat" onClick={handleToggleFollowers}>
+              <p className="stat-value">{followersCount}</p>
               <p className="stat-label">Followers</p>
             </div>
           </div>
 
-          <div className="rivals-section">
-            <h3 className="rivals-title">Rivals</h3>
+          {isOwnProfile && <RivalsList rivals={rivals} />}
 
-            <div className="rivals-list">
-              {rivals.map((rival, index) => {
-                const letter = rival.name.charAt(0).toUpperCase();
-
-                return (
-                  <div className="rival" key={index}>
-                    <div className="rival-avatar">{letter}</div>
-                    <p className="rival-name">{rival.name}</p>
-                  </div>
-                );
-              })}
-            </div>
-            {isOwnProfile && (
-              <div className="profile-actions">
-                <button
-                  className="edit-profile-btn"
-                  onClick={handleEditProfile}
-                >
-                  Edit Profile
-                </button>
-              </div>
-            )}
+          <div className="profile-actions">
+            {isOwnProfile ?
+              <button className="edit-profile-btn" onClick={handleEditProfile}>
+                Edit Profile
+              </button>
+            : <button
+                className={`follower-btn ${isFollowing ? "unfollow-button" : ""}`}
+                onClick={handleFollow}
+              >
+                {isFollowing ? "Unfollow" : "Follow"}
+              </button>
+            }
           </div>
         </div>
       </div>
+
+      {followersLoading && (
+        <div className="followers-loading">
+          <div className="followers-spinner"></div>
+        </div>
+      )}
+
+      {showFollowers && profile && (
+        <FollowersList
+          profileId={profile.id}
+          isOwnProfile={isOwnProfile}
+          onFollowerRemoved={() => fetchFollowersCount(profile.id)}
+        />
+      )}
     </div>
   );
 }
