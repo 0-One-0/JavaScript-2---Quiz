@@ -257,7 +257,7 @@ export function Home({ setCategory }) {
       setInspo(quote); // Store the fetched quote in state to display it in the UI
     } catch (err) {
       // If an error occurs during fetch, catch it and set an error message in state to display in the UI
-      setInspoError("Could not load Kanye quote. Please try again later.");
+      setInspoError(err.message);
     } finally {
       // Finally block runs after try/catch
       setLoadingInspo(false); // Set loading to false after fetch is complete
