@@ -210,7 +210,7 @@ export function Home({ setCategory }) {
 
         stagger: {
           each: 0.1,
-          amount: 1.5,
+          amount: 0.5,
         },
         ease: "power2.out",
       })

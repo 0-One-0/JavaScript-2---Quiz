@@ -184,7 +184,8 @@ function Dashboard() {
     }).from(".dashboard-item", {
       opacity: 0,
       autoAlpha: 0,
-      xPercent: "random([-50, 50])",
+      yPercent: -10,
+      xPercent: -10,
       stagger: {
         each: 0.2,
       },
