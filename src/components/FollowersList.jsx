@@ -106,7 +106,7 @@ function FollowersList({ profileId, isOwnProfile, onFollowerRemoved }) {
                     className="followers-remove-btn"
                     onClick={() => handleRemoveFollower(follower.id)}
                   >
-                    Ta bort
+                    Remove
                   </button>
                 )}
               </div>

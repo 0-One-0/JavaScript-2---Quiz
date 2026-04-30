@@ -49,7 +49,6 @@ function ProfilePage() {
       }
 
       setLoggedInUser(user);
-      fetchRivals(user.id);
 
       // Get profile data from profiles table by username in URL
       const { data, error } = await supabase
@@ -66,6 +65,7 @@ function ProfilePage() {
       setProfile(data);
       checkIfFollowing(user.id, data.id);
       fetchFollowersCount(data.id);
+      fetchRivals(data.id);
     }
 
     fetchProfile();
@@ -225,7 +225,7 @@ function ProfilePage() {
             </div>
           </div>
 
-          {isOwnProfile && <RivalsList rivals={rivals} />}
+          <RivalsList rivals={rivals} />
 
           <div className="profile-actions">
             {isOwnProfile ?
