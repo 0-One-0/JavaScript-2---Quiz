@@ -28,7 +28,8 @@
     max-height: 10rem;
     overflow-y: scroll;
   }
-
+  .results::-webkit-scrollbar { display: none };
+  
   .result { padding: 10px; }
 
   .result:hover { 

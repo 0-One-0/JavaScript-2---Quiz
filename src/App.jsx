@@ -17,6 +17,7 @@ import QuizCategories from "./components/quizCategories.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import EditProfile from "./pages/EditProfile.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import HowToPlay from "./pages/HowToPlay.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -25,13 +26,11 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
   gsap.registerPlugin(useGSAP, SplitText);
-  const [category, setCategory] = useState(null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState(null);
-  const [questionAmount, setQuestionAmount] = useState(0);
   const [score, setScore] = useState(0); //Keeps check of the correct answers from user.
   const [replay, setReplay] = useState(false);
   const [quizArray, setQuizArray] = useState([]);
   const [catArray, setCatArray] = useState([]);
+  const [category, setCategory] = useState(null);
 
   return (
     <Router>
@@ -49,34 +48,19 @@ function App() {
           }
         >
           <Route path="/" element={<FrontPage setCategory={setCategory} />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/profile/:username" element={<ProfilePage />} />
           <Route path="/Quiz" element={<Quiz />}>
             <Route
               path="/Quiz/"
-              element={
-                <SelectQuiz
-                  setCategory={setCategory}
-                  setCatArray={setCatArray}
-                />
-              }
+              element={<SelectQuiz setCatArray={setCatArray} />}
             />
-            <Route
-              path="/Quiz/selectDifficulty"
-              element={
-                <DifficultyPage
-                  setSelectedDifficulty={setSelectedDifficulty}
-                  setQuestionAmount={setQuestionAmount}
-                />
-              }
-            />
+            <Route path="/Quiz/selectDifficulty" element={<DifficultyPage />} />
             <Route
               path="/Quiz/quizCard"
               element={
                 <QuizCard
-                  questionAmount={questionAmount}
-                  category={category}
-                  selectedDifficulty={selectedDifficulty}
                   setScore={setScore}
                   quizArray={quizArray}
                   setQuizArray={setQuizArray}
@@ -87,15 +71,12 @@ function App() {
             />
             <Route
               path="/Quiz/categories"
-              element={
-                <QuizCategories setCategory={setCategory} catArray={catArray} />
-              }
+              element={<QuizCategories catArray={catArray} />}
             />
             <Route
               path="/Quiz/quizResult"
               element={
                 <QuizResult
-                  questionAmount={questionAmount}
                   score={score}
                   setReplay={setReplay}
                   setScore={setScore}
@@ -105,6 +86,7 @@ function App() {
           </Route>
           <Route path="/Quiz" element={<Quiz />} />
           <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/HowToPlay" element={<HowToPlay />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

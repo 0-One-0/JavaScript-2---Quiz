@@ -8,21 +8,15 @@ import { fetchQuizQuestions } from "../lib/triviaApi";
 import { SplitText } from "gsap/all";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
+import { useQuizParams } from "../lib/quizParams";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
 //Temp array for tesing and demo, api will be implemented. the object structure is same as api
 
-function QuizCard({
-  questionAmount,
-  category,
-  selectedDifficulty,
-  setScore,
-  quizArray,
-  setQuizArray,
-  replay,
-}) {
+function QuizCard({ setScore, quizArray, setQuizArray, replay }) {
   const navigate = useNavigate();
+  const { amount, category, difficulty } = useQuizParams();
   //All the useState are made here.
 
   const [index, setIndex] = useState(0); //this is for the index that we are on like what question.
@@ -49,11 +43,7 @@ function QuizCard({
 
     //We try to call the async function
     try {
-      const data = await fetchQuizQuestions(
-        questionAmount,
-        category,
-        selectedDifficulty,
-      );
+      const data = await fetchQuizQuestions(amount, category, difficulty);
       setQuizArray(data);
     } catch (err) {
       //We return the error if it happens

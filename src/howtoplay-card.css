@@ -1,0 +1,73 @@
+.howTo-card {
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-box {
+  background-color: var(--card-color);
+  padding: 16px;
+  border-radius: 30px;
+  border: 2px solid var(--text-muted);
+}
+
+.video-box .howTo-video {
+  height: 350px;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.howTo-card h2 {
+  font-size: 1.5rem;
+  padding: 8px;
+  font-weight: 400;
+}
+
+.howTo-card p {
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 0;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 20px 0;
+}
+
+.dot {
+  width: 12px;
+  height: 6px;
+  border-radius: 999px;
+  background: #767cc9;
+  transition: 0.5s;
+}
+
+.dot.active {
+  background: var(--text-color);
+  width: 20px;
+}
+
+.howTo-card button {
+  background-color: #3F9FFE;
+  border: none;
+  border-radius: 16px;
+  color: var(--text-color);
+  width: 90%;
+  padding: 6px;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+/* Desktop Styling */
+@media (min-width: 1024px) {
+  .video-box .howTo-video {
+    height: 400px;
+  }
+}
