@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import howTo from "../assets/howto-logo.png";
 import quizLogo from "../assets/Quiz-logo.png";
 import dashboard from "../assets/dashboard-logo.png";
+import HowToPlay from "../pages/HowToPlay";
 gsap.registerPlugin(useGSAP, MorphSVGPlugin);
 
 function Links() {
@@ -160,7 +161,7 @@ function Links() {
         </li>
 
         <li>
-          <Link to="/">How to play</Link>
+          <Link to="/HowToPlay">How to play</Link>
         </li>
       </ul>
       <PopUpMenu show={show} setShow={setShow} />
@@ -199,7 +200,7 @@ function PopUpMenu({show, setShow}) {
         </li>
 
         <li>
-          <Link to="/"
+          <Link to="/HowToPlay"
            onClick={() => setShow(!show)}>
             <img
               className="menu-logos"

@@ -18,6 +18,7 @@ import QuizCategories from "./components/quizCategories.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import EditProfile from "./pages/EditProfile.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import HowToPlay from "./pages/HowToPlay.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -79,6 +80,7 @@ function App() {
           </Route>
           <Route path="/Quiz" element={<Quiz />} />
           <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/HowToPlay" element={<HowToPlay />} />
         </Route>
          <Route path="*" element={<NotFound />} />
       </Routes>
