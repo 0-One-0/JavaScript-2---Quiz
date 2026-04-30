@@ -4,10 +4,15 @@ import { FrontPageDaily } from "./FrontPageDaily";
 import RandomQuizContainer from "./FrontQuizContainer";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
+import { useEffect, useState } from "react";
+import { fetchKanyeQuote } from "../lib/kanyeQuote";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
 export function Home({ setCategory }) {
+  const [loadingInspo, setLoadingInspo] = useState(true);
+  const [inspo, setInspo] = useState("");
+  const [inspoError, setInspoError] = useState("");
   //values from CSS mediaquery to only do the changes when we want.
   function mediaCss() {
     gsap.set(".flex-div", {
@@ -51,12 +56,12 @@ export function Home({ setCategory }) {
 
   //Temp values for veribals real values added later.
   let title1 = "Daily inspiration";
-  let content1 = (
-    <p className="daily-content">
-      "We must form a union.
-      <br /> We must unify"
-    </p>
-  );
+  // let content1 = (
+  //   <p className="daily-content">
+  //     "We must form a union.
+  //     <br /> We must unify"
+  //   </p>
+  // );
   let title2 = "Daily Score";
   let content2 = <p className="daily-content">420 points</p>;
 
@@ -241,6 +246,28 @@ export function Home({ setCategory }) {
         ease: "power3.inOut",
       });
   }, []);
+
+  const loadDailyInspo = async () => {
+    // Function to call Kanye Quote
+    try {
+      setLoadingInspo(true); // Set loading to true before starting fetch
+      setInspoError(""); // Clear any previous error messages before starting new fetch
+
+      const quote = await fetchKanyeQuote(); // Call the function that fetches the Kanye quote from the API
+      setInspo(quote); // Store the fetched quote in state to display it in the UI
+    } catch (err) {
+      // If an error occurs during fetch, catch it and set an error message in state to display in the UI
+      setInspoError("Could not load Kanye quote. Please try again later.");
+    } finally {
+      // Finally block runs after try/catch
+      setLoadingInspo(false); // Set loading to false after fetch is complete
+    }
+  };
+
+  useEffect(() => {
+    loadDailyInspo();
+  }, []);
+
   return (
     <>
       <h1 className="page-title">
@@ -249,7 +276,18 @@ export function Home({ setCategory }) {
       <div className="flex-div">
         <FrontHeader />
         <div className="daily-continer">
-          <FrontPageDaily title={title1} content={content1} />
+          <FrontPageDaily
+            title={title1}
+            content={
+              loadingInspo ? (
+                <p className="daily-content">Loading...</p>
+              ) : inspoError ? (
+                <p className="daily-content">{inspoError}</p>
+              ) : (
+                <p className="daily-content"> " {inspo} "</p>
+              )
+            }
+          />
           <FrontPageDaily title={title2} content={content2} />
         </div>
 
