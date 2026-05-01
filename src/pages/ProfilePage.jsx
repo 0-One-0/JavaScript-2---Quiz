@@ -37,8 +37,6 @@ function ProfilePage() {
   // Loading screen for followers
   const [followersLoading, setFollowersLoading] = useState(false);
 
- 
-
   async function fetchRivals(userId) {
     const { data, error } = await supabase
       .from("followers")
@@ -158,7 +156,7 @@ function ProfilePage() {
     }, 1000);
   }
 
-   // Fetch profile data from profiles table
+  // Fetch profile data from profiles table
   useEffect(() => {
     async function fetchProfile() {
       // Get currently logged-in user
@@ -177,7 +175,7 @@ function ProfilePage() {
       const { data, error } = await supabase
         .from("profiles")
         .select("*")
-        .eq("username", username)
+        .ilike("username", username)
         .single();
 
       if (error) {
@@ -194,7 +192,7 @@ function ProfilePage() {
     fetchProfile();
   }, [username, navigate]);
 
-   useGSAP(() => {
+  useGSAP(() => {
     const tl = gsap.timeline();
 
     tl.from(".profile-card, .profile-header", {
@@ -211,15 +209,13 @@ function ProfilePage() {
       <div className="profile-card">
         <div className="profile-header">
           <div className="profile-avatar">
-            {avatarUrl ? (
+            {avatarUrl ?
               <img
                 src={avatarUrl}
                 alt="Profile avatar"
                 className="profile-avatar-image"
               />
-            ) : (
-              <span>{avatarLetter}</span>
-            )}
+            : <span>{avatarLetter}</span>}
           </div>
         </div>
 
@@ -247,18 +243,17 @@ function ProfilePage() {
           <RivalsList rivals={rivals} />
 
           <div className="profile-actions">
-            {isOwnProfile ? (
+            {isOwnProfile ?
               <button className="edit-profile-btn" onClick={handleEditProfile}>
                 Edit Profile
               </button>
-            ) : (
-              <button
+            : <button
                 className={`follower-btn ${isFollowing ? "unfollow-button" : ""}`}
                 onClick={handleFollow}
               >
                 {isFollowing ? "Unfollow" : "Follow"}
               </button>
-            )}
+            }
           </div>
         </div>
       </div>
