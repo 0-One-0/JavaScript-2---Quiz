@@ -9,7 +9,7 @@ import { fetchKanyeQuote } from "../lib/kanyeQuote";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
-export function Home({ setCategory }) {
+export function Home() {
   const [loadingInspo, setLoadingInspo] = useState(true);
   const [inspo, setInspo] = useState("");
   const [inspoError, setInspoError] = useState("");
@@ -291,7 +291,7 @@ export function Home({ setCategory }) {
           <FrontPageDaily title={title2} content={content2} />
         </div>
 
-        <RandomQuizContainer setCategory={setCategory} />
+        <RandomQuizContainer />
       </div>
     </>
   );

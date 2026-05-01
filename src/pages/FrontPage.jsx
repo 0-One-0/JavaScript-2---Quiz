@@ -5,7 +5,7 @@ import "../front-page.css";
 function FrontPage({ setCategory }) {
   return <>
   <section className="front-page-section">
-  <Home setCategory={setCategory}/>
+  <Home />
   </section>
   </>
 }
