@@ -22,7 +22,7 @@
 /* CARD SECTION */
 .login-container {
   width: 21rem;
-  margin: 3.75rem auto;
+  margin: 1rem;
   padding: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 0 2.5rem 0 2.5rem;
@@ -166,13 +166,5 @@
 }
 
 .sign-up a:hover {
-  color: var(--text-muted);
-}
-
-/* FOOTER SECTION */
-.login-footer {
-  text-align: center;
-  padding: 1.25rem 0;
-  font-size: 0.75rem;
   color: var(--text-muted);
 }

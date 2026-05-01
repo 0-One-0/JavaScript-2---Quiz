@@ -45,7 +45,6 @@ function QuizResult({ questionAmount, score, setReplay, setScore }) {
 
   const [loaded, setLoaded] = useState(false);
   const [showScore, setShowScore] = useState(0);
-  const [saveError, setSaveError] = useState("");
 
   let procent = (score / questionAmount) * 100;
   if (isNaN(procent)) {
