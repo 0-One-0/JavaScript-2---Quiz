@@ -5,8 +5,8 @@ import { useState } from "react";
   Insert an array to search through and a placeholder text and a handleSelect function */
 }
 export default function SearchBar(
-  { searchArr, placeholderText },
-  handleSelect,
+  { searchArr, placeholderText, handleSelect }
+  
 ) {
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
