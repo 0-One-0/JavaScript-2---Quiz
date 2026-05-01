@@ -127,6 +127,7 @@ function QuizCard({ setScore, quizArray, setQuizArray, replay }) {
 
   const goBack = () => {
     setScore((prev) => prev - prev);
+    setQuizArray([]);
     navigate("/Quiz/");
   };
 
