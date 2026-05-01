@@ -30,7 +30,6 @@ function App() {
   const [replay, setReplay] = useState(false);
   const [quizArray, setQuizArray] = useState([]);
   const [catArray, setCatArray] = useState([]);
-  const [category, setCategory] = useState(null);
 
   return (
     <Router>
@@ -47,7 +46,7 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route path="/" element={<FrontPage setCategory={setCategory} />} />
+          <Route path="/" element={<FrontPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/profile/:username" element={<ProfilePage />} />
