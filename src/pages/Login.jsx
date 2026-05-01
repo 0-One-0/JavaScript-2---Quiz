@@ -29,9 +29,12 @@ function Login() {
       y: 300,
     });
 
-    gsap.set(".sign-up, label, .forgot-password, .login-title, .login-subtitle", {
-      opacity: 0,
-    });
+    gsap.set(
+      ".sign-up, label, .forgot-password, .login-title, .login-subtitle",
+      {
+        opacity: 0,
+      },
+    );
     gsap.set("input", {
       x: -500,
     });
@@ -42,8 +45,8 @@ function Login() {
       scale: 0.5,
       repeat: 3,
       yoyo: true,
-      duration: 1,
-      ease: "sine.inOut"
+      duration: 0.5,
+      ease: "sine.inOut",
     })
       .to(".login-logo", {
         y: 0,
@@ -62,17 +65,17 @@ function Login() {
       .to("input", {
         x: 0,
         duration: 0.5,
-        ease: "power4.inOut"
+        ease: "power4.inOut",
       })
       .to("label", {
         opacity: 1,
         duration: 0.5,
-        ease: "power4.inOut"
+        ease: "power4.inOut",
       })
-      .to(".forgot-password, .login-title, .login-subtitle",{
+      .to(".forgot-password, .login-title, .login-subtitle", {
         opacity: 1,
         duration: 0.5,
-        ease: "power4.inOut"
+        ease: "power4.inOut",
       })
       .to(".login-btn", {
         y: 0,
@@ -81,9 +84,8 @@ function Login() {
       .to(".sign-up", {
         opacity: 1,
         duration: 1,
-        ease: "power1.inOut"
+        ease: "power1.inOut",
       });
-      
   }, []);
 
   async function handleLogin(e) {

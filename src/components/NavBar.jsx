@@ -6,6 +6,7 @@ import logo from "../assets/logo2.png";
 
 function NavBar() {
   const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -16,6 +17,25 @@ function NavBar() {
       } = await supabase.auth.getUser();
 
       setUser(user);
+
+      if (!user) {
+        setProfile(null);
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+
+      if (error) {
+        console.log(error.message);
+        setProfile(null);
+        return;
+      }
+
+      setProfile(data);
     }
 
     fetchUser();
@@ -31,17 +51,6 @@ function NavBar() {
     };
   }, []);
 
-  async function getUser() {
-    const { data, error } = await supabase.auth.getUser();
-
-    if (error) {
-      console.log(error.message);
-      return;
-    }
-
-    setUser(data.user);
-  }
-
   async function handleLogout() {
     const { error } = await supabase.auth.signOut();
 
@@ -55,12 +64,9 @@ function NavBar() {
     navigate("/login");
   }
 
-  const displayName =
-    user?.user_metadata?.display_name || user?.user_metadata?.username || "";
-
-  const avatarUrl = user?.user_metadata?.avatar_url || "";
-
-  const avatarLetter = displayName.charAt(0).toUpperCase();
+  const displayName = profile?.username || "";
+  const avatarUrl = profile?.avatar_url || "";
+  const avatarLetter = displayName.charAt(0).toUpperCase() || "?";
 
   return (
     <nav className="navbar-continer">
@@ -92,7 +98,10 @@ function NavBar() {
               <div className="dropdown-profile">
                 <p className="dropdown-username">{displayName}</p>
 
-                <Link to="/profile" onClick={() => setIsOpen(false)}>
+                <Link
+                  to={`/profile/${profile?.username}`}
+                  onClick={() => setIsOpen(false)}
+                >
                   Profil
                 </Link>
 

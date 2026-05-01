@@ -12,7 +12,6 @@ import { useState } from "react";
 import SelectQuiz from "./components/quizSelect.jsx";
 import DifficultyPage from "./components/quizDifficulty.jsx";
 import QuizCard from "./components/quizcard.jsx";
-import Profile from "./pages/Profile.jsx";
 import QuizResult from "./components/QuizResult.jsx";
 import QuizCategories from "./components/quizCategories.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
@@ -23,6 +22,7 @@ import NotFound from "./pages/NotFound.jsx";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
   gsap.registerPlugin(useGSAP, SplitText);
@@ -39,10 +39,17 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/update-password" element={<UpdatePassword />} />
 
-        <Route element={<Layout />}>
+        <Route
+          element={
+            <ProtectedRoute>
+              <Layout />
+            </ProtectedRoute>
+          }
+        >
           <Route path="/" element={<FrontPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/profile/:username" element={<ProfilePage />} />
           <Route path="/Quiz" element={<Quiz />}>
             <Route
               path="/Quiz/"

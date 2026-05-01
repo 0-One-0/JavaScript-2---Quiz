@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useNavigate } from "react-router-dom";
 import confetti from "canvas-confetti";
+import { supabase } from "../lib/supabase";
 
 gsap.registerPlugin(useGSAP);
 
@@ -13,23 +14,23 @@ function QuizResult({ questionAmount, score, setReplay, setScore }) {
     // left cannon aimed right
     confetti({
       particleCount: 150,
-      angle: 60, 
+      angle: 60,
       spread: 120,
-      origin: { x: 0, y: 0 }, 
-      gravity: 0.8, 
-      drift: 0.5, 
-      ticks: 400, 
+      origin: { x: 0, y: 0 },
+      gravity: 0.8,
+      drift: 0.5,
+      ticks: 400,
       colors: ["#FF6BB5", "#00D4E8", "#FFD700", "#fff"],
     });
 
     // right cannon — angled inward to the left
     confetti({
       particleCount: 150,
-      angle: 120, 
+      angle: 120,
       spread: 120,
       origin: { x: 1, y: 0 },
       gravity: 0.8,
-      drift: -0.5, 
+      drift: -0.5,
       ticks: 400,
       colors: ["#FF6BB5", "#00D4E8", "#FFD700", "#fff"],
     });
@@ -44,6 +45,7 @@ function QuizResult({ questionAmount, score, setReplay, setScore }) {
 
   const [loaded, setLoaded] = useState(false);
   const [showScore, setShowScore] = useState(0);
+  const [saveError, setSaveError] = useState("");
 
   let procent = (score / questionAmount) * 100;
   if (isNaN(procent)) {
@@ -135,6 +137,44 @@ function QuizResult({ questionAmount, score, setReplay, setScore }) {
         }
       });
   }, []);
+
+  async function saveQuizResult() {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) return;
+
+    const earnedPoints = score;
+
+    const { data: profile, error: fetchError } = await supabase
+      .from("profiles")
+      .select("points, quizzes")
+      .eq("id", user.id)
+      .single();
+
+    if (fetchError) {
+      console.log(fetchError.message);
+      return;
+    }
+
+    const { error: updateError } = await supabase
+      .from("profiles")
+      .update({
+        points: (profile.points ?? 0) + earnedPoints,
+        quizzes: (profile.quizzes ?? 0) + 1,
+      })
+      .eq("id", user.id);
+
+    if (updateError) {
+      console.log(updateError.message);
+    }
+  }
+
+  useEffect(() => {
+    saveQuizResult();
+  }, []);
+
   return (
     <section className="result-section">
       <div className="results-container">

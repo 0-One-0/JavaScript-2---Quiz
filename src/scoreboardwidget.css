@@ -31,7 +31,7 @@
 }
 
 .scoreboardRow--me {
-  background: linear-gradient(to right, #AF487E, #B55AB4, #BA6BEA);
+  background: linear-gradient(to right, #af487e, #b55ab4, #ba6bea);
 }
 
 .scoreboardLeft {
@@ -61,6 +61,15 @@
   object-fit: cover;
 }
 
+.scoreboardAvatarFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  background: var(--accent-color);
+  color: var(--text-color);
+}
+
 .scoreboardCrown {
   position: absolute;
   top: -24px;
@@ -71,6 +80,11 @@
 .scoreboardName {
   font-size: 1.05rem;
   color: var(--text-color);
+  text-decoration: none;
+}
+
+.scoreboardName:hover {
+  text-decoration: underline;
 }
 
 .scoreboardRow--me .scoreboardName,
@@ -82,7 +96,7 @@
 
 .scoreboardScore {
   font-size: 1rem;
-  color: var(--card-color);
+  color: var(--text-color);
 }
 
 @media (min-width: 1024px) {

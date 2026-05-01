@@ -1,4 +1,3 @@
-
 För Godkänt (G)
  
 - [X] Applikationen är byggd med Vite + React
@@ -14,9 +13,9 @@ För Godkänt (G)
 - [X] Koden är formaterad och konsekvent
 - [X] Git används med meningsfulla commits från alla gruppmedlemmar
 - [ ] Repot har en README med projektbeskrivning och instruktioner för att köra projektet
- 
+
 För Väl Godkänt (VG)
- 
+
 Alla krav för G plus:
  
 - [X] Applikationen har en genomtänkt och konsekvent mappstruktur
