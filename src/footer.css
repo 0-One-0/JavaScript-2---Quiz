@@ -1,0 +1,10 @@
+.footer {
+  text-align: center;
+  padding: 1.25rem 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.footer p {
+  margin: 0;
+}

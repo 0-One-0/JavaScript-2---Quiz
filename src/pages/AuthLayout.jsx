@@ -1,5 +1,6 @@
 import "../login.css";
 import logo from "../assets/logo2.png";
+import Footer from "../components/Footer";
 
 function AuthLayout({ children }) {
   return (
@@ -8,7 +9,7 @@ function AuthLayout({ children }) {
 
       <div className="login-main">{children}</div>
 
-      <p className="login-footer">© 2026 Flowly – All rights reserved</p>
+      <Footer />
     </div>
   );
 }

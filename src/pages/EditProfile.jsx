@@ -8,9 +8,6 @@ function EditProfile() {
   // Store full profile from database
   const [profile, setProfile] = useState(null);
 
-  // Store currently logged-in Supabase user
-  const [loggedInUser, setLoggedInUser] = useState(null);
-
   // Store selected avatar preview
   const [avatarPreview, setAvatarPreview] = useState("");
 
