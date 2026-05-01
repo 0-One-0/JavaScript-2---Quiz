@@ -14,7 +14,10 @@ import lightBulb from "../assets/light-bulb.png";
 import hpImg from "../assets/harry-potter.png";
 import jokeImg from "../assets/laughing-emoji.png";
 import ScoreboardWidget from "../components/ScoreboardWidget";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { supabase } from "../lib/supabase";
+
 
 function Dashboard() {
   // Kanye Quote State
@@ -192,16 +195,36 @@ function Dashboard() {
     loadPlayers();
   }, []);
 
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      onComplete: () => {
+         tl.set(".dashboard", {
+      overflow: "visible",
+    })
+      },
+    });
+    tl.set(".dashboard", {
+      overflow: "hidden",
+    }).from(".dashboard-item", {
+      opacity: 0,
+      autoAlpha: 0,
+      yPercent: -10,
+      xPercent: -10,
+      stagger: {
+        each: 0.2,
+      },
+      ease: "power3.inOut",
+    });
+  }, []);
+
   return (
     <div className="dashboard">
       <div className="dashboard-item dashboard-item-small">
-        <Widget
-          widgetTitle="Random Kanye Quote"
+        <Widget // Kanye Quote Widget
+          widgetTitle="Random Kanye Quote" // Title of the widget
           widgetText={
-            kanyeLoading ? "Loading..."
-            : kanyeError ?
-              kanyeError
-            : kanyeQuote
+            // The main content of the widget, which will show the quote or loading/error message
+            kanyeLoading ? "Loading..." : kanyeError ? kanyeError : kanyeQuote
           }
           image={kanyeImg}
           variant="kanye"
@@ -212,10 +235,7 @@ function Dashboard() {
         <Widget
           widgetTitle="Today's Useless Fact"
           widgetText={
-            factLoading ? "Loading..."
-            : factError ?
-              factError
-            : uselessFact
+            factLoading ? "Loading..." : factError ? factError : uselessFact
           }
           image={lightBulb}
           variant="uselessFact"
@@ -227,10 +247,7 @@ function Dashboard() {
           widgetTitle="Harry Potter Spell"
           widgetSubTitle={spellLoading || spellError ? "" : spellTitle}
           widgetText={
-            spellLoading ? "Loading..."
-            : spellError ?
-              spellError
-            : spellText
+            spellLoading ? "Loading..." : spellError ? spellError : spellText
           }
           image={hpImg}
           variant="hpSpell"
@@ -241,16 +258,10 @@ function Dashboard() {
         <Widget
           widgetTitle="Random Joke"
           widgetSubTitle={
-            jokeLoading ? "Loading..."
-            : jokeError ?
-              ""
-            : jokeSetup
+            jokeLoading ? "Loading..." : jokeError ? "" : jokeSetup
           }
           widgetText={
-            jokeLoading ? "Loading..."
-            : jokeError ?
-              jokeError
-            : jokePunchline
+            jokeLoading ? "Loading..." : jokeError ? jokeError : jokePunchline
           }
           image={jokeImg}
           variant="joke"
@@ -261,10 +272,7 @@ function Dashboard() {
         <Widget
           widgetTitle="Random titan from Attack on Titan"
           widgetText={
-            titanLoading ? "Loading..."
-            : titanError ?
-              titanError
-            : titanTitle
+            titanLoading ? "Loading..." : titanError ? titanError : titanTitle
           }
           image={titanImage}
           variant="aot"
@@ -275,10 +283,11 @@ function Dashboard() {
         <Widget
           widgetTitle="Random Cat"
           widgetText={
-            catLoading ? "Loading..."
-            : catError ?
-              catError
-            : "Enjoy this random cat"
+            catLoading
+              ? "Loading..."
+              : catError
+                ? catError
+                : "Enjoy this random cat"
           }
           image={catImage}
           variant="cat"
@@ -286,7 +295,7 @@ function Dashboard() {
       </div>
 
       <div className="dashboard-item dashboard-item-large">
-        <ScoreboardWidget
+        <ScoreboardWidget // Scoreboard Widget
           title="Scoreboard"
           players={players}
           currentUserId={currentUserId}

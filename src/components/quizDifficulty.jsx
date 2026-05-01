@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useQuizParams } from "../lib/quizParams";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 export default function DifficultyPage() {
   const [localDifficulty, setLocalDifficulty] = useState("");
@@ -10,13 +12,13 @@ export default function DifficultyPage() {
   const chooseDifficulty = (level) => {
     setDifficulty(level);
     setLocalDifficulty(level);
-    if(level === "easy") {
+    if (level === "easy") {
       setAmount(5);
     }
-    if(level === "medium") {
+    if (level === "medium") {
       setAmount(10);
     }
-    if(level === "hard") {
+    if (level === "hard") {
       setAmount(20);
     }
   };
@@ -26,21 +28,51 @@ export default function DifficultyPage() {
     navigate("/quiz/quizCard");
   };
 
+  useGSAP(() => {
+    const tl = gsap.timeline();
+
+    tl.set(".quizApp", {
+      boxSizing: "border-box",
+      width: "100%",
+      overflow: "hidden",
+    })
+      .from(".quizApp", {
+        opacity: 0,
+        autoAlpha: 0,
+        xPercent: "random([-50, 50])",
+        ease: "power3.inOut",
+      })
+      .set(".quizApp", {
+        overflow: "visible",
+      });
+  }, []);
+
   return (
     <div className="quizApp">
       <h2 className="section-title">Choose your difficulty</h2>
 
-      <div className={`difficulty ${localDifficulty === "easy" ? "active" : ""}`} onClick={() => chooseDifficulty("easy")}>
+      <div
+        className={`difficulty ${localDifficulty === "easy" ? "active" : ""}`}
+        onClick={() => chooseDifficulty("easy")}
+      >
         Easy (5 Questions)
       </div>
-      <div className={`difficulty ${localDifficulty === "medium" ? "active" : ""}`} onClick={() => chooseDifficulty("medium")}>
+      <div
+        className={`difficulty ${localDifficulty === "medium" ? "active" : ""}`}
+        onClick={() => chooseDifficulty("medium")}
+      >
         Medium (10 Questions)
       </div>
-      <div className={`difficulty ${localDifficulty === "hard" ? "active" : ""}`} onClick={() => chooseDifficulty("hard")}>
+      <div
+        className={`difficulty ${localDifficulty === "hard" ? "active" : ""}`}
+        onClick={() => chooseDifficulty("hard")}
+      >
         Hard (20 Questions)
       </div>
 
-      <button className="start-btn" onClick={startQuiz}>Start Quiz</button>
+      <button className="start-btn" onClick={startQuiz}>
+        Start Quiz
+      </button>
     </div>
   );
 }

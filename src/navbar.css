@@ -303,6 +303,9 @@ dashboard-logo {
 .hide {
   display: none;
 }
+.logo-img-big {
+  display: none;
+}
 
 /* media queries */
 
@@ -317,6 +320,11 @@ dashboard-logo {
   }
   .links-continer {
     padding: 0;
+    width: fit-content;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 1rem;
+    padding-left: 1rem;
     margin-top: 0;
   }
 
@@ -326,6 +334,16 @@ dashboard-logo {
 
   .popup-menu {
     visibility: hidden;
+  }
+  .logo-img {
+    display: none;
+  }
+  .logo-img-big {
+    display: flex;
+    width: 6rem;
+  }
+  .logo-continer {
+    display: none;
   }
 }
 

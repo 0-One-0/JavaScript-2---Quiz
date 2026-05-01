@@ -4,10 +4,15 @@ import { FrontPageDaily } from "./FrontPageDaily";
 import RandomQuizContainer from "./FrontQuizContainer";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
+import { useEffect, useState } from "react";
+import { fetchKanyeQuote } from "../lib/kanyeQuote";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
-export function Home({ setCategory }) {
+export function Home() {
+  const [loadingInspo, setLoadingInspo] = useState(true);
+  const [inspo, setInspo] = useState("");
+  const [inspoError, setInspoError] = useState("");
   //values from CSS mediaquery to only do the changes when we want.
   function mediaCss() {
     gsap.set(".flex-div", {
@@ -51,12 +56,12 @@ export function Home({ setCategory }) {
 
   //Temp values for veribals real values added later.
   let title1 = "Daily inspiration";
-  let content1 = (
-    <p className="daily-content">
-      "We must form a union.
-      <br /> We must unify"
-    </p>
-  );
+  // let content1 = (
+  //   <p className="daily-content">
+  //     "We must form a union.
+  //     <br /> We must unify"
+  //   </p>
+  // );
   let title2 = "Daily Score";
   let content2 = <p className="daily-content">420 points</p>;
 
@@ -84,7 +89,7 @@ export function Home({ setCategory }) {
         mm.add("(min-width: 768px)", () => {
           const tl2 = gsap.timeline();
 
-          tl2 //make sure we se the elements before we animate
+          tl2 //make sure we set the elements before we animate
             .set(".header-div, .daily-div, .random-container", {
               scale: 1,
               opacity: 1,
@@ -102,7 +107,7 @@ export function Home({ setCategory }) {
                 each: 0.04,
                 from: "start",
               },
-              duration: 0.6,
+              duration: 0.2,
             })
             .call(mediaCss) //Call function that changes properties when we cant see the elemnts
             //Show elemenets
@@ -116,7 +121,7 @@ export function Home({ setCategory }) {
                 each: 0.04,
                 from: "start",
               },
-              duration: 0.6,
+              duration: 0.2,
             });
           //happens when we go under the 768px
           return () => {
@@ -174,14 +179,12 @@ export function Home({ setCategory }) {
       y: 200,
     });
 
-
     //timeline starts here and animations happens after oneanother
     //This animation creates a "loading" aniamtion without loading.
     tl.from(split.chars, {
       yPercent: "random([-50,50])",
       rotate: -30,
       opacity: 0,
-      repeat: 2,
       repeatDelay: 1,
       yoyo: true,
       ease: "sine.inOut",
@@ -192,11 +195,12 @@ export function Home({ setCategory }) {
     })
       .to(".page-title", {
         y: 0,
-        duration: 1.8,
+        duration: 1.5,
         ease: "bounce.in",
       })
       .to(".flex-div", {
         opacity: 1,
+        duration: 0.02,
       })
       .to(".header-div", {
         scale: 1,
@@ -204,20 +208,20 @@ export function Home({ setCategory }) {
         y: 0,
         xPercent: 0,
         ease: "power2.inOut",
-        duration: 1,
+        duration: 0.5,
       })
       .from(splitQuote.words, {
         opacity: 0,
 
         stagger: {
           each: 0.1,
-          amount: 2,
+          amount: 0.5,
         },
         ease: "power2.out",
       })
       .from(".quote-auth", {
         opacity: 0,
-        direction: 2,
+        direction: 1,
         ease: "power2.out",
       })
       .to(".daily-div, .random-container", {
@@ -226,9 +230,9 @@ export function Home({ setCategory }) {
         y: 0,
         xPercent: 0,
         ease: "power2.inOut",
-        duration: 1,
+        duration: 0.5,
         stagger: {
-          each: 0.4,
+          each: 0.04,
         },
       })
       .to(".page-title", {
@@ -242,6 +246,28 @@ export function Home({ setCategory }) {
         ease: "power3.inOut",
       });
   }, []);
+
+  const loadDailyInspo = async () => {
+    // Function to call Kanye Quote
+    try {
+      setLoadingInspo(true); // Set loading to true before starting fetch
+      setInspoError(""); // Clear any previous error messages before starting new fetch
+
+      const quote = await fetchKanyeQuote(); // Call the function that fetches the Kanye quote from the API
+      setInspo(quote); // Store the fetched quote in state to display it in the UI
+    } catch (err) {
+      // If an error occurs during fetch, catch it and set an error message in state to display in the UI
+      setInspoError(err.message);
+    } finally {
+      // Finally block runs after try/catch
+      setLoadingInspo(false); // Set loading to false after fetch is complete
+    }
+  };
+
+  useEffect(() => {
+    loadDailyInspo();
+  }, []);
+
   return (
     <>
       <h1 className="page-title">
@@ -250,11 +276,22 @@ export function Home({ setCategory }) {
       <div className="flex-div">
         <FrontHeader />
         <div className="daily-continer">
-          <FrontPageDaily title={title1} content={content1} />
+          <FrontPageDaily
+            title={title1}
+            content={
+              loadingInspo ? (
+                <p className="daily-content">Loading...</p>
+              ) : inspoError ? (
+                <p className="daily-content">{inspoError}</p>
+              ) : (
+                <p className="daily-content"> " {inspo} "</p>
+              )
+            }
+          />
           <FrontPageDaily title={title2} content={content2} />
         </div>
 
-        <RandomQuizContainer setCategory={setCategory} />
+        <RandomQuizContainer />
       </div>
     </>
   );

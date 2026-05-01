@@ -2,6 +2,8 @@ import "../profile-page.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { useParams } from "react-router-dom";
 import RivalsList from "../components/RivalsList";
 import FollowersList from "../components/FollowersList";
@@ -35,41 +37,7 @@ function ProfilePage() {
   // Loading screen for followers
   const [followersLoading, setFollowersLoading] = useState(false);
 
-  // Fetch profile data from profiles table
-  useEffect(() => {
-    async function fetchProfile() {
-      // Get currently logged-in user
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      if (!user) {
-        navigate("/login");
-        return;
-      }
-
-      setLoggedInUser(user);
-
-      // Get profile data from profiles table by username in URL
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("username", username)
-        .single();
-
-      if (error) {
-        console.error(error.message);
-        return;
-      }
-
-      setProfile(data);
-      checkIfFollowing(user.id, data.id);
-      fetchFollowersCount(data.id);
-      fetchRivals(data.id);
-    }
-
-    fetchProfile();
-  }, [username, navigate]);
+ 
 
   async function fetchRivals(userId) {
     const { data, error } = await supabase
@@ -189,18 +157,69 @@ function ProfilePage() {
       setFollowersLoading(false);
     }, 1000);
   }
+
+   // Fetch profile data from profiles table
+  useEffect(() => {
+    async function fetchProfile() {
+      // Get currently logged-in user
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        navigate("/login");
+        return;
+      }
+
+      setLoggedInUser(user);
+
+      // Get profile data from profiles table by username in URL
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("username", username)
+        .single();
+
+      if (error) {
+        console.error(error.message);
+        return;
+      }
+
+      setProfile(data);
+      checkIfFollowing(user.id, data.id);
+      fetchFollowersCount(data.id);
+      fetchRivals(data.id);
+    }
+
+    fetchProfile();
+  }, [username, navigate]);
+
+   useGSAP(() => {
+    const tl = gsap.timeline();
+
+    tl.from(".profile-card, .profile-header", {
+      opacity: 0,
+      y: -900,
+      stagger: {
+        each: 0.04,
+      },
+      ease: "power1.inOut",
+    });
+  }, []);
   return (
     <div className="profile-page">
       <div className="profile-card">
         <div className="profile-header">
           <div className="profile-avatar">
-            {avatarUrl ?
+            {avatarUrl ? (
               <img
                 src={avatarUrl}
                 alt="Profile avatar"
                 className="profile-avatar-image"
               />
-            : <span>{avatarLetter}</span>}
+            ) : (
+              <span>{avatarLetter}</span>
+            )}
           </div>
         </div>
 
@@ -228,17 +247,18 @@ function ProfilePage() {
           <RivalsList rivals={rivals} />
 
           <div className="profile-actions">
-            {isOwnProfile ?
+            {isOwnProfile ? (
               <button className="edit-profile-btn" onClick={handleEditProfile}>
                 Edit Profile
               </button>
-            : <button
+            ) : (
+              <button
                 className={`follower-btn ${isFollowing ? "unfollow-button" : ""}`}
                 onClick={handleFollow}
               >
                 {isFollowing ? "Unfollow" : "Follow"}
               </button>
-            }
+            )}
           </div>
         </div>
       </div>
