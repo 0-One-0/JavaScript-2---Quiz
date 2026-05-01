@@ -9,7 +9,11 @@ import dashboard from "../assets/dashboard-logo.png";
 import HowToPlay from "../pages/HowToPlay";
 gsap.registerPlugin(useGSAP, MorphSVGPlugin);
 
-function Links() {
+function Links({setQuizArray}) {
+
+  const handleClickQuiz = () =>{
+    setQuizArray([]);
+  }
   const [show, setShow] = useState(false);
   useGSAP(
     () => {
@@ -157,19 +161,19 @@ function Links() {
         </li>
 
         <li>
-          <Link to="/Quiz">Quiz</Link>
+          <Link onClick={handleClickQuiz}to="/Quiz">Quiz</Link>
         </li>
 
         <li>
           <Link to="/HowToPlay">How to play</Link>
         </li>
       </ul>
-      <PopUpMenu show={show} setShow={setShow} />
+      <PopUpMenu show={show} setShow={setShow} handleClickQuiz={handleClickQuiz}/>
     </>
   );
 }
 
-function PopUpMenu({show, setShow}) {
+function PopUpMenu({show, setShow, handleClickQuiz}) {
   return (
     <div className="popup-menu">
       <ul className="link-list-small">
@@ -188,7 +192,11 @@ function PopUpMenu({show, setShow}) {
 
         <li>
           <Link to="/Quiz"
-           onClick={() => setShow(!show)}>
+           onClick={() =>{
+            handleClickQuiz(); 
+           setShow(!show)
+           }
+            }>
             {" "}
             <img
               className="menu-logos"
