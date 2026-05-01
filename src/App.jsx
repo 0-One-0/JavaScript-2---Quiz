@@ -48,12 +48,7 @@ function App() {
               path="/Quiz/"
               element={<SelectQuiz setCatArray={setCatArray} />}
             />
-            <Route
-              path="/Quiz/selectDifficulty"
-              element={
-                <DifficultyPage />
-              }
-            />
+            <Route path="/Quiz/selectDifficulty" element={<DifficultyPage />} />
             <Route
               path="/Quiz/quizCard"
               element={
@@ -66,7 +61,10 @@ function App() {
                 />
               }
             />
-            <Route path="/Quiz/categories" element={<QuizCategories catArray={catArray}/>} />
+            <Route
+              path="/Quiz/categories"
+              element={<QuizCategories catArray={catArray} />}
+            />
             <Route
               path="/Quiz/quizResult"
               element={
@@ -74,6 +72,7 @@ function App() {
                   score={score}
                   setReplay={setReplay}
                   setScore={setScore}
+                  questionAmount={quizArray.length}
                 />
               }
             />
@@ -82,7 +81,7 @@ function App() {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/HowToPlay" element={<HowToPlay />} />
         </Route>
-         <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
