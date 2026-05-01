@@ -230,7 +230,7 @@
 .links-continer > svg {
   position: absolute;
   z-index: 1;
-  top: 0.5;
+  top: 1.2rem;
   width: 2rem;
   height: 1rem;
   padding-top: 0.5rem;
