@@ -2,7 +2,7 @@ import { Home } from "../components/Home";
 import "../front-page.css";
 
 
-function FrontPage({ setCategory }) {
+function FrontPage() {
   return <>
   <section className="front-page-section">
   <Home />
