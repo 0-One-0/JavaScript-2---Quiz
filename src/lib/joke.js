@@ -13,4 +13,4 @@ export async function fetchJoke() {
     setup: data.setup,
     punchline: data.punchline,
   };
-}
+} 

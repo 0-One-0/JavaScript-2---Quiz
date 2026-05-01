@@ -14,23 +14,13 @@ import lightBulb from "../assets/light-bulb.png";
 import hpImg from "../assets/harry-potter.png";
 import jokeImg from "../assets/laughing-emoji.png";
 import ScoreboardWidget from "../components/ScoreboardWidget";
-import avatar1 from "../assets/profile-woman.png";
-import avatar2 from "../assets/profile-man.png";
-
-// Mock data for Scoreboard Widget - for now
-const players = [
-  { id: 1, rank: 1, name: "Johan", score: 980, avatar: avatar1 },
-  { id: 2, rank: 2, name: "Anna", score: 920, avatar: avatar2 },
-  { id: 3, rank: 3, name: "Svante", score: 870, avatar: avatar2 },
-  { id: 4, rank: 4, name: "Gunilla", score: 860, avatar: avatar1 },
-  { id: 5, rank: 8, name: "Me", score: 610, avatar: avatar1 },
-];
+import { supabase } from "../lib/supabase";
 
 function Dashboard() {
   // Kanye Quote State
-  const [kanyeQuote, setKanyeQuote] = useState(""); // Store the fetched Kanye quote
-  const [kanyeLoading, setKanyeLoading] = useState(true); // When data is being fetched, set to true to show loading state in UI
-  const [kanyeError, setKanyeError] = useState(""); // If error occurs during fetch, store error message here
+  const [kanyeQuote, setKanyeQuote] = useState("");
+  const [kanyeLoading, setKanyeLoading] = useState(true);
+  const [kanyeError, setKanyeError] = useState("");
 
   // Useless Fact State
   const [uselessFact, setUselessFact] = useState("");
@@ -60,18 +50,24 @@ function Dashboard() {
   const [catLoading, setCatLoading] = useState(true);
   const [catError, setCatError] = useState("");
 
-  // Kanye Quote Widget
-  const loadQuote = async () => { // Function to call Kanye Quote
-    try {
-      setKanyeLoading(true); // Set loading to true before starting fetch
-      setKanyeError(""); // Clear any previous error messages before starting new fetch
+  // Store leaderboard players from Supabase profiles table
+  const [players, setPlayers] = useState([]);
 
-      const quote = await fetchKanyeQuote(); // Call the function that fetches the Kanye quote from the API
-      setKanyeQuote(quote); // Store the fetched quote in state to display it in the UI
-    } catch (err) { // If an error occurs during fetch, catch it and set an error message in state to display in the UI
+  // Store logged-in user id to highlight current user in scoreboard
+  const [currentUserId, setCurrentUserId] = useState(null);
+
+  // Kanye Quote Widget
+  const loadQuote = async () => {
+    try {
+      setKanyeLoading(true);
+      setKanyeError("");
+
+      const quote = await fetchKanyeQuote();
+      setKanyeQuote(quote);
+    } catch (err) {
       setKanyeError("Could not load Kanye quote. Please try again later.");
-    } finally { // Finally block runs after try/catch
-      setKanyeLoading(false); // Set loading to false after fetch is complete
+    } finally {
+      setKanyeLoading(false);
     }
   };
 
@@ -95,9 +91,9 @@ function Dashboard() {
     try {
       setSpellLoading(true);
       setSpellError("");
-  
+
       const spell = await fetchHpSpell();
-  
+
       setSpellTitle(spell.title);
       setSpellText(spell.text);
     } catch (err) {
@@ -112,9 +108,9 @@ function Dashboard() {
     try {
       setJokeLoading(true);
       setJokeError("");
-  
+
       const joke = await fetchJoke();
-  
+
       setJokeSetup(joke.setup);
       setJokePunchline(joke.punchline);
     } catch (err) {
@@ -129,9 +125,9 @@ function Dashboard() {
     try {
       setTitanLoading(true);
       setTitanError("");
-  
+
       const titan = await fetchTitan();
-  
+
       setTitanTitle(titan.title);
       setTitanImage(titan.image);
     } catch (err) {
@@ -146,7 +142,7 @@ function Dashboard() {
     try {
       setCatLoading(true);
       setCatError("");
-  
+
       const cat = await fetchCat();
       setCatImage(cat.image);
     } catch (err) {
@@ -156,7 +152,36 @@ function Dashboard() {
     }
   };
 
-  // Load all widgets on component mount
+  // Fetch leaderboard players from profiles table and format them for ScoreboardWidget
+  const loadPlayers = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    setCurrentUserId(user?.id || null);
+
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("id, username, avatar_url, points")
+      .order("points", { ascending: false });
+
+    if (error) {
+      console.log(error.message);
+      return;
+    }
+
+    const formattedPlayers = data.map((profile, index) => ({
+      id: profile.id,
+      rank: index + 1,
+      name: profile.username,
+      score: profile.points ?? 0,
+      avatar: profile.avatar_url,
+    }));
+
+    setPlayers(formattedPlayers);
+  };
+
+  // Load all widgets and leaderboard on component mount
   useEffect(() => {
     loadQuote();
     loadFact();
@@ -164,34 +189,33 @@ function Dashboard() {
     loadJoke();
     loadTitan();
     loadCat();
+    loadPlayers();
   }, []);
 
   return (
     <div className="dashboard">
       <div className="dashboard-item dashboard-item-small">
-        <Widget // Kanye Quote Widget
-          widgetTitle="Random Kanye Quote" // Title of the widget
-          widgetText={ // The main content of the widget, which will show the quote or loading/error message
-            kanyeLoading
-              ? "Loading..."
-              : kanyeError
-              ? kanyeError
-              : kanyeQuote
+        <Widget
+          widgetTitle="Random Kanye Quote"
+          widgetText={
+            kanyeLoading ? "Loading..."
+            : kanyeError ?
+              kanyeError
+            : kanyeQuote
           }
-          image={kanyeImg} // Image of the widget
-          variant="kanye" // Variant prop to allow for specific styling based on the type of widget
+          image={kanyeImg}
+          variant="kanye"
         />
       </div>
 
       <div className="dashboard-item dashboard-item-small">
-        <Widget // Useless Fact Widget
+        <Widget
           widgetTitle="Today's Useless Fact"
           widgetText={
-            factLoading
-              ? "Loading..."
-              : factError
-              ? factError
-              : uselessFact
+            factLoading ? "Loading..."
+            : factError ?
+              factError
+            : uselessFact
           }
           image={lightBulb}
           variant="uselessFact"
@@ -199,15 +223,14 @@ function Dashboard() {
       </div>
 
       <div className="dashboard-item dashboard-item-small">
-        <Widget // Harry Potter Spell Widget
+        <Widget
           widgetTitle="Harry Potter Spell"
-          widgetSubTitle={spellLoading || spellError ? "" : spellTitle} // Subtitle is optional, only show if spell is loaded successfully
+          widgetSubTitle={spellLoading || spellError ? "" : spellTitle}
           widgetText={
-            spellLoading
-              ? "Loading..."
-              : spellError
-              ? spellError
-              : spellText
+            spellLoading ? "Loading..."
+            : spellError ?
+              spellError
+            : spellText
           }
           image={hpImg}
           variant="hpSpell"
@@ -218,18 +241,16 @@ function Dashboard() {
         <Widget
           widgetTitle="Random Joke"
           widgetSubTitle={
-            jokeLoading
-              ? "Loading..."
-              : jokeError
-              ? ""
-              : jokeSetup
+            jokeLoading ? "Loading..."
+            : jokeError ?
+              ""
+            : jokeSetup
           }
           widgetText={
-            jokeLoading
-              ? "Loading..."
-              : jokeError
-              ? jokeError
-              : jokePunchline
+            jokeLoading ? "Loading..."
+            : jokeError ?
+              jokeError
+            : jokePunchline
           }
           image={jokeImg}
           variant="joke"
@@ -237,14 +258,13 @@ function Dashboard() {
       </div>
 
       <div className="dashboard-item dashboard-item-large">
-        <Widget // Attack on Titan Widget
+        <Widget
           widgetTitle="Random titan from Attack on Titan"
           widgetText={
-            titanLoading
-              ? "Loading..."
-              : titanError
-              ? titanError
-              : titanTitle
+            titanLoading ? "Loading..."
+            : titanError ?
+              titanError
+            : titanTitle
           }
           image={titanImage}
           variant="aot"
@@ -252,25 +272,24 @@ function Dashboard() {
       </div>
 
       <div className="dashboard-item dashboard-item-large">
-        <Widget // Random Cat Image Widget
+        <Widget
           widgetTitle="Random Cat"
           widgetText={
-            catLoading
-              ? "Loading..."
-              : catError
-              ? catError
-              : "Enjoy this random cat"
+            catLoading ? "Loading..."
+            : catError ?
+              catError
+            : "Enjoy this random cat"
           }
           image={catImage}
           variant="cat"
         />
       </div>
-      
+
       <div className="dashboard-item dashboard-item-large">
-        <ScoreboardWidget  // Scoreboard Widget
+        <ScoreboardWidget
           title="Scoreboard"
           players={players}
-          currentUserId={5}
+          currentUserId={currentUserId}
         />
       </div>
     </div>
