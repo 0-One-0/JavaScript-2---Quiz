@@ -79,6 +79,7 @@ function App() {
                   score={score}
                   setReplay={setReplay}
                   setScore={setScore}
+                  questionAmount={quizArray.length}
                 />
               }
             />
