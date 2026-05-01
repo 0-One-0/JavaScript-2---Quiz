@@ -32,7 +32,7 @@ function App() {
   const [catArray, setCatArray] = useState([]);
 
   return (
-    <Router>
+    <Router basename="/JavaScript-2---Quiz">
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
