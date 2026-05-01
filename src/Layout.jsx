@@ -5,10 +5,10 @@ import Footer from "./components/Footer";
 {
   /* Layout determines how the page will be structured. Outlet renders all route components that are children to the route Layout is in */
 }
-function Layout({setQuizArray}) {
+function Layout({setQuizArray, setScore}) {
   return (
     <>
-      <NavBar setQuizArray={setQuizArray} />
+      <NavBar setQuizArray={setQuizArray} setScore={setScore} />
       <main>
         <Outlet />
       </main>

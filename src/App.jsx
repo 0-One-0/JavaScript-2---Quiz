@@ -42,7 +42,7 @@ function App() {
         <Route
           element={
             <ProtectedRoute>
-              <Layout setQuizArray={setCatArray} />
+              <Layout setQuizArray={setCatArray} setScore={setScore} />
             </ProtectedRoute>
           }
         >

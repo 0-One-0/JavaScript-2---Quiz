@@ -9,9 +9,10 @@ import dashboard from "../assets/dashboard-logo.png";
 import HowToPlay from "../pages/HowToPlay";
 gsap.registerPlugin(useGSAP, MorphSVGPlugin);
 
-function Links({ setQuizArray }) {
+function Links({ setQuizArray, setScore }) {
   const handleClickQuiz = () => {
     setQuizArray([]);
+    setScore((prev) => prev - prev);
   };
   const [show, setShow] = useState(false);
   useGSAP(

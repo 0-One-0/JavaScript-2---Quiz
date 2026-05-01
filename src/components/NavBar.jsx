@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import logo from "../assets/logo2.png";
 
-function NavBar({setQuizArray}) {
+function NavBar({setQuizArray, setScore}) {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -74,7 +74,7 @@ function NavBar({setQuizArray}) {
         <Link to="/">
           <img className="logo-img-big" src={logo} alt="logo" />
         </Link>
-        <Links setQuizArray={setQuizArray} />
+        <Links setQuizArray={setQuizArray} setScore={setScore} />
       </div>
       <div className="logo-continer">
         <Link to="/">
