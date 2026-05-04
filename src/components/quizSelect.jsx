@@ -5,6 +5,7 @@ import RandomBtn from "./RandomQuizBtn";
 import SearchBar from "./SearchBar";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import RecentQuizzes from "./RecentQuizzes";
 
 export default function SelectQuiz({ setCatArray }) {
   const navigate = useNavigate();
@@ -96,21 +97,7 @@ export default function SelectQuiz({ setCatArray }) {
       </div>
 
       {/* Recent Quiz */}
-      <h2 className="section-title">Recent Quiz</h2>
-      <div className="list">
-        <div className="list-item">
-          <div className="list-left">🎮 Entertainment: Video Games</div>
-          <div>▶</div>
-        </div>
-        <div className="list-item">
-          <div className="list-left">📜 History</div>
-          <div>▶</div>
-        </div>
-        <div className="list-item">
-          <div className="list-left">🔬 Science: Gadgets</div>
-          <div>▶</div>
-        </div>
-      </div>
+      <RecentQuizzes catArr={catArr} />
 
       {/* Featured Categories */}
       <div className="section-header">
