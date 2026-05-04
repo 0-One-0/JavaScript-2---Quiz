@@ -1,0 +1,45 @@
+.search {
+  background: var(--card-color);
+  padding: 10px;
+  border-radius: 12px;
+  min-width: 10rem;
+}
+
+.search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-color);
+}
+
+.results {
+  background-color: var(--card-color);
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.75rem;
+}
+.results::-webkit-scrollbar { display: none }
+
+.result { 
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 10px; 
+}
+
+.result:hover { 
+  background-color: var(--hover-color);
+  cursor: pointer;
+}
+
+.result-icon {
+  display: flex;
+  max-width: 20px;
+  max-height: 20px;
+  border-radius: 1rem;
+}
+
+.hidden {
+  display: none;
+}

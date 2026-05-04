@@ -21,7 +21,6 @@
   }
 
   .results {
-    width: 100%;
     background-color: var(--card-color);
     display: flex;
     flex-direction: column;
