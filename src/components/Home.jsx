@@ -310,7 +310,7 @@ export function Home() {
               )
             }
           />
-          <FrontPageDaily title={title2} content={playerData} />
+          <FrontPageDaily title={title2} content={playerData + " points"} />
         </div>
 
         <RandomQuizContainer />
