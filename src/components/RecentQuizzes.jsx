@@ -19,7 +19,7 @@ export default function RecentQuizzes({catArr}) {
         <div className="list-items">
           {JSON.parse(localStorage.getItem("recentQuizzes"))?.map((quizArray) => (
             <>
-              <div className="list-item" key={quizArray.category} onClick={() => handleSelect(quizArray)}>{catArr.find((item) => item.id === quizArray.category)?.icon} {catArr.find((item) => item.id === quizArray.category)?.name} <div>▶</div></div>
+              <div className="list-item" key={quizArray.category} onClick={() => handleSelect(quizArray)}>{catArr.find((item) => item.id === quizArray.category)?.icon} {catArr.find((item) => item.id === quizArray.category)?.name} "{quizArray.difficulty}" <div>▶</div></div>
             </>
           ))}
         </div>

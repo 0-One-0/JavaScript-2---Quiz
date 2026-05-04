@@ -12,6 +12,7 @@ export default function SelectQuiz({ setCatArray }) {
   const { setCategory } = useQuizParams();
 
   const catArr = [
+    { id: 0, name: "Random", icon: "🔀" },
     { id: 9, name: "General Knowledge", icon: "💡" },
     { id: 10, name: "Entertainment: Books", icon: "📚" },
     { id: 11, name: "Entertainment: Film", icon: "🎥" },
@@ -85,12 +86,12 @@ export default function SelectQuiz({ setCatArray }) {
       {/* Daily Challenge */}
       <h2 className="section-title">Daily Challenge</h2>
       <div className="horizontal-scroll">
-        <div className="card gradient-pink" onClick={() => handleSelect("9")}>
+        <div className="card gradient-pink" onClick={() => handleSelect(9)}>
           <div className="card-title">General Knowledge</div>
           <div className="card-icon">💡</div>
         </div>
 
-        <div className="card gradient-green" onClick={() => handleSelect("12")}>
+        <div className="card gradient-green" onClick={() => handleSelect(12)}>
           <div className="card-title">Entertainment: Music</div>
           <div className="card-icon">🎵</div>
         </div>
