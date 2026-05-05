@@ -3,6 +3,8 @@
   padding: 16px;
   margin-top: 4rem;
 
+  & .hidden { display: none; }
+
   & .search {
     background: var(--card-color);
     padding: 10px;
@@ -19,7 +21,6 @@
   }
 
   .results {
-    width: 100%;
     background-color: var(--card-color);
     display: flex;
     flex-direction: column;
@@ -70,10 +71,18 @@
     text-align: center; 
   }
 
-  & .list { margin: 10px 0; }
+  & .list { 
+    margin: 10px 0; 
+  }
 
-  & .list-item {
+  & .list-items {
     display: flex;
+    flex-direction: column;
+  }
+
+  & .list-item { 
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     background: var(--card-color);
     padding: 10px;

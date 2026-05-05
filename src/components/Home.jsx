@@ -6,13 +6,16 @@ import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { useEffect, useState } from "react";
 import { fetchKanyeQuote } from "../lib/kanyeQuote";
+import { supabase } from "../lib/supabase";
 
 gsap.registerPlugin(useGSAP, SplitText);
+
 
 export function Home() {
   const [loadingInspo, setLoadingInspo] = useState(true);
   const [inspo, setInspo] = useState("");
   const [inspoError, setInspoError] = useState("");
+  const [playerData, setPlayerData] = useState();
   //values from CSS mediaquery to only do the changes when we want.
   function mediaCss() {
     gsap.set(".flex-div", {
@@ -62,8 +65,26 @@ export function Home() {
   //     <br /> We must unify"
   //   </p>
   // );
-  let title2 = "Daily Score";
-  let content2 = <p className="daily-content">420 points</p>;
+  let title2 = "Total Score";
+  // Searches for the players current score
+  const playerScore = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("id, points");
+  
+      if (error) {
+        console.log(error.message);
+        return;
+      }
+  
+      const playerTotalScore = data.filter((profile) => profile.id === user.id)[0]?.points ?? 0;
+      
+      setPlayerData(playerTotalScore);
+    };
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -266,6 +287,7 @@ export function Home() {
 
   useEffect(() => {
     loadDailyInspo();
+    playerScore();
   }, []);
 
   return (
@@ -288,7 +310,7 @@ export function Home() {
               )
             }
           />
-          <FrontPageDaily title={title2} content={content2} />
+          <FrontPageDaily title={title2} content={playerData + " points"} />
         </div>
 
         <RandomQuizContainer />

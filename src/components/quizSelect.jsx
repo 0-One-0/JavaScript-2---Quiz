@@ -5,12 +5,14 @@ import RandomBtn from "./RandomQuizBtn";
 import SearchBar from "./SearchBar";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import RecentQuizzes from "./RecentQuizzes";
 
 export default function SelectQuiz({ setCatArray }) {
   const navigate = useNavigate();
   const { setCategory } = useQuizParams();
 
   const catArr = [
+    { id: 0, name: "Random", icon: "🔀" },
     { id: 9, name: "General Knowledge", icon: "💡" },
     { id: 10, name: "Entertainment: Books", icon: "📚" },
     { id: 11, name: "Entertainment: Film", icon: "🎥" },
@@ -84,33 +86,19 @@ export default function SelectQuiz({ setCatArray }) {
       {/* Daily Challenge */}
       <h2 className="section-title">Daily Challenge</h2>
       <div className="horizontal-scroll">
-        <div className="card gradient-pink" onClick={() => handleSelect("9")}>
+        <div className="card gradient-pink" onClick={() => handleSelect(9)}>
           <div className="card-title">General Knowledge</div>
           <div className="card-icon">💡</div>
         </div>
 
-        <div className="card gradient-green" onClick={() => handleSelect("12")}>
+        <div className="card gradient-green" onClick={() => handleSelect(12)}>
           <div className="card-title">Entertainment: Music</div>
           <div className="card-icon">🎵</div>
         </div>
       </div>
 
       {/* Recent Quiz */}
-      <h2 className="section-title">Recent Quiz</h2>
-      <div className="list">
-        <div className="list-item">
-          <div className="list-left">🎮 Entertainment: Video Games</div>
-          <div>▶</div>
-        </div>
-        <div className="list-item">
-          <div className="list-left">📜 History</div>
-          <div>▶</div>
-        </div>
-        <div className="list-item">
-          <div className="list-left">🔬 Science: Gadgets</div>
-          <div>▶</div>
-        </div>
-      </div>
+      <RecentQuizzes catArr={catArr} />
 
       {/* Featured Categories */}
       <div className="section-header">

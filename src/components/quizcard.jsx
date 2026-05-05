@@ -7,7 +7,6 @@ import RandomAlign from "./Answers";
 import { fetchQuizQuestions } from "../lib/triviaApi";
 import { SplitText } from "gsap/all";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../lib/supabase";
 import { useQuizParams } from "../lib/quizParams";
 
 gsap.registerPlugin(useGSAP, SplitText);
@@ -45,6 +44,17 @@ function QuizCard({ setScore, quizArray, setQuizArray, replay }) {
     try {
       const data = await fetchQuizQuestions(amount, category, difficulty);
       setQuizArray(data);
+      
+      // Save quiz fetch params to local storage with a maximum of 3 objects.
+      const newQuiz = { amount: amount, category: category, difficulty: difficulty };
+      const recentQuizzes = JSON.parse(localStorage.getItem("recentQuizzes")) || [];
+      if (!recentQuizzes.some((quiz) => quiz.amount === amount && quiz.category === category && quiz.difficulty === difficulty)) {
+        recentQuizzes.push(newQuiz);
+        if (recentQuizzes.length > 3) {
+          recentQuizzes.shift();
+        }
+        localStorage.setItem("recentQuizzes", JSON.stringify(recentQuizzes));
+      }
     } catch (err) {
       //We return the error if it happens
       setError(err.message);
