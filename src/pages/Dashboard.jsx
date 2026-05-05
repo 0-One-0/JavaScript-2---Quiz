@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Widget from "../components/Widget";
-import "../dashboard.css";
+import "../css/dashboard.css";
 
 import { fetchKanyeQuote } from "../lib/kanyeQuote";
 import { fetchUselessFact } from "../lib/uselessFact";
@@ -17,7 +17,6 @@ import ScoreboardWidget from "../components/ScoreboardWidget";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { supabase } from "../lib/supabase";
-
 
 function Dashboard() {
   // Kanye Quote State
@@ -198,9 +197,9 @@ function Dashboard() {
   useGSAP(() => {
     const tl = gsap.timeline({
       onComplete: () => {
-         tl.set(".dashboard", {
-      overflow: "visible",
-    })
+        tl.set(".dashboard", {
+          overflow: "visible",
+        });
       },
     });
     tl.set(".dashboard", {
@@ -224,7 +223,10 @@ function Dashboard() {
           widgetTitle="Random Kanye Quote" // Title of the widget
           widgetText={
             // The main content of the widget, which will show the quote or loading/error message
-            kanyeLoading ? "Loading..." : kanyeError ? kanyeError : kanyeQuote
+            kanyeLoading ? "Loading..."
+            : kanyeError ?
+              kanyeError
+            : kanyeQuote
           }
           image={kanyeImg}
           variant="kanye"
@@ -235,7 +237,10 @@ function Dashboard() {
         <Widget
           widgetTitle="Today's Useless Fact"
           widgetText={
-            factLoading ? "Loading..." : factError ? factError : uselessFact
+            factLoading ? "Loading..."
+            : factError ?
+              factError
+            : uselessFact
           }
           image={lightBulb}
           variant="uselessFact"
@@ -247,7 +252,10 @@ function Dashboard() {
           widgetTitle="Harry Potter Spell"
           widgetSubTitle={spellLoading || spellError ? "" : spellTitle}
           widgetText={
-            spellLoading ? "Loading..." : spellError ? spellError : spellText
+            spellLoading ? "Loading..."
+            : spellError ?
+              spellError
+            : spellText
           }
           image={hpImg}
           variant="hpSpell"
@@ -258,10 +266,16 @@ function Dashboard() {
         <Widget
           widgetTitle="Random Joke"
           widgetSubTitle={
-            jokeLoading ? "Loading..." : jokeError ? "" : jokeSetup
+            jokeLoading ? "Loading..."
+            : jokeError ?
+              ""
+            : jokeSetup
           }
           widgetText={
-            jokeLoading ? "Loading..." : jokeError ? jokeError : jokePunchline
+            jokeLoading ? "Loading..."
+            : jokeError ?
+              jokeError
+            : jokePunchline
           }
           image={jokeImg}
           variant="joke"
@@ -272,7 +286,10 @@ function Dashboard() {
         <Widget
           widgetTitle="Random titan from Attack on Titan"
           widgetText={
-            titanLoading ? "Loading..." : titanError ? titanError : titanTitle
+            titanLoading ? "Loading..."
+            : titanError ?
+              titanError
+            : titanTitle
           }
           image={titanImage}
           variant="aot"
@@ -283,11 +300,10 @@ function Dashboard() {
         <Widget
           widgetTitle="Random Cat"
           widgetText={
-            catLoading
-              ? "Loading..."
-              : catError
-                ? catError
-                : "Enjoy this random cat"
+            catLoading ? "Loading..."
+            : catError ?
+              catError
+            : "Enjoy this random cat"
           }
           image={catImage}
           variant="cat"

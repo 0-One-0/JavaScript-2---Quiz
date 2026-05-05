@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../searchBar.css";
+import "../css/searchBar.css";
 
 export default function SearchBar({
   searchArr,
@@ -56,11 +56,9 @@ export default function SearchBar({
               }}
             >
               {iconValue &&
-                (typeof iconValue === "string" && iconValue.startsWith("http") ? (
+                (typeof iconValue === "string" && iconValue.startsWith("http") ?
                   <img src={iconValue} alt="icon" className="result-icon" />
-                ) : (
-                  iconValue
-                ))}
+                : iconValue)}
               {iconValue ? " " : ""}
               {item[displayKey] || "Unknown"}
             </div>

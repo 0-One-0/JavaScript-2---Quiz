@@ -1,4 +1,4 @@
-import "../edit-profile.css";
+import "../css/edit-profile.css";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import { useNavigate } from "react-router-dom";

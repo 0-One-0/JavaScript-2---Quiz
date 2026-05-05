@@ -1,4 +1,4 @@
-import "../ScoreboardWidget.css";
+import "../css/ScoreboardWidget.css";
 import { Link } from "react-router-dom";
 
 // Displays a scoreboard with players from the profiles table

@@ -1,5 +1,5 @@
-import "./App.css";
-import "./navbar.css";
+import "./css/App.css";
+import "./css/navbar.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FrontPage from "./pages/FrontPage.jsx";
 import Layout from "./Layout.jsx";

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import "../quiz-card.css";
+import "../css/quiz-card.css";
 import CountdownTimer from "./Timer";
 import RandomAlign from "./Answers";
 import { fetchQuizQuestions } from "../lib/triviaApi";
@@ -44,11 +44,23 @@ function QuizCard({ setScore, quizArray, setQuizArray, replay }) {
     try {
       const data = await fetchQuizQuestions(amount, category, difficulty);
       setQuizArray(data);
-      
+
       // Save quiz fetch params to local storage with a maximum of 3 objects.
-      const newQuiz = { amount: amount, category: category, difficulty: difficulty };
-      const recentQuizzes = JSON.parse(localStorage.getItem("recentQuizzes")) || [];
-      if (!recentQuizzes.some((quiz) => quiz.amount === amount && quiz.category === category && quiz.difficulty === difficulty)) {
+      const newQuiz = {
+        amount: amount,
+        category: category,
+        difficulty: difficulty,
+      };
+      const recentQuizzes =
+        JSON.parse(localStorage.getItem("recentQuizzes")) || [];
+      if (
+        !recentQuizzes.some(
+          (quiz) =>
+            quiz.amount === amount &&
+            quiz.category === category &&
+            quiz.difficulty === difficulty,
+        )
+      ) {
         recentQuizzes.push(newQuiz);
         if (recentQuizzes.length > 3) {
           recentQuizzes.shift();

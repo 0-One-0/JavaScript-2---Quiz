@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "../wrong-page.css";
+import "../css/wrong-page.css";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 

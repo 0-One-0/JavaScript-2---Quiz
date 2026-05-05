@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import "../quizFront.css";
+import "../css/quizFront.css";
 
-function Quiz(){
-    return <Outlet />
+function Quiz() {
+  return <Outlet />;
 }
 export default Quiz;
