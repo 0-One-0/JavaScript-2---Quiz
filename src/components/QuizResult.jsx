@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../quiz-result.css";
+import "../css/quiz-result.css";
 import trophy from "../assets/prize-icon.png";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";

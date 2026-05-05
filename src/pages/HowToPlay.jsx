@@ -4,7 +4,7 @@ import video1 from "../assets/videos/video1.mp4";
 import video2 from "../assets/videos/video2.mp4";
 import video3 from "../assets/videos/video3.mp4";
 import video4 from "../assets/videos/video4.mp4";
-import "../HowToPlay.css";
+import "../css/HowToPlay.css";
 
 // Page that handles the "How to Play" section of the quiz
 function HowToPlay() {

@@ -1,4 +1,4 @@
-import "../howtoplay-card.css";
+import "../css/howtoplay-card.css";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ function HowToPlayCard({ title, text, video, step, totalSteps, onNext }) {
     gsap.fromTo(
       content,
       { opacity: 0, x: 80 },
-      { opacity: 1, x: 0, duration: 0.4, ease: "power3.out", stagger: 0.05 }
+      { opacity: 1, x: 0, duration: 0.4, ease: "power3.out", stagger: 0.05 },
     );
   }, [step]); // Re-run the animation whenever the step changes
 

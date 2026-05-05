@@ -1,13 +1,14 @@
 import { Home } from "../components/Home";
-import "../front-page.css";
-
+import "../css/front-page.css";
 
 function FrontPage() {
-  return <>
-  <section className="front-page-section">
-  <Home />
-  </section>
-  </>
+  return (
+    <>
+      <section className="front-page-section">
+        <Home />
+      </section>
+    </>
+  );
 }
 
 export default FrontPage;

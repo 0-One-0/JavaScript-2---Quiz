@@ -1,4 +1,4 @@
-import "../profile-page.css";
+import "../css/profile-page.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
