@@ -174,6 +174,7 @@ vite.config.js
 ```txt
   aot.js
   cat.js
+  categoryArray.js
   hpSpells.js
   joke.js
   kanyeQuote.js
@@ -204,3 +205,6 @@ vite.config.js
 ```
 
 </details>
+
+## Project by
+> Marko · Maan · Vanessa · Jonathan
