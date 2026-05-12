@@ -3,10 +3,12 @@ import { useQuizParams } from "../lib/quizParams";
 import CategoryGridItem from "./CategoryGridItem";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { categoryArray } from "../lib/categoryArray";
 
-export default function QuizCategories({ catArray }) {
+export default function QuizCategories() {
   const navigate = useNavigate();
   const { setCategory } = useQuizParams();
+  const catArr = categoryArray;
 
   const handleSelect = (category) => {
     setCategory(category);
@@ -50,7 +52,7 @@ export default function QuizCategories({ catArray }) {
       </div>
 
       <div className="grid">
-        {catArray.map((category) => (
+        {catArr.map((category) => (
           <CategoryGridItem
             categoryArray={category}
             handleSelect={handleSelect}

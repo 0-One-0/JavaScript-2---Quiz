@@ -1,10 +1,22 @@
 import { create } from "zustand";
 
-export const useQuizParams = create((set) => ({
+const amountSlice =  (set) => ({
   amount: null,
-  category: "",
-  difficulty: "",
   setAmount: (amount) => set({ amount }),
+});
+
+const categorySlice =  (set) => ({
+  category: "",
   setCategory: (category) => set({ category }),
-  setDifficulty: (difficulty) => set({ difficulty }),
+});
+
+const difficultySlice =  (set) => ({
+  difficulty: "",
+  setDifficulty: (difficulty) => set({ difficulty}),
+});
+
+export const useQuizParams = create((set) => ({
+  ...amountSlice(set),
+  ...categorySlice(set),
+  ...difficultySlice(set),
 }));

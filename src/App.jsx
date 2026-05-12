@@ -29,7 +29,6 @@ function App() {
   const [score, setScore] = useState(0); //Keeps check of the correct answers from user.
   const [replay, setReplay] = useState(false);
   const [quizArray, setQuizArray] = useState([]);
-  const [catArray, setCatArray] = useState([]);
 
   return (
     <Router>
@@ -42,7 +41,7 @@ function App() {
         <Route
           element={
             <ProtectedRoute>
-              <Layout setQuizArray={setCatArray} setScore={setScore} />
+              <Layout setScore={setScore} />
             </ProtectedRoute>
           }
         >
@@ -53,7 +52,7 @@ function App() {
           <Route path="/Quiz" element={<Quiz />}>
             <Route
               path="/Quiz/"
-              element={<SelectQuiz setCatArray={setCatArray} />}
+              element={<SelectQuiz />}
             />
             <Route path="/Quiz/selectDifficulty" element={<DifficultyPage />} />
             <Route
@@ -70,7 +69,7 @@ function App() {
             />
             <Route
               path="/Quiz/categories"
-              element={<QuizCategories catArray={catArray} />}
+              element={<QuizCategories />}
             />
             <Route
               path="/Quiz/quizResult"
