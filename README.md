@@ -204,3 +204,6 @@ vite.config.js
 ```
 
 </details>
+
+## Project by
+> Marko · Maan · Vanessa · Jonathan
