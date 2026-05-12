@@ -159,9 +159,9 @@ vite.config.js
   quiz-card.css
   quiz-result.css
   quiz.css
-  quizFront.css
-  scoreboardwidget.css
-  searchBar.css
+  quiz-front.css
+  scoreboard-widget.css
+  search-bar.css.css
   widget.css
   wrong-page.css
 ```
