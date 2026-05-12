@@ -19,19 +19,14 @@ function QuizCard({ setScore, quizArray, setQuizArray, replay }) {
   //All the useState are made here.
 
   const [index, setIndex] = useState(0); //this is for the index that we are on like what question.
-  const [question, setQuestion] = useState(quizArray[index]); //the quiz questions
-  const [progress, setProgrss] = useState(
-    ((index + 1) / quizArray.length) * 100 + "%", //This is a useState for the progress bar, it updates with the index to giva a correct answer.
-  );
   const [random, setRandom] = useState(() => Math.random()); //Random number to make sure that we dont have the right answer on all the questions.
-
   const [answerd, setAnswerd] = useState(false); //Looks the submit so that we dont leave without answering, diffrent for skip.
-
   const [stopProgress, setStopProgress] = useState(false); //checks so we stop everything when the timer is done.
   const [seconds, setSeconds] = useState(60); //use to start the timer for every question
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const question = quizArray[index];
+  const progress = ((index + 1) / quizArray.length) * 100 + "%";
 
   //Handles the load, err and quiz states and
   // fetches the questions and
@@ -192,14 +187,7 @@ function QuizCard({ setScore, quizArray, setQuizArray, replay }) {
     }
   }, [stopProgress, question]); //We user stopProgress and question to make sure we look at this as an option when they change
 
-  //Updates question when the index goes up.
-  useEffect(() => {
-    setQuestion(quizArray[index]);
-  }, [index, quizArray]);
-  //Updates the progessbar state when index changes.
-  useEffect(() => {
-    setProgrss(((index + 1) / quizArray.length) * 100 + "%");
-  }, [index, quizArray]);
+
 
   //Gsap animations, it users progress as a dependense to to change the progressbar, animate question and alot of other stuff.
   //Gsap animations for the loading screen.
