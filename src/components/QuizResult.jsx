@@ -79,7 +79,7 @@ function QuizResult({ questionAmount, score, setReplay, setScore }) {
   const playAgain = () => {
     setReplay(true);
     setScore((prev) => prev - prev);
-    navigate("/Quiz/quizCard");
+    navigate("/Quiz/QuizCard");
   };
 
   useGSAP(() => {

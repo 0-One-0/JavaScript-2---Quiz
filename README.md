@@ -124,11 +124,11 @@ vite.config.js
   Links.jsx
   NavBar.jsx
   ProtectedRoute.jsx
-  quizcard.jsx
-  quizCategories.jsx
+  QuizCard.jsx
+  QuizCategories.jsx
   QuizDifficulty.jsx
   QuizResult.jsx
-  quizSelect.jsx
+  QuizSelect.jsx
   RandomQuizBtn.jsx
   RecentQuizzes.jsx
   RivalsList.jsx
