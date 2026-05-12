@@ -25,7 +25,7 @@ export default function DifficultyPage() {
 
   const startQuiz = async () => {
     //if (!selectedDifficulty) return;
-    navigate("/quiz/QuizCard");
+    navigate("/quiz/quizCard");
   };
 
   useGSAP(() => {
