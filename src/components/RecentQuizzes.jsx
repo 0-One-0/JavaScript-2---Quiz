@@ -9,7 +9,7 @@ export default function RecentQuizzes({catArr}) {
     setCategory(category);
     setAmount(amount);
     setDifficulty(difficulty);
-    navigate("/Quiz/QuizCard");
+    navigate("/Quiz/quizCard");
   };
 
   return (
