@@ -18,19 +18,22 @@ function QuizCard({ setScore, quizArray, setQuizArray, replay }) {
   const { amount, category, difficulty } = useQuizParams();
   //All the useState are made here.
 
-  const [index, setIndex] = useState(0); //this is for the index that we are on like what question.
-  const [random, setRandom] = useState(() => Math.random()); //Random number to make sure that we dont have the right answer on all the questions.
-  const [answerd, setAnswerd] = useState(false); //Looks the submit so that we dont leave without answering, diffrent for skip.
-  const [stopProgress, setStopProgress] = useState(false); //checks so we stop everything when the timer is done.
-  const [seconds, setSeconds] = useState(60); //use to start the timer for every question
+  const [index, setIndex] = useState(0); 
+  const [random, setRandom] = useState(() => Math.random()); 
+  const [answerd, setAnswerd] = useState(false);
+  const [stopProgress, setStopProgress] = useState(false); 
+  const [seconds, setSeconds] = useState(60); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+
+  //Uses veribals derived from index state to update when re-render.
   const question = quizArray[index];
   const progress = ((index + 1) / quizArray.length) * 100 + "%";
 
   //Handles the load, err and quiz states and
   // fetches the questions and
-  // answers by doing a calling the function
+  // answers by calling the function
   const loadQuestions = async () => {
     setLoading(true); //Lets react know that we need some time and want to show the user that we are loading.
     setError(null); //Make sure we clear the previus error so that it doesnt lock the user in the error message.
@@ -71,7 +74,8 @@ function QuizCard({ setScore, quizArray, setQuizArray, replay }) {
     }
   };
 
-  //this happens the first mount and only then so when we refresh page this happens
+   // Runs once on mount. If replay is true the questions are already in quizArray
+  // so we skip the fetch and just stop the loading state.
   useEffect(() => {
     //Sets timer so we know that we har loading the questions, prevents a fetch error. Double fetch because in strikt mode.
     const timer = setTimeout(() => {
@@ -86,52 +90,28 @@ function QuizCard({ setScore, quizArray, setQuizArray, replay }) {
   }, []);
 
   //Checks if answer is correct or wrong, we then save score and change styles to show user. We altso lock so you can only guess ones
-  const checkAns = (e, answer) => {
-    if (answerd === false) {
+  const checkAns = (answer) => {
+    if (!answerd) {
+      setSelectedAnswer(answer);
+      setAnswerd(true);
+      setStopProgress(true);
+
       if (question.correct_answer === answer) {
-        //Changes the color
-        e.target.classList.add("correct");
-
-        //Update relevent states
-        setAnswerd(true);
-        setStopProgress(true);
         setScore((prev) => prev + 1);
-      } else {
-        //Changes the color
-        e.target.classList.add("wrong");
-
-        //Update relevent states
-        setAnswerd(true);
-        setStopProgress(true);
-
-        //Shows the right answer
-        const answers = document.querySelectorAll(".options");
-        answers.forEach((li) => {
-          if (li.textContent === question.correct_answer) {
-            li.classList.add("correct");
-          }
-        });
       }
     }
   };
 
-  //function for the submit button, this only works if the user has made a guess.
+  // Moves to the next question. If it's the last question, navigates to results.
+  // Only works if the user has answered — skipping uses skipQuestion instead.
   const nextQuestion = () => {
-    //Makes sure the user made a guess before the btn does anything
     if (answerd === true) {
-      //Makes sure there are answers left
       if (index === quizArray.length - 1) {
-        //Shows user the score
         navigate("/Quiz/quizResult");
         return 0;
       }
 
-      //Takes away the colors for the anwsers.
-      const answers = document.querySelectorAll(".options");
-      answers.forEach((li) => {
-        li.classList.remove("correct");
-        li.classList.remove("wrong");
-      });
+      setSelectedAnswer(null);
 
       //Update relevent useStates
       setIndex((prev) => prev + 1);
@@ -141,24 +121,17 @@ function QuizCard({ setScore, quizArray, setQuizArray, replay }) {
       setSeconds(60);
     }
   };
-
+  // Resets the score and quiz array before navigating back to the home screen.
   const goBack = () => {
-    setScore((prev) => prev - prev);
+    setScore(0);
     setQuizArray([]);
     navigate("/Quiz/");
   };
 
-  //function to skip the question
+    // Skips the current question without requiring an answer.
+  // Does nothing if it's the last question to prevent an out of bounds.
   const skipQuestion = () => {
-    //if the user anwred we just skip
-    if (answerd === true) {
-      const answers = document.querySelectorAll(".options");
-      answers.forEach((li) => {
-        li.classList.remove("correct");
-        li.classList.remove("wrong");
-      });
-    }
-    //makes sure that there is more questions so it doesnt crash
+    
     if (index === quizArray.length - 1) {
       return 0;
     }
@@ -169,28 +142,22 @@ function QuizCard({ setScore, quizArray, setQuizArray, replay }) {
     setAnswerd(false);
     setStopProgress(false);
     setSeconds(60);
+    setSelectedAnswer(null);
   };
 
-  //When the timer goes out we show the user the right answer.
+  // When the timer runs out, show the correct answer.
+  // The !answered check prevents overwriting the users selection
+  // if they answered just as the timer hit zero.
   useEffect(() => {
-    //Checks if we are meant to stop with the state
-    if (stopProgress === true) {
+    
+    if (stopProgress === true && !answerd) {
       setAnswerd(true);
-
-      //Finds the  right answer and change color to green
-      const answers = document.querySelectorAll(".options");
-      answers.forEach((li) => {
-        if (li.textContent === question.correct_answer) {
-          li.classList.add("correct");
-        }
-      });
+      setSelectedAnswer(question.correct_answer);
     }
-  }, [stopProgress, question]); //We user stopProgress and question to make sure we look at this as an option when they change
+  }, [stopProgress]); //We user stopProgress and question to make sure we look at this as an option when they change
 
-
-
-  //Gsap animations, it users progress as a dependense to to change the progressbar, animate question and alot of other stuff.
-  //Gsap animations for the loading screen.
+   // Animates the progress bar, question and answers on each new question.
+  // Also handles the loading animation while waiting for the API.
   useGSAP(() => {
     let split = SplitText.create(".loading", {
       type: "chars",
@@ -293,6 +260,7 @@ function QuizCard({ setScore, quizArray, setQuizArray, replay }) {
             random={random}
             question={question}
             checkAns={checkAns}
+            selectedAnswer={selectedAnswer}
           />
         </div>
         <div className="sub-continer">
@@ -314,7 +282,7 @@ function QuizCard({ setScore, quizArray, setQuizArray, replay }) {
 //Component for the Progressbar.
 function ProgressBar() {
   return (
-    //use the div as a continer so we can change the width of inner div with % of the continer.
+    // Inner div width is controlled by GSAP via the progressbar-indicator class
     <div className="progressbar-continer">
       <div className="progressbar-indicator"></div>
     </div>
