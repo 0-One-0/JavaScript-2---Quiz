@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import "../css/quizFront.css";
+import "../css/quiz-front.css";
 
 function Quiz() {
   return <Outlet />;

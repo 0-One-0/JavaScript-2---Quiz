@@ -124,11 +124,11 @@ vite.config.js
   Links.jsx
   NavBar.jsx
   ProtectedRoute.jsx
-  quizcard.jsx
-  quizCategories.jsx
+  QuizCard.jsx
+  QuizCategories.jsx
   QuizDifficulty.jsx
   QuizResult.jsx
-  quizSelect.jsx
+  QuizSelect.jsx
   RandomQuizBtn.jsx
   RecentQuizzes.jsx
   RivalsList.jsx
@@ -159,9 +159,9 @@ vite.config.js
   quiz-card.css
   quiz-result.css
   quiz.css
-  quizFront.css
-  scoreboardwidget.css
-  searchBar.css
+  quiz-front.css
+  scoreboard-widget.css
+  search-bar.css.css
   widget.css
   wrong-page.css
 ```
@@ -174,6 +174,7 @@ vite.config.js
 ```txt
   aot.js
   cat.js
+  categoryArray.js
   hpSpells.js
   joke.js
   kanyeQuote.js
@@ -204,3 +205,6 @@ vite.config.js
 ```
 
 </details>
+
+## Project by
+> Marko · Maan · Vanessa · Jonathan
