@@ -59,12 +59,7 @@ export function Home() {
 
   //Temp values for veribals real values added later.
   let title1 = "Daily inspiration";
-  // let content1 = (
-  //   <p className="daily-content">
-  //     "We must form a union.
-  //     <br /> We must unify"
-  //   </p>
-  // );
+ 
   let title2 = "Total Score";
   // Searches for the players current score
   const playerScore = async () => {
