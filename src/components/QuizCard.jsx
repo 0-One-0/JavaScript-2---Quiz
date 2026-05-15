@@ -11,7 +11,7 @@ import { useQuizParams } from "../lib/quizParams";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
-//Temp array for tesing and demo, api will be implemented. the object structure is same as api
+
 
 function QuizCard({ setScore, quizArray, setQuizArray, replay }) {
   const navigate = useNavigate();
